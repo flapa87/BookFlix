@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BookFlix - Resumos que Transformam</title>
+    <title>LitLoop - Resumos que Transformam</title>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Inter:wght@300;400;500;600;800&display=swap" rel="stylesheet">
     <style>
         * {
@@ -13,13 +13,16 @@
         }
 
         :root {
-            --primary: #E50914;
-            --dark: #0a0a0a;
-            --darker: #050505;
-            --gray: #1a1a1a;
-            --light-gray: #888;
-            --cream: #f5f5f0;
-            --gold: #d4af37;
+            --primary: #6366f1;
+            --primary-dark: #4f46e5;
+            --accent: #f59e0b;
+            --quixote: #8b5cf6;
+            --dark: #0f0f1a;
+            --darker: #08080f;
+            --gray: #1e1e2e;
+            --light-gray: #94a3b8;
+            --cream: #f8fafc;
+            --gold: #fbbf24;
         }
 
         body {
@@ -30,34 +33,214 @@
             line-height: 1.6;
         }
 
-        /* Navigation - Glassmorphism */
-        nav {
-            position: fixed;
-            top: 0;
-            width: 100%;
-            padding: 25px 5%;
+        /* Custom Logo */
+        .logo-container {
             display: flex;
-            justify-content: space-between;
             align-items: center;
-            z-index: 1000;
-            background: rgba(5, 5, 5, 0.8);
-            backdrop-filter: blur(20px);
-            border-bottom: 1px solid rgba(255,255,255,0.05);
+            gap: 12px;
+            cursor: pointer;
         }
 
-        .logo {
+        .logo-icon {
+            width: 45px;
+            height: 45px;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(99, 102, 241, 0.3);
+        }
+
+        .logo-icon::before {
+            content: '';
+            position: absolute;
+            width: 60%;
+            height: 60%;
+            border: 3px solid white;
+            border-radius: 50%;
+            border-right-color: transparent;
+            transform: rotate(-45deg);
+        }
+
+        .logo-icon::after {
+            content: '';
+            position: absolute;
+            width: 20%;
+            height: 20%;
+            background: white;
+            border-radius: 50%;
+            right: 25%;
+            top: 25%;
+        }
+
+        .logo-text {
             font-family: 'Playfair Display', serif;
-            font-size: 2.2rem;
+            font-size: 2rem;
             font-weight: 900;
-            background: linear-gradient(135deg, var(--primary) 0%, #ff6b6b 100%);
+            background: linear-gradient(135deg, #fff 0%, var(--light-gray) 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             letter-spacing: -1px;
         }
 
+        .logo-text span {
+            color: var(--primary);
+            -webkit-text-fill-color: var(--primary);
+        }
+
+        /* Navigation with Search */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 20px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            background: rgba(8, 8, 15, 0.9);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .nav-center {
+            flex: 1;
+            max-width: 500px;
+            margin: 0 40px;
+        }
+
+        .search-container {
+            position: relative;
+            width: 100%;
+        }
+
+        .search-box {
+            width: 100%;
+            padding: 14px 50px 14px 20px;
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 30px;
+            color: white;
+            font-size: 0.95rem;
+            transition: all 0.3s;
+            outline: none;
+        }
+
+        .search-box:focus {
+            background: rgba(255,255,255,0.08);
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+        }
+
+        .search-box::placeholder {
+            color: var(--light-gray);
+        }
+
+        .search-icon {
+            position: absolute;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--light-gray);
+            font-size: 1.2rem;
+        }
+
+        /* Search Results Dropdown */
+        .search-results {
+            position: absolute;
+            top: calc(100% + 10px);
+            left: 0;
+            right: 0;
+            background: var(--gray);
+            border-radius: 16px;
+            border: 1px solid rgba(255,255,255,0.1);
+            overflow: hidden;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-10px);
+            transition: all 0.3s;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+            max-height: 400px;
+            overflow-y: auto;
+        }
+
+        .search-results.active {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .search-item {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            padding: 20px;
+            cursor: pointer;
+            transition: all 0.3s;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .search-item:hover {
+            background: rgba(99, 102, 241, 0.1);
+        }
+
+        .search-item:last-child {
+            border-bottom: none;
+        }
+
+        .search-item-image {
+            width: 60px;
+            height: 85px;
+            border-radius: 8px;
+            overflow: hidden;
+            flex-shrink: 0;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+
+        .search-item-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .search-item-info h4 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.1rem;
+            margin-bottom: 5px;
+            color: white;
+        }
+
+        .search-item-info p {
+            font-size: 0.85rem;
+            color: var(--light-gray);
+        }
+
+        .search-item-meta {
+            margin-left: auto;
+            text-align: right;
+        }
+
+        .search-item-year {
+            background: rgba(99, 102, 241, 0.2);
+            color: var(--primary);
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+
+        .no-results {
+            padding: 40px;
+            text-align: center;
+            color: var(--light-gray);
+        }
+
         .nav-links {
             display: flex;
-            gap: 40px;
+            gap: 30px;
             list-style: none;
         }
 
@@ -89,13 +272,14 @@
             width: 100%;
         }
 
-        /* Hero Section - Split Design */
+        /* Hero Section */
         .hero {
             min-height: 100vh;
             display: grid;
             grid-template-columns: 1fr 1fr;
             position: relative;
             overflow: hidden;
+            padding-top: 80px;
         }
 
         .hero-content {
@@ -105,26 +289,25 @@
             padding: 0 10%;
             position: relative;
             z-index: 2;
-            background: linear-gradient(90deg, var(--darker) 0%, transparent 100%);
         }
 
-        .hero-tag {
+        .hero-badge {
             display: inline-flex;
             align-items: center;
             gap: 10px;
             margin-bottom: 30px;
         }
 
-        .hero-tag span {
-            background: rgba(229, 9, 20, 0.2);
+        .hero-badge span {
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.2), rgba(245, 158, 11, 0.2));
             color: var(--primary);
-            padding: 8px 16px;
-            border-radius: 20px;
-            font-size: 0.75rem;
+            padding: 10px 20px;
+            border-radius: 30px;
+            font-size: 0.8rem;
             font-weight: 600;
             text-transform: uppercase;
             letter-spacing: 2px;
-            border: 1px solid rgba(229, 9, 20, 0.3);
+            border: 1px solid rgba(99, 102, 241, 0.3);
         }
 
         .hero h1 {
@@ -133,7 +316,7 @@
             font-weight: 900;
             line-height: 1.1;
             margin-bottom: 25px;
-            background: linear-gradient(135deg, #fff 0%, #a0a0a0 100%);
+            background: linear-gradient(135deg, #fff 0%, #94a3b8 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
@@ -154,7 +337,7 @@
         .btn {
             padding: 18px 40px;
             border: none;
-            border-radius: 8px;
+            border-radius: 12px;
             font-size: 1rem;
             font-weight: 600;
             cursor: pointer;
@@ -168,29 +351,14 @@
         }
 
         .btn-primary {
-            background: var(--primary);
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
             color: white;
-            box-shadow: 0 10px 30px rgba(229, 9, 20, 0.3);
-        }
-
-        .btn-primary::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
-            transition: left 0.5s;
-        }
-
-        .btn-primary:hover::before {
-            left: 100%;
+            box-shadow: 0 10px 30px rgba(99, 102, 241, 0.3);
         }
 
         .btn-primary:hover {
             transform: translateY(-2px);
-            box-shadow: 0 15px 40px rgba(229, 9, 20, 0.4);
+            box-shadow: 0 15px 40px rgba(99, 102, 241, 0.4);
         }
 
         .btn-secondary {
@@ -205,19 +373,18 @@
             border-color: rgba(255,255,255,0.4);
         }
 
-        /* Hero Visual - Book Showcase */
         .hero-visual {
             position: relative;
             display: flex;
             align-items: center;
             justify-content: center;
-            background: radial-gradient(circle at center, rgba(229, 9, 20, 0.1) 0%, transparent 70%);
+            background: radial-gradient(circle at center, rgba(99, 102, 241, 0.15) 0%, transparent 70%);
         }
 
         .book-showcase {
             position: relative;
-            width: 350px;
-            height: 500px;
+            width: 380px;
+            height: 550px;
             transform-style: preserve-3d;
             perspective: 1000px;
             animation: float 6s ease-in-out infinite;
@@ -231,11 +398,11 @@
         .book-cover {
             width: 100%;
             height: 100%;
-            border-radius: 12px;
+            border-radius: 16px;
             overflow: hidden;
             box-shadow: 
                 0 50px 100px rgba(0,0,0,0.8),
-                0 30px 60px rgba(229, 9, 20, 0.2),
+                0 30px 60px rgba(99, 102, 241, 0.2),
                 inset 0 0 0 1px rgba(255,255,255,0.1);
             position: relative;
             transform: rotateY(-5deg);
@@ -252,20 +419,7 @@
             object-fit: cover;
         }
 
-        .book-reflection {
-            position: absolute;
-            bottom: -30px;
-            left: 0;
-            right: 0;
-            height: 100px;
-            background: linear-gradient(to bottom, rgba(255,255,255,0.1), transparent);
-            transform: scaleY(-1);
-            filter: blur(10px);
-            opacity: 0.3;
-            border-radius: 12px;
-        }
-
-        /* Featured Books Section */
+        /* Featured Section with Background Images */
         .featured-section {
             padding: 100px 5%;
             background: var(--dark);
@@ -294,119 +448,146 @@
 
         .books-grid {
             display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 60px;
-            max-width: 1400px;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            max-width: 1600px;
             margin: 0 auto;
         }
 
-        .book-card-large {
-            background: linear-gradient(145deg, rgba(255,255,255,0.03) 0%, rgba(255,255,255,0.01) 100%);
-            border-radius: 24px;
-            overflow: hidden;
-            border: 1px solid rgba(255,255,255,0.05);
-            transition: all 0.5s;
-            cursor: pointer;
-            position: relative;
+        @media (max-width: 1200px) {
+            .books-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
         }
 
-        .book-card-large::before {
-            content: '';
+        @media (max-width: 768px) {
+            .books-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .book-card-large {
+            position: relative;
+            border-radius: 24px;
+            overflow: hidden;
+            cursor: pointer;
+            min-height: 550px;
+            border: 1px solid rgba(255,255,255,0.1);
+            transition: all 0.5s;
+        }
+
+        .book-card-bg {
             position: absolute;
             top: 0;
             left: 0;
-            right: 0;
-            bottom: 0;
-            background: radial-gradient(circle at top right, rgba(229, 9, 20, 0.1), transparent 70%);
-            opacity: 0;
-            transition: opacity 0.5s;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            filter: blur(2px) brightness(0.3);
+            transform: scale(1.1);
+            transition: all 0.5s;
         }
 
-        .book-card-large:hover {
-            transform: translateY(-10px);
-            border-color: rgba(229, 9, 20, 0.3);
-            box-shadow: 0 30px 60px rgba(0,0,0,0.5);
+        .book-card-large:hover .book-card-bg {
+            transform: scale(1.2);
+            filter: blur(3px) brightness(0.2);
         }
 
-        .book-card-large:hover::before {
-            opacity: 1;
+        .book-card-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(15, 15, 26, 0.95) 0%, rgba(15, 15, 26, 0.7) 50%, rgba(15, 15, 26, 0.9) 100%);
         }
 
-        .book-card-inner {
-            display: grid;
-            grid-template-columns: 1fr 1.5fr;
-            min-height: 400px;
+        .book-card-content {
+            position: relative;
+            z-index: 2;
+            padding: 40px;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+            justify-content: space-between;
+        }
+
+        .book-card-top {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
         }
 
         .book-card-image {
             position: relative;
-            overflow: hidden;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 40px;
-            background: linear-gradient(135deg, rgba(229, 9, 20, 0.05) 0%, transparent 100%);
+            margin-bottom: 30px;
         }
 
         .book-card-image img {
-            width: 100%;
-            max-width: 220px;
-            border-radius: 8px;
+            width: 180px;
+            height: 260px;
+            border-radius: 12px;
             box-shadow: 
-                0 20px 40px rgba(0,0,0,0.6),
+                0 25px 50px rgba(0,0,0,0.6),
                 0 0 0 1px rgba(255,255,255,0.1);
-            transition: transform 0.5s;
+            transition: all 0.5s;
+            transform: rotate(-3deg);
+            object-fit: cover;
         }
 
         .book-card-large:hover .book-card-image img {
-            transform: scale(1.1) rotate(-3deg);
-        }
-
-        .book-card-content {
-            padding: 50px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
+            transform: rotate(0deg) scale(1.1) translateY(-10px);
+            box-shadow: 
+                0 35px 70px rgba(0,0,0,0.8),
+                0 0 0 1px rgba(255,255,255,0.2);
         }
 
         .book-year {
             display: inline-block;
-            background: rgba(229, 9, 20, 0.1);
+            background: rgba(99, 102, 241, 0.2);
             color: var(--primary);
-            padding: 6px 14px;
+            padding: 8px 16px;
             border-radius: 20px;
-            font-size: 0.8rem;
+            font-size: 0.85rem;
             font-weight: 600;
-            margin-bottom: 20px;
-            width: fit-content;
+            margin-bottom: 15px;
+            border: 1px solid rgba(99, 102, 241, 0.3);
         }
 
-        .book-card-content h3 {
+        .book-card-info h3 {
             font-family: 'Playfair Display', serif;
-            font-size: 2.5rem;
+            font-size: 1.8rem;
             font-weight: 700;
-            margin-bottom: 15px;
+            margin-bottom: 10px;
             line-height: 1.2;
+            color: white;
         }
 
         .book-author {
             color: var(--light-gray);
-            font-size: 1.1rem;
-            margin-bottom: 25px;
+            font-size: 1rem;
+            margin-bottom: 20px;
             font-style: italic;
         }
 
         .book-excerpt {
-            color: rgba(255,255,255,0.7);
-            line-height: 1.8;
-            margin-bottom: 30px;
+            color: rgba(255,255,255,0.8);
+            line-height: 1.6;
+            margin-bottom: 20px;
             font-size: 0.95rem;
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
         }
 
         .book-stats {
             display: flex;
-            gap: 30px;
-            margin-bottom: 30px;
+            justify-content: center;
+            gap: 25px;
+            margin-bottom: 25px;
             padding-top: 20px;
             border-top: 1px solid rgba(255,255,255,0.1);
         }
@@ -415,16 +596,17 @@
             display: flex;
             flex-direction: column;
             gap: 5px;
+            text-align: center;
         }
 
         .stat-value {
-            font-size: 1.5rem;
+            font-size: 1.3rem;
             font-weight: 700;
             color: white;
         }
 
         .stat-label {
-            font-size: 0.8rem;
+            font-size: 0.75rem;
             color: var(--light-gray);
             text-transform: uppercase;
             letter-spacing: 1px;
@@ -433,25 +615,33 @@
         .read-more-btn {
             display: inline-flex;
             align-items: center;
+            justify-content: center;
             gap: 10px;
             color: var(--primary);
             font-weight: 600;
             text-decoration: none;
-            transition: gap 0.3s;
+            transition: all 0.3s;
+            font-size: 1rem;
+            padding: 12px 24px;
+            border-radius: 8px;
+            background: rgba(99, 102, 241, 0.1);
+            border: 1px solid rgba(99, 102, 241, 0.3);
         }
 
         .read-more-btn:hover {
             gap: 15px;
+            background: rgba(99, 102, 241, 0.2);
+            border-color: var(--primary);
         }
 
-        /* Modal - Fullscreen Immersive */
+        /* Modals */
         .modal-overlay {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(5, 5, 5, 0.98);
+            background: rgba(8, 8, 15, 0.98);
             backdrop-filter: blur(30px);
             z-index: 3000;
             opacity: 0;
@@ -478,7 +668,7 @@
             grid-template-columns: 1fr 1fr;
             align-items: center;
             padding: 100px 10% 50px;
-            background: linear-gradient(135deg, rgba(229, 9, 20, 0.05) 0%, transparent 50%);
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.05) 0%, transparent 50%);
         }
 
         .modal-book-display {
@@ -491,12 +681,12 @@
         .modal-book-cover {
             width: 350px;
             height: 500px;
-            border-radius: 12px;
+            border-radius: 16px;
             overflow: hidden;
             box-shadow: 
                 0 50px 100px rgba(0,0,0,0.8),
                 0 0 0 1px rgba(255,255,255,0.1),
-                0 0 100px rgba(229, 9, 20, 0.2);
+                0 0 100px rgba(99, 102, 241, 0.2);
             transform: rotate(-3deg);
             transition: transform 0.5s;
             animation: bookEntrance 0.8s ease-out;
@@ -529,7 +719,7 @@
 
         .modal-tag {
             display: inline-block;
-            background: rgba(229, 9, 20, 0.2);
+            background: rgba(99, 102, 241, 0.2);
             color: var(--primary);
             padding: 10px 20px;
             border-radius: 30px;
@@ -538,7 +728,7 @@
             text-transform: uppercase;
             letter-spacing: 2px;
             margin-bottom: 30px;
-            border: 1px solid rgba(229, 9, 20, 0.3);
+            border: 1px solid rgba(99, 102, 241, 0.3);
         }
 
         .modal-title {
@@ -547,7 +737,7 @@
             font-weight: 900;
             margin-bottom: 20px;
             line-height: 1.1;
-            background: linear-gradient(135deg, #fff 0%, #888 100%);
+            background: linear-gradient(135deg, #fff 0%, #94a3b8 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
@@ -601,7 +791,7 @@
         }
 
         .modal-close:hover {
-            background: rgba(229, 9, 20, 0.2);
+            background: rgba(99, 102, 241, 0.2);
             border-color: var(--primary);
             transform: rotate(90deg);
         }
@@ -636,7 +826,7 @@
             left: 0;
             width: 60px;
             height: 3px;
-            background: var(--primary);
+            background: linear-gradient(90deg, var(--primary), var(--accent));
         }
 
         .modal-text {
@@ -708,7 +898,7 @@
             width: 100%;
             margin-top: 30px;
             padding: 20px;
-            background: var(--primary);
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
             color: white;
             text-align: center;
             text-decoration: none;
@@ -716,16 +906,20 @@
             font-weight: 600;
             font-size: 1.1rem;
             transition: all 0.3s;
-            box-shadow: 0 10px 30px rgba(229, 9, 20, 0.3);
+            box-shadow: 0 10px 30px rgba(99, 102, 241, 0.3);
         }
 
         .access-page-btn:hover {
             transform: translateY(-2px);
-            box-shadow: 0 15px 40px rgba(229, 9, 20, 0.4);
+            box-shadow: 0 15px 40px rgba(99, 102, 241, 0.4);
         }
 
         /* Responsive */
         @media (max-width: 1024px) {
+            .nav-center {
+                display: none;
+            }
+
             .hero {
                 grid-template-columns: 1fr;
             }
@@ -734,12 +928,8 @@
                 display: none;
             }
 
-            .books-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .book-card-inner {
-                grid-template-columns: 1fr;
+            .book-card-content {
+                padding: 30px;
             }
 
             .modal-hero {
@@ -782,6 +972,15 @@
             .nav-links {
                 display: none;
             }
+
+            .logo-text {
+                font-size: 1.5rem;
+            }
+
+            .book-card-image img {
+                width: 150px;
+                height: 220px;
+            }
         }
 
         /* Animations */
@@ -795,13 +994,43 @@
             opacity: 1;
             transform: translateY(0);
         }
+
+        /* Scrollbar styling */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--darker);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--gray);
+            border-radius: 5px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--primary);
+        }
     </style>
 </head>
 <body>
 
     <!-- Navigation -->
     <nav>
-        <div class="logo">BookFlix</div>
+        <div class="logo-container" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">
+            <div class="logo-icon"></div>
+            <div class="logo-text">Lit<span>Loop</span></div>
+        </div>
+
+        <div class="nav-center">
+            <div class="search-container">
+                <input type="text" class="search-box" id="searchInput" placeholder="Pesquisar livros, autores, temas..." autocomplete="off">
+                <span class="search-icon">🔍</span>
+                <div class="search-results" id="searchResults"></div>
+            </div>
+        </div>
+
         <ul class="nav-links">
             <li><a href="#inicio">Início</a></li>
             <li><a href="#catalogo">Catálogo</a></li>
@@ -813,18 +1042,18 @@
     <!-- Hero Section -->
     <section class="hero" id="inicio">
         <div class="hero-content">
-            <div class="hero-tag">
-                <span>Destaque da Semana</span>
+            <div class="hero-badge">
+                <span>Clássico da Semana</span>
             </div>
-            <h1>A Revolução<br>dos Bichos</h1>
+            <h1>Dom Quixote</h1>
             <p class="hero-description">
-                Uma distopia atemporal que expõe as mecânicas do poder e a corrupção através de uma narrativa aparentemente simples, mas profundamente perturbadora.
+                A maior obra da literatura ocidental. As aventuras do cavaleiro andante que lutou contra moinhos de vento e nos ensinou sobre idealismo, loucura e a eterna busca pela justiça.
             </p>
             <div class="hero-buttons">
-                <button class="btn btn-primary" onclick="openModal('revolucao')">
+                <button class="btn btn-primary" onclick="openModal('quixote')">
                     <span>▶</span> Explorar Resumo
                 </button>
-                <button class="btn btn-secondary" onclick="openModal('revolucao')">
+                <button class="btn btn-secondary" onclick="openModal('quixote')">
                     Ver Detalhes
                 </button>
             </div>
@@ -832,9 +1061,8 @@
         <div class="hero-visual">
             <div class="book-showcase">
                 <div class="book-cover">
-                    <img src="revolucaodosbichos.png" alt="A Revolução dos Bichos">
+                    <img src="domquixote.png" alt="Dom Quixote">
                 </div>
-                <div class="book-reflection"></div>
             </div>
         </div>
     </section>
@@ -842,24 +1070,70 @@
     <!-- Featured Books Section -->
     <section class="featured-section" id="catalogo">
         <div class="section-header fade-in">
-            <h2>Catálogo Premium</h2>
+            <h2>Destaques da Semana</h2>
             <p>Resumos cuidadosamente elaborados dos maiores clássicos da literatura mundial</p>
         </div>
 
         <div class="books-grid">
-            <!-- Book 1: Revolução dos Bichos -->
-            <div class="book-card-large fade-in" onclick="openModal('revolucao')">
-                <div class="book-card-inner">
-                    <div class="book-card-image">
-                        <img src="revolucaodosbichos.png" alt="A Revolução dos Bichos">
+            <!-- Book 1: Dom Quixote -->
+            <div class="book-card-large fade-in" onclick="openModal('quixote')">
+                <div class="book-card-bg" style="background-image: url('domquixote.png');"></div>
+                <div class="book-card-overlay"></div>
+                <div class="book-card-content">
+                    <div class="book-card-top">
+                        <div class="book-card-image">
+                            <img src="domquixote.png" alt="Dom Quixote">
+                        </div>
+                        <span class="book-year" style="background: rgba(139, 92, 246, 0.2); color: var(--quixote); border-color: rgba(139, 92, 246, 0.3);">1605</span>
+                        <div class="book-card-info">
+                            <h3>Dom Quixote</h3>
+                            <p class="book-author">Miguel de Cervantes</p>
+                            <p class="book-excerpt">
+                                "Lutar contra moinhos de vento." A história do cavaleiro andante que confundia a realidade com seus livros de cavalaria, acompanhado por seu fiel escudeiro Sancho Pança, é uma reflexão profunda sobre idealismo, loucura e sanidade.
+                            </p>
+                        </div>
                     </div>
-                    <div class="book-card-content">
+                    <div>
+                        <div class="book-stats">
+                            <div class="stat">
+                                <span class="stat-value">25</span>
+                                <span class="stat-label">Min de Leitura</span>
+                            </div>
+                            <div class="stat">
+                                <span class="stat-value">5.0</span>
+                                <span class="stat-label">Avaliação</span>
+                            </div>
+                            <div class="stat">
+                                <span class="stat-value">1020</span>
+                                <span class="stat-label">Páginas</span>
+                            </div>
+                        </div>
+                        <a href="#" class="read-more-btn" style="color: var(--quixote); background: rgba(139, 92, 246, 0.1); border-color: rgba(139, 92, 246, 0.3);" onclick="event.stopPropagation(); openModal('quixote')">
+                            Ler Resumo →
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Book 2: Revolução dos Bichos -->
+            <div class="book-card-large fade-in" onclick="openModal('revolucao')">
+                <div class="book-card-bg" style="background-image: url('revolucaodosbichos.png');"></div>
+                <div class="book-card-overlay"></div>
+                <div class="book-card-content">
+                    <div class="book-card-top">
+                        <div class="book-card-image">
+                            <img src="revolucaodosbichos.png" alt="A Revolução dos Bichos">
+                        </div>
                         <span class="book-year">1945</span>
-                        <h3>A Revolução dos Bichos</h3>
-                        <p class="book-author">George Orwell</p>
-                        <p class="book-excerpt">
-                            "Todos os animais são iguais, mas alguns animais são mais iguais que outros." Uma alegoria política que continua ecoando através das décadas como um alerta sobre a natureza do poder absoluto.
-                        </p>
+                        <div class="book-card-info">
+                            <h3>A Revolução dos Bichos</h3>
+                            <p class="book-author">George Orwell</p>
+                            <p class="book-excerpt">
+                                "Todos os animais são iguais, mas alguns animais são mais iguais que outros." Uma alegoria política que continua ecoando através das décadas como um alerta sobre a natureza do poder absoluto.
+                            </p>
+                        </div>
+                    </div>
+                    <div>
                         <div class="book-stats">
                             <div class="stat">
                                 <span class="stat-value">15</span>
@@ -881,19 +1155,25 @@
                 </div>
             </div>
 
-            <!-- Book 2: O Pequeno Príncipe -->
+            <!-- Book 3: O Pequeno Príncipe -->
             <div class="book-card-large fade-in" onclick="openModal('principe')">
-                <div class="book-card-inner">
-                    <div class="book-card-image" style="background: linear-gradient(135deg, rgba(212, 175, 55, 0.1) 0%, transparent 100%);">
-                        <img src="opequenoprincipe.png" alt="O Pequeno Príncipe">
+                <div class="book-card-bg" style="background-image: url('opequenoprincipe.png');"></div>
+                <div class="book-card-overlay"></div>
+                <div class="book-card-content">
+                    <div class="book-card-top">
+                        <div class="book-card-image">
+                            <img src="opequenoprincipe.png" alt="O Pequeno Príncipe">
+                        </div>
+                        <span class="book-year" style="background: rgba(245, 158, 11, 0.2); color: var(--accent); border-color: rgba(245, 158, 11, 0.3);">1943</span>
+                        <div class="book-card-info">
+                            <h3>O Pequeno Príncipe</h3>
+                            <p class="book-author">Antoine de Saint-Exupéry</p>
+                            <p class="book-excerpt">
+                                "O essencial é invisível aos olhos." Uma história aparentemente infantil que esconde lições profundas sobre amor, perda e o verdadeiro sentido das relações humanas.
+                            </p>
+                        </div>
                     </div>
-                    <div class="book-card-content">
-                        <span class="book-year" style="background: rgba(212, 175, 55, 0.2); color: var(--gold);">1943</span>
-                        <h3>O Pequeno Príncipe</h3>
-                        <p class="book-author">Antoine de Saint-Exupéry</p>
-                        <p class="book-excerpt">
-                            "O essencial é invisível aos olhos." Uma história aparentemente infantil que esconde lições profundas sobre amor, perda e o verdadeiro sentido das relações humanas.
-                        </p>
+                    <div>
                         <div class="book-stats">
                             <div class="stat">
                                 <span class="stat-value">12</span>
@@ -908,7 +1188,7 @@
                                 <span class="stat-label">Páginas</span>
                             </div>
                         </div>
-                        <a href="#" class="read-more-btn" onclick="event.stopPropagation(); openModal('principe')" style="color: var(--gold);">
+                        <a href="#" class="read-more-btn" style="color: var(--accent); background: rgba(245, 158, 11, 0.1); border-color: rgba(245, 158, 11, 0.3);" onclick="event.stopPropagation(); openModal('principe')">
                             Ler Resumo →
                         </a>
                     </div>
@@ -916,6 +1196,93 @@
             </div>
         </div>
     </section>
+
+    <!-- Modal: Dom Quixote -->
+    <div class="modal-overlay" id="modal-quixote">
+        <button class="modal-close" onclick="closeModal('quixote')">×</button>
+        
+        <div class="modal-container">
+            <div class="modal-hero" style="background: linear-gradient(135deg, rgba(139, 92, 246, 0.05) 0%, transparent 50%);">
+                <div class="modal-book-display">
+                    <div class="modal-book-cover" style="box-shadow: 0 50px 100px rgba(0,0,0,0.8), 0 0 100px rgba(139, 92, 246, 0.2);">
+                        <img src="domquixote.png" alt="Dom Quixote">
+                    </div>
+                </div>
+                
+                <div class="modal-info">
+                    <span class="modal-tag" style="background: rgba(139, 92, 246, 0.2); color: var(--quixote); border-color: rgba(139, 92, 246, 0.3);">Romance de Cavalaria</span>
+                    <h2 class="modal-title">Dom Quixote<br>de la Mancha</h2>
+                    <p class="modal-author">por Miguel de Cervantes</p>
+                    
+                    <div class="modal-actions">
+                        <a href="domquixote.html" class="btn btn-primary btn-large" style="background: linear-gradient(135deg, var(--quixote) 0%, #7c3aed 100%); box-shadow: 0 10px 30px rgba(139, 92, 246, 0.3);">
+                            <span>▶</span> Acessar Resumo Completo
+                        </a>
+                        <button class="btn btn-outline btn-large" onclick="closeModal('quixote')">
+                            Voltar
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal-body">
+                <div class="modal-grid">
+                    <div class="modal-section">
+                        <h3>Sobre a Obra</h3>
+                        <p class="modal-text">
+                            Dom Quixote de la Mancha é um romance escrito pelo espanhol Miguel de Cervantes e publicado em duas partes (1605 e 1615). Considerado por muitos o primeiro romance moderno da literatura ocidental, a obra narra as aventuras de Alonso Quijano, um fidalgo que enlouqueceu de tanto ler livros de cavalaria e decide tornar-se cavaleiro andante.
+                        </p>
+                        <p class="modal-text">
+                            Acompanhado por seu fiel escudeiro Sancho Pança, Dom Quixote parte em busca de aventuras para desfazer agravos, endireitar tortos e proteger donzelas. Suas confusões — como a famosa luta contra moinhos de vento que ele confunde com gigantes — tornaram-se metáforas universais para o idealismo desmedido e a luta entre sonho e realidade.
+                        </p>
+
+                        <h3 style="margin-top: 50px;">Temas Principais</h3>
+                        <ul class="key-points">
+                            <li>A tensão entre idealismo e realidade, loucura e sanidade</li>
+                            <li>A natureza da literatura e seu poder de transformar a vida</li>
+                            <li>A amizade verdadeira entre Dom Quixote e Sancho Pança</li>
+                            <li>A crítica às convenções sociais e à hipocrisia</li>
+                            <li>A busca pela justiça em um mundo injusto</li>
+                            <li>O conflito entre o mundo medieval e o mundo moderno renascentista</li>
+                        </ul>
+                    </div>
+
+                    <div class="modal-sidebar">
+                        <h4 class="sidebar-title">Ficha Técnica</h4>
+                        
+                        <div class="detail-row">
+                            <span class="detail-label">Autor</span>
+                            <span class="detail-value">Miguel de Cervantes</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">Publicação</span>
+                            <span class="detail-value">1605 (Parte I)<br>1615 (Parte II)</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">Gênero</span>
+                            <span class="detail-value">Romance/Burlesco</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">Páginas</span>
+                            <span class="detail-value">~1020</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">Idioma Original</span>
+                            <span class="detail-value">Espanhol</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">Tempo de Leitura</span>
+                            <span class="detail-value">~25 min</span>
+                        </div>
+
+                        <a href="domquixote.html" class="access-page-btn" style="background: linear-gradient(135deg, var(--quixote) 0%, #7c3aed 100%);">
+                            Ler Resumo Completo →
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <!-- Modal: Revolução dos Bichos -->
     <div class="modal-overlay" id="modal-revolucao">
@@ -1008,20 +1375,20 @@
         <button class="modal-close" onclick="closeModal('principe')">×</button>
         
         <div class="modal-container">
-            <div class="modal-hero" style="background: linear-gradient(135deg, rgba(212, 175, 55, 0.05) 0%, transparent 50%);">
+            <div class="modal-hero" style="background: linear-gradient(135deg, rgba(245, 158, 11, 0.05) 0%, transparent 50%);">
                 <div class="modal-book-display">
-                    <div class="modal-book-cover" style="box-shadow: 0 50px 100px rgba(0,0,0,0.8), 0 0 100px rgba(212, 175, 55, 0.2);">
+                    <div class="modal-book-cover" style="box-shadow: 0 50px 100px rgba(0,0,0,0.8), 0 0 100px rgba(245, 158, 11, 0.2);">
                         <img src="opequenoprincipe.png" alt="O Pequeno Príncipe">
                     </div>
                 </div>
                 
                 <div class="modal-info">
-                    <span class="modal-tag" style="background: rgba(212, 175, 55, 0.2); color: var(--gold); border-color: rgba(212, 175, 55, 0.3);">Fábula Filosófica</span>
+                    <span class="modal-tag" style="background: rgba(245, 158, 11, 0.2); color: var(--accent); border-color: rgba(245, 158, 11, 0.3);">Fábula Filosófica</span>
                     <h2 class="modal-title">O Pequeno<br>Príncipe</h2>
                     <p class="modal-author">por Antoine de Saint-Exupéry</p>
                     
                     <div class="modal-actions">
-                        <a href="opequenoprincipe.html" class="btn btn-primary btn-large" style="background: var(--gold); box-shadow: 0 10px 30px rgba(212, 175, 55, 0.3);">
+                        <a href="opequenoprincipe.html" class="btn btn-primary btn-large" style="background: linear-gradient(135deg, var(--accent) 0%, #d97706 100%); box-shadow: 0 10px 30px rgba(245, 158, 11, 0.3);">
                             <span>▶</span> Acessar Resumo Completo
                         </a>
                         <button class="btn btn-outline btn-large" onclick="closeModal('principe')">
@@ -1080,7 +1447,7 @@
                             <span class="detail-value">~12 min</span>
                         </div>
 
-                        <a href="opequenoprincipe.html" class="access-page-btn" style="background: var(--gold);">
+                        <a href="opequenoprincipe.html" class="access-page-btn" style="background: linear-gradient(135deg, var(--accent) 0%, #d97706 100%);">
                             Ler Resumo Completo →
                         </a>
                     </div>
@@ -1090,6 +1457,88 @@
     </div>
 
     <script>
+        // Book database for search
+        const books = [
+            {
+                id: 'quixote',
+                title: 'Dom Quixote',
+                author: 'Miguel de Cervantes',
+                year: '1605',
+                image: 'domquixote.png',
+                genre: 'Romance de Cavalaria',
+                description: 'O maior clássico da literatura ocidental'
+            },
+            {
+                id: 'revolucao',
+                title: 'A Revolução dos Bichos',
+                author: 'George Orwell',
+                year: '1945',
+                image: 'revolucaodosbichos.png',
+                genre: 'Distopia Política',
+                description: 'Uma alegoria sobre poder e corrupção'
+            },
+            {
+                id: 'principe',
+                title: 'O Pequeno Príncipe',
+                author: 'Antoine de Saint-Exupéry',
+                year: '1943',
+                image: 'opequenoprincipe.png',
+                genre: 'Fábula Filosófica',
+                description: 'Uma história sobre amor e inocência'
+            }
+        ];
+
+        // Search functionality
+        const searchInput = document.getElementById('searchInput');
+        const searchResults = document.getElementById('searchResults');
+
+        searchInput.addEventListener('input', (e) => {
+            const query = e.target.value.toLowerCase().trim();
+            
+            if (query.length === 0) {
+                searchResults.classList.remove('active');
+                return;
+            }
+
+            const filtered = books.filter(book => 
+                book.title.toLowerCase().includes(query) ||
+                book.author.toLowerCase().includes(query) ||
+                book.genre.toLowerCase().includes(query) ||
+                book.year.includes(query)
+            );
+
+            renderSearchResults(filtered);
+        });
+
+        function renderSearchResults(results) {
+            if (results.length === 0) {
+                searchResults.innerHTML = '<div class="no-results">Nenhum livro encontrado</div>';
+            } else {
+                searchResults.innerHTML = results.map(book => `
+                    <div class="search-item" onclick="openModal('${book.id}'); searchResults.classList.remove('active'); searchInput.value = '';">
+                        <div class="search-item-image">
+                            <img src="${book.image}" alt="${book.title}">
+                        </div>
+                        <div class="search-item-info">
+                            <h4>${book.title}</h4>
+                            <p>${book.author} • ${book.genre}</p>
+                        </div>
+                        <div class="search-item-meta">
+                            <span class="search-item-year">${book.year}</span>
+                        </div>
+                    </div>
+                `).join('');
+            }
+            searchResults.classList.add('active');
+        }
+
+        // Close search when clicking outside
+        document.addEventListener('click', (e) => {
+            if (!e.target.closest('.search-container')) {
+                searchResults.classList.remove('active');
+            }
+        });
+
         // Scroll animations
         const observerOptions = {
             threshold: 0.1,
@@ -1112,7 +1561,6 @@
             modal.classList.add('active');
             document.body.style.overflow = 'hidden';
             
-            // Animate content
             const content = modal.querySelector('.modal-container');
             content.style.opacity = '0';
             content.style.transform = 'translateY(30px)';
@@ -1130,17 +1578,16 @@
             document.body.style.overflow = 'auto';
         }
 
-        // Close on escape
         document.addEventListener('keydown', (e) => {
             if (e.key === 'Escape') {
                 document.querySelectorAll('.modal-overlay').forEach(modal => {
                     modal.classList.remove('active');
                 });
+                searchResults.classList.remove('active');
                 document.body.style.overflow = 'auto';
             }
         });
 
-        // Close on backdrop click
         document.querySelectorAll('.modal-overlay').forEach(modal => {
             modal.addEventListener('click', (e) => {
                 if (e.target === modal) {
@@ -1150,7 +1597,6 @@
             });
         });
 
-        // Smooth scroll for nav links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
