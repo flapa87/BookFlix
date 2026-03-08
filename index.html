@@ -1,0 +1,1165 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BookFlix - Resumos que Transformam</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Inter:wght@300;400;500;600;800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #E50914;
+            --dark: #0a0a0a;
+            --darker: #050505;
+            --gray: #1a1a1a;
+            --light-gray: #888;
+            --cream: #f5f5f0;
+            --gold: #d4af37;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--darker);
+            color: white;
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        /* Navigation - Glassmorphism */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 25px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            background: rgba(5, 5, 5, 0.8);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.2rem;
+            font-weight: 900;
+            background: linear-gradient(135deg, var(--primary) 0%, #ff6b6b 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: -1px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 40px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: rgba(255,255,255,0.7);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: all 0.3s;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary);
+            transition: width 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: white;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* Hero Section - Split Design */
+        .hero {
+            min-height: 100vh;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-content {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 0 10%;
+            position: relative;
+            z-index: 2;
+            background: linear-gradient(90deg, var(--darker) 0%, transparent 100%);
+        }
+
+        .hero-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 30px;
+        }
+
+        .hero-tag span {
+            background: rgba(229, 9, 20, 0.2);
+            color: var(--primary);
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            border: 1px solid rgba(229, 9, 20, 0.3);
+        }
+
+        .hero h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 5rem;
+            font-weight: 900;
+            line-height: 1.1;
+            margin-bottom: 25px;
+            background: linear-gradient(135deg, #fff 0%, #a0a0a0 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero-description {
+            font-size: 1.1rem;
+            color: rgba(255,255,255,0.7);
+            max-width: 500px;
+            margin-bottom: 40px;
+            line-height: 1.8;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 20px;
+        }
+
+        .btn {
+            padding: 18px 40px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+            box-shadow: 0 10px 30px rgba(229, 9, 20, 0.3);
+        }
+
+        .btn-primary::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s;
+        }
+
+        .btn-primary:hover::before {
+            left: 100%;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 15px 40px rgba(229, 9, 20, 0.4);
+        }
+
+        .btn-secondary {
+            background: rgba(255,255,255,0.05);
+            color: white;
+            border: 1px solid rgba(255,255,255,0.2);
+            backdrop-filter: blur(10px);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255,255,255,0.1);
+            border-color: rgba(255,255,255,0.4);
+        }
+
+        /* Hero Visual - Book Showcase */
+        .hero-visual {
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: radial-gradient(circle at center, rgba(229, 9, 20, 0.1) 0%, transparent 70%);
+        }
+
+        .book-showcase {
+            position: relative;
+            width: 350px;
+            height: 500px;
+            transform-style: preserve-3d;
+            perspective: 1000px;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotateY(-5deg); }
+            50% { transform: translateY(-20px) rotateY(5deg); }
+        }
+
+        .book-cover {
+            width: 100%;
+            height: 100%;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 
+                0 50px 100px rgba(0,0,0,0.8),
+                0 30px 60px rgba(229, 9, 20, 0.2),
+                inset 0 0 0 1px rgba(255,255,255,0.1);
+            position: relative;
+            transform: rotateY(-5deg);
+            transition: transform 0.5s;
+        }
+
+        .book-cover:hover {
+            transform: rotateY(0deg) scale(1.05);
+        }
+
+        .book-cover img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .book-reflection {
+            position: absolute;
+            bottom: -30px;
+            left: 0;
+            right: 0;
+            height: 100px;
+            background: linear-gradient(to bottom, rgba(255,255,255,0.1), transparent);
+            transform: scaleY(-1);
+            filter: blur(10px);
+            opacity: 0.3;
+            border-radius: 12px;
+        }
+
+        /* Featured Books Section */
+        .featured-section {
+            padding: 100px 5%;
+            background: var(--dark);
+            position: relative;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 80px;
+        }
+
+        .section-header h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+            color: white;
+        }
+
+        .section-header p {
+            color: var(--light-gray);
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .books-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 60px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .book-card-large {
+            background: linear-gradient(145deg, rgba(255,255,255,0.03) 0%, rgba(255,255,255,0.01) 100%);
+            border-radius: 24px;
+            overflow: hidden;
+            border: 1px solid rgba(255,255,255,0.05);
+            transition: all 0.5s;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .book-card-large::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at top right, rgba(229, 9, 20, 0.1), transparent 70%);
+            opacity: 0;
+            transition: opacity 0.5s;
+        }
+
+        .book-card-large:hover {
+            transform: translateY(-10px);
+            border-color: rgba(229, 9, 20, 0.3);
+            box-shadow: 0 30px 60px rgba(0,0,0,0.5);
+        }
+
+        .book-card-large:hover::before {
+            opacity: 1;
+        }
+
+        .book-card-inner {
+            display: grid;
+            grid-template-columns: 1fr 1.5fr;
+            min-height: 400px;
+        }
+
+        .book-card-image {
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 40px;
+            background: linear-gradient(135deg, rgba(229, 9, 20, 0.05) 0%, transparent 100%);
+        }
+
+        .book-card-image img {
+            width: 100%;
+            max-width: 220px;
+            border-radius: 8px;
+            box-shadow: 
+                0 20px 40px rgba(0,0,0,0.6),
+                0 0 0 1px rgba(255,255,255,0.1);
+            transition: transform 0.5s;
+        }
+
+        .book-card-large:hover .book-card-image img {
+            transform: scale(1.1) rotate(-3deg);
+        }
+
+        .book-card-content {
+            padding: 50px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .book-year {
+            display: inline-block;
+            background: rgba(229, 9, 20, 0.1);
+            color: var(--primary);
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-bottom: 20px;
+            width: fit-content;
+        }
+
+        .book-card-content h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+            line-height: 1.2;
+        }
+
+        .book-author {
+            color: var(--light-gray);
+            font-size: 1.1rem;
+            margin-bottom: 25px;
+            font-style: italic;
+        }
+
+        .book-excerpt {
+            color: rgba(255,255,255,0.7);
+            line-height: 1.8;
+            margin-bottom: 30px;
+            font-size: 0.95rem;
+        }
+
+        .book-stats {
+            display: flex;
+            gap: 30px;
+            margin-bottom: 30px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .stat {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+
+        .stat-value {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: white;
+        }
+
+        .stat-label {
+            font-size: 0.8rem;
+            color: var(--light-gray);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .read-more-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            color: var(--primary);
+            font-weight: 600;
+            text-decoration: none;
+            transition: gap 0.3s;
+        }
+
+        .read-more-btn:hover {
+            gap: 15px;
+        }
+
+        /* Modal - Fullscreen Immersive */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(5, 5, 5, 0.98);
+            backdrop-filter: blur(30px);
+            z-index: 3000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.5s;
+            overflow-y: auto;
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .modal-container {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .modal-hero {
+            position: relative;
+            min-height: 70vh;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            align-items: center;
+            padding: 100px 10% 50px;
+            background: linear-gradient(135deg, rgba(229, 9, 20, 0.05) 0%, transparent 50%);
+        }
+
+        .modal-book-display {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
+
+        .modal-book-cover {
+            width: 350px;
+            height: 500px;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 
+                0 50px 100px rgba(0,0,0,0.8),
+                0 0 0 1px rgba(255,255,255,0.1),
+                0 0 100px rgba(229, 9, 20, 0.2);
+            transform: rotate(-3deg);
+            transition: transform 0.5s;
+            animation: bookEntrance 0.8s ease-out;
+        }
+
+        @keyframes bookEntrance {
+            from {
+                opacity: 0;
+                transform: rotate(-10deg) translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: rotate(-3deg) translateY(0);
+            }
+        }
+
+        .modal-book-cover:hover {
+            transform: rotate(0deg) scale(1.05);
+        }
+
+        .modal-book-cover img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .modal-info {
+            padding-left: 60px;
+        }
+
+        .modal-tag {
+            display: inline-block;
+            background: rgba(229, 9, 20, 0.2);
+            color: var(--primary);
+            padding: 10px 20px;
+            border-radius: 30px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 30px;
+            border: 1px solid rgba(229, 9, 20, 0.3);
+        }
+
+        .modal-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 4rem;
+            font-weight: 900;
+            margin-bottom: 20px;
+            line-height: 1.1;
+            background: linear-gradient(135deg, #fff 0%, #888 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .modal-author {
+            font-size: 1.3rem;
+            color: var(--light-gray);
+            margin-bottom: 40px;
+            font-style: italic;
+        }
+
+        .modal-actions {
+            display: flex;
+            gap: 20px;
+        }
+
+        .btn-large {
+            padding: 20px 50px;
+            font-size: 1.1rem;
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 2px solid rgba(255,255,255,0.3);
+            color: white;
+        }
+
+        .btn-outline:hover {
+            border-color: white;
+            background: rgba(255,255,255,0.05);
+        }
+
+        .modal-close {
+            position: fixed;
+            top: 40px;
+            right: 40px;
+            width: 60px;
+            height: 60px;
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.2);
+            border-radius: 50%;
+            color: white;
+            font-size: 2rem;
+            cursor: pointer;
+            z-index: 3001;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+            backdrop-filter: blur(10px);
+        }
+
+        .modal-close:hover {
+            background: rgba(229, 9, 20, 0.2);
+            border-color: var(--primary);
+            transform: rotate(90deg);
+        }
+
+        .modal-body {
+            padding: 80px 10%;
+            background: var(--darker);
+            flex: 1;
+        }
+
+        .modal-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 80px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .modal-section h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            margin-bottom: 30px;
+            color: white;
+            position: relative;
+            padding-bottom: 15px;
+        }
+
+        .modal-section h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 60px;
+            height: 3px;
+            background: var(--primary);
+        }
+
+        .modal-text {
+            font-size: 1.1rem;
+            line-height: 2;
+            color: rgba(255,255,255,0.8);
+            margin-bottom: 30px;
+        }
+
+        .key-points {
+            list-style: none;
+            margin-top: 40px;
+        }
+
+        .key-points li {
+            padding: 20px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            display: flex;
+            align-items: start;
+            gap: 20px;
+            font-size: 1.1rem;
+            color: rgba(255,255,255,0.9);
+        }
+
+        .key-points li::before {
+            content: '→';
+            color: var(--primary);
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        .modal-sidebar {
+            background: rgba(255,255,255,0.02);
+            border-radius: 20px;
+            padding: 40px;
+            border: 1px solid rgba(255,255,255,0.05);
+            height: fit-content;
+            position: sticky;
+            top: 100px;
+        }
+
+        .sidebar-title {
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--light-gray);
+            margin-bottom: 30px;
+        }
+
+        .detail-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 15px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .detail-label {
+            color: var(--light-gray);
+            font-size: 0.9rem;
+        }
+
+        .detail-value {
+            color: white;
+            font-weight: 600;
+        }
+
+        .access-page-btn {
+            display: block;
+            width: 100%;
+            margin-top: 30px;
+            padding: 20px;
+            background: var(--primary);
+            color: white;
+            text-align: center;
+            text-decoration: none;
+            border-radius: 12px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.3s;
+            box-shadow: 0 10px 30px rgba(229, 9, 20, 0.3);
+        }
+
+        .access-page-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 15px 40px rgba(229, 9, 20, 0.4);
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .hero {
+                grid-template-columns: 1fr;
+            }
+
+            .hero-visual {
+                display: none;
+            }
+
+            .books-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .book-card-inner {
+                grid-template-columns: 1fr;
+            }
+
+            .modal-hero {
+                grid-template-columns: 1fr;
+                text-align: center;
+                padding-top: 150px;
+            }
+
+            .modal-book-display {
+                margin-bottom: 50px;
+            }
+
+            .modal-info {
+                padding-left: 0;
+            }
+
+            .modal-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .modal-sidebar {
+                position: static;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 3rem;
+            }
+
+            .modal-title {
+                font-size: 2.5rem;
+            }
+
+            .modal-book-cover {
+                width: 250px;
+                height: 350px;
+            }
+
+            .nav-links {
+                display: none;
+            }
+        }
+
+        /* Animations */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease-out;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation -->
+    <nav>
+        <div class="logo">BookFlix</div>
+        <ul class="nav-links">
+            <li><a href="#inicio">Início</a></li>
+            <li><a href="#catalogo">Catálogo</a></li>
+            <li><a href="#categorias">Categorias</a></li>
+            <li><a href="#minha-lista">Minha Lista</a></li>
+        </ul>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="inicio">
+        <div class="hero-content">
+            <div class="hero-tag">
+                <span>Destaque da Semana</span>
+            </div>
+            <h1>A Revolução<br>dos Bichos</h1>
+            <p class="hero-description">
+                Uma distopia atemporal que expõe as mecânicas do poder e a corrupção através de uma narrativa aparentemente simples, mas profundamente perturbadora.
+            </p>
+            <div class="hero-buttons">
+                <button class="btn btn-primary" onclick="openModal('revolucao')">
+                    <span>▶</span> Explorar Resumo
+                </button>
+                <button class="btn btn-secondary" onclick="openModal('revolucao')">
+                    Ver Detalhes
+                </button>
+            </div>
+        </div>
+        <div class="hero-visual">
+            <div class="book-showcase">
+                <div class="book-cover">
+                    <img src="revolucaodosbichos.png" alt="A Revolução dos Bichos">
+                </div>
+                <div class="book-reflection"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Books Section -->
+    <section class="featured-section" id="catalogo">
+        <div class="section-header fade-in">
+            <h2>Catálogo Premium</h2>
+            <p>Resumos cuidadosamente elaborados dos maiores clássicos da literatura mundial</p>
+        </div>
+
+        <div class="books-grid">
+            <!-- Book 1: Revolução dos Bichos -->
+            <div class="book-card-large fade-in" onclick="openModal('revolucao')">
+                <div class="book-card-inner">
+                    <div class="book-card-image">
+                        <img src="revolucaodosbichos.png" alt="A Revolução dos Bichos">
+                    </div>
+                    <div class="book-card-content">
+                        <span class="book-year">1945</span>
+                        <h3>A Revolução dos Bichos</h3>
+                        <p class="book-author">George Orwell</p>
+                        <p class="book-excerpt">
+                            "Todos os animais são iguais, mas alguns animais são mais iguais que outros." Uma alegoria política que continua ecoando através das décadas como um alerta sobre a natureza do poder absoluto.
+                        </p>
+                        <div class="book-stats">
+                            <div class="stat">
+                                <span class="stat-value">15</span>
+                                <span class="stat-label">Min de Leitura</span>
+                            </div>
+                            <div class="stat">
+                                <span class="stat-value">4.9</span>
+                                <span class="stat-label">Avaliação</span>
+                            </div>
+                            <div class="stat">
+                                <span class="stat-value">112</span>
+                                <span class="stat-label">Páginas</span>
+                            </div>
+                        </div>
+                        <a href="#" class="read-more-btn" onclick="event.stopPropagation(); openModal('revolucao')">
+                            Ler Resumo →
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Book 2: O Pequeno Príncipe -->
+            <div class="book-card-large fade-in" onclick="openModal('principe')">
+                <div class="book-card-inner">
+                    <div class="book-card-image" style="background: linear-gradient(135deg, rgba(212, 175, 55, 0.1) 0%, transparent 100%);">
+                        <img src="opequenoprincipe.png" alt="O Pequeno Príncipe">
+                    </div>
+                    <div class="book-card-content">
+                        <span class="book-year" style="background: rgba(212, 175, 55, 0.2); color: var(--gold);">1943</span>
+                        <h3>O Pequeno Príncipe</h3>
+                        <p class="book-author">Antoine de Saint-Exupéry</p>
+                        <p class="book-excerpt">
+                            "O essencial é invisível aos olhos." Uma história aparentemente infantil que esconde lições profundas sobre amor, perda e o verdadeiro sentido das relações humanas.
+                        </p>
+                        <div class="book-stats">
+                            <div class="stat">
+                                <span class="stat-value">12</span>
+                                <span class="stat-label">Min de Leitura</span>
+                            </div>
+                            <div class="stat">
+                                <span class="stat-value">5.0</span>
+                                <span class="stat-label">Avaliação</span>
+                            </div>
+                            <div class="stat">
+                                <span class="stat-value">96</span>
+                                <span class="stat-label">Páginas</span>
+                            </div>
+                        </div>
+                        <a href="#" class="read-more-btn" onclick="event.stopPropagation(); openModal('principe')" style="color: var(--gold);">
+                            Ler Resumo →
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Modal: Revolução dos Bichos -->
+    <div class="modal-overlay" id="modal-revolucao">
+        <button class="modal-close" onclick="closeModal('revolucao')">×</button>
+        
+        <div class="modal-container">
+            <div class="modal-hero">
+                <div class="modal-book-display">
+                    <div class="modal-book-cover">
+                        <img src="revolucaodosbichos.png" alt="A Revolução dos Bichos">
+                    </div>
+                </div>
+                
+                <div class="modal-info">
+                    <span class="modal-tag">Distopia Política</span>
+                    <h2 class="modal-title">A Revolução<br>dos Bichos</h2>
+                    <p class="modal-author">por George Orwell</p>
+                    
+                    <div class="modal-actions">
+                        <a href="revolucaodosbichos.html" class="btn btn-primary btn-large">
+                            <span>▶</span> Acessar Resumo Completo
+                        </a>
+                        <button class="btn btn-outline btn-large" onclick="closeModal('revolucao')">
+                            Voltar
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal-body">
+                <div class="modal-grid">
+                    <div class="modal-section">
+                        <h3>Sobre a Obra</h3>
+                        <p class="modal-text">
+                            A Revolução dos Bichos é uma fábula política escrita por George Orwell e publicada em 1945. A história se passa na Granja do Solar, onde os animais, cansados da exploração do fazendeiro Sr. Jones, organizam uma revolução e expulsam os humanos, estabelecendo um regime de igualdade entre os animais.
+                        </p>
+                        <p class="modal-text">
+                            No entanto, o que começa como um sonho de liberdade e justiça degenera rapidamente em uma ditadura tão opressiva quanto o regime anterior. Os porcos, liderados por Napoleão, gradualmente se corrompem pelo poder e traem todos os princípios da revolução.
+                        </p>
+
+                        <h3 style="margin-top: 50px;">Pontos Principais</h3>
+                        <ul class="key-points">
+                            <li>A corrupção do poder e como revoluções podem trair seus próprios ideais</li>
+                            <li>A manipulação da linguagem e da história para controlar as massas</li>
+                            <li>A natureza cíclica da opressão e a dificuldade de manter ideais puros</li>
+                            <li>A crítica ao totalitarismo stalinista e seus mecanismos de controle</li>
+                            <li>A importância do ceticismo e da vigilância contra a propaganda</li>
+                        </ul>
+                    </div>
+
+                    <div class="modal-sidebar">
+                        <h4 class="sidebar-title">Ficha Técnica</h4>
+                        
+                        <div class="detail-row">
+                            <span class="detail-label">Autor</span>
+                            <span class="detail-value">George Orwell</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">Publicação</span>
+                            <span class="detail-value">17/08/1945</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">Gênero</span>
+                            <span class="detail-value">Sátira/Distopia</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">Páginas</span>
+                            <span class="detail-value">112</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">Idioma Original</span>
+                            <span class="detail-value">Inglês</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">Tempo de Leitura</span>
+                            <span class="detail-value">~15 min</span>
+                        </div>
+
+                        <a href="revolucaodosbichos.html" class="access-page-btn">
+                            Ler Resumo Completo →
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal: O Pequeno Príncipe -->
+    <div class="modal-overlay" id="modal-principe">
+        <button class="modal-close" onclick="closeModal('principe')">×</button>
+        
+        <div class="modal-container">
+            <div class="modal-hero" style="background: linear-gradient(135deg, rgba(212, 175, 55, 0.05) 0%, transparent 50%);">
+                <div class="modal-book-display">
+                    <div class="modal-book-cover" style="box-shadow: 0 50px 100px rgba(0,0,0,0.8), 0 0 100px rgba(212, 175, 55, 0.2);">
+                        <img src="opequenoprincipe.png" alt="O Pequeno Príncipe">
+                    </div>
+                </div>
+                
+                <div class="modal-info">
+                    <span class="modal-tag" style="background: rgba(212, 175, 55, 0.2); color: var(--gold); border-color: rgba(212, 175, 55, 0.3);">Fábula Filosófica</span>
+                    <h2 class="modal-title">O Pequeno<br>Príncipe</h2>
+                    <p class="modal-author">por Antoine de Saint-Exupéry</p>
+                    
+                    <div class="modal-actions">
+                        <a href="opequenoprincipe.html" class="btn btn-primary btn-large" style="background: var(--gold); box-shadow: 0 10px 30px rgba(212, 175, 55, 0.3);">
+                            <span>▶</span> Acessar Resumo Completo
+                        </a>
+                        <button class="btn btn-outline btn-large" onclick="closeModal('principe')">
+                            Voltar
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal-body">
+                <div class="modal-grid">
+                    <div class="modal-section">
+                        <h3>Sobre a Obra</h3>
+                        <p class="modal-text">
+                            O Pequeno Príncipe é uma obra do escritor e aviador francês Antoine de Saint-Exupéry, publicada em 1943. A história começa com um piloto perdido no deserto do Saara, onde encontra um pequeno príncipe que vem do asteroide B-612.
+                        </p>
+                        <p class="modal-text">
+                            Ao longo de oito dias, o príncipe conta ao piloto sobre suas viagens por outros asteroides e as pessoas estranhas que encontrou: um rei sem súditos, um vaidoso que só ouve elogios, um bêbado envergonhado de beber, um homem de negócios ocupado contando estrelas, um acendedor de lampiões fiel a sua rotina, e um geógrafo que nunca viaja.
+                        </p>
+
+                        <h3 style="margin-top: 50px;">Lições Principais</h3>
+                        <ul class="key-points">
+                            <li>O verdadeiro valor das coisas está no tempo dedicado a elas</li>
+                            <li>A importância de ver com o coração, não apenas com os olhos</li>
+                            <li>A responsabilidade que vem com a criação de laços afetivos</li>
+                            <li>A crítica à perda da imaginação e inocência na vida adulta</li>
+                            <li>O significado da amizade e do cuidado com o outro</li>
+                        </ul>
+                    </div>
+
+                    <div class="modal-sidebar">
+                        <h4 class="sidebar-title">Ficha Técnica</h4>
+                        
+                        <div class="detail-row">
+                            <span class="detail-label">Autor</span>
+                            <span class="detail-value">A. de Saint-Exupéry</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">Publicação</span>
+                            <span class="detail-value">06/04/1943</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">Gênero</span>
+                            <span class="detail-value">Fábula/Filosófico</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">Páginas</span>
+                            <span class="detail-value">96</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">Idioma Original</span>
+                            <span class="detail-value">Francês</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">Tempo de Leitura</span>
+                            <span class="detail-value">~12 min</span>
+                        </div>
+
+                        <a href="opequenoprincipe.html" class="access-page-btn" style="background: var(--gold);">
+                            Ler Resumo Completo →
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Scroll animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: "0px 0px -50px 0px"
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+        // Modal functions
+        function openModal(book) {
+            const modal = document.getElementById(`modal-${book}`);
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+            
+            // Animate content
+            const content = modal.querySelector('.modal-container');
+            content.style.opacity = '0';
+            content.style.transform = 'translateY(30px)';
+            
+            setTimeout(() => {
+                content.style.transition = 'all 0.6s ease-out';
+                content.style.opacity = '1';
+                content.style.transform = 'translateY(0)';
+            }, 100);
+        }
+
+        function closeModal(book) {
+            const modal = document.getElementById(`modal-${book}`);
+            modal.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+
+        // Close on escape
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                document.querySelectorAll('.modal-overlay').forEach(modal => {
+                    modal.classList.remove('active');
+                });
+                document.body.style.overflow = 'auto';
+            }
+        });
+
+        // Close on backdrop click
+        document.querySelectorAll('.modal-overlay').forEach(modal => {
+            modal.addEventListener('click', (e) => {
+                if (e.target === modal) {
+                    modal.classList.remove('active');
+                    document.body.style.overflow = 'auto';
+                }
+            });
+        });
+
+        // Smooth scroll for nav links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
