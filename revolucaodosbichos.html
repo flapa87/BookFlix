@@ -54,7 +54,7 @@
         .progress-bar { position: fixed; top: 0; left: 0; height: 3px; background: linear-gradient(to right, #DC2626, #fbbf24); z-index: 100; }
         .nav-dot { width: 12px; height: 12px; border-radius: 50%; background: rgba(255,255,255,0.2); cursor: pointer; transition: all 0.3s; }
         .nav-dot.active { background: #DC2626; transform: scale(1.3); box-shadow: 0 0 15px rgba(220,38,38,0.5); }
-        .chapter-number { font-family: 'Cinzel', serif; font-size: 5rem; font-weight: 900; color: rgba(220,38,38,0.2); position: absolute; top: -20px; left: -20px; }
+        .chapter-badge { font-family: 'Cinzel', serif; font-size: 1.5rem; font-weight: 900; color: #DC2626; background: rgba(220, 38, 38, 0.1); border: 2px solid rgba(220, 38, 38, 0.3); border-radius: 12px; width: 48px; height: 48px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
         .hover-reveal { position: relative; overflow: hidden; }
         .hover-reveal::after { content: ''; position: absolute; bottom: 0; left: 0; width: 100%; height: 2px; background: #DC2626; transform: scaleX(0); transform-origin: left; transition: transform 0.3s; }
         .hover-reveal:hover::after { transform: scaleX(1); }
@@ -126,7 +126,7 @@
                 <div class="bg-stone-800 p-8 rounded-2xl border border-stone-700">
                     <h3 class="font-display text-2xl font-bold text-white mb-6">Linha do Tempo: Ficção e Realidade</h3>
                     <div class="space-y-6 relative">
-                        <div class="absolute left-4 top-2 bottom-2 w-0.5 timeline-line rounded"></div>
+                        <div class="absolute left-4 top-2 bottom-2 w-0.5 timeline-line rounded-full"></div>
                         
                         <div class="relative pl-12">
                             <div class="absolute left-2 top-1 w-5 h-5 bg-wheat rounded-full border-4 border-stone-900"></div>
@@ -183,159 +183,169 @@
 
         <div class="grid lg:grid-cols-2 gap-8 mb-16">
             <!-- Old Major -->
-            <div class="scroll-reveal bg-stone-800 p-8 rounded-2xl border border-stone-700 relative overflow-hidden">
-                <div class="chapter-number">01</div>
-                <div class="relative z-10">
-                    <div class="flex items-center gap-4 mb-6">
-                        <div class="w-16 h-16 bg-wheat/20 rounded-xl flex items-center justify-center text-3xl border-2 border-wheat/50">🐗</div>
-                        <div>
-                            <h3 class="font-display text-3xl font-bold text-wheat">Old Major</h3>
-                            <p class="text-xs text-stone-500 uppercase tracking-wider">O Profeta / Marx & Lênin</p>
+            <div class="scroll-reveal bg-stone-800 p-8 rounded-2xl border border-stone-700">
+                <div class="flex items-start gap-4 mb-6">
+                    <div class="chapter-badge text-wheat border-wheat/30 bg-wheat/10">01</div>
+                    <div class="flex-1">
+                        <div class="flex items-center gap-4 mb-2">
+                            <div class="w-16 h-16 bg-wheat/20 rounded-xl flex items-center justify-center text-3xl border-2 border-wheat/50">🐗</div>
+                            <div>
+                                <h3 class="font-display text-3xl font-bold text-wheat">Old Major</h3>
+                                <p class="text-xs text-stone-500 uppercase tracking-wider">O Profeta / Marx & Lênin</p>
+                            </div>
                         </div>
                     </div>
-                    <div class="space-y-4 text-stone-300">
-                        <p>
-                            <strong class="text-white">Descrição:</strong> Porco Middle White de 12 anos, respeitado por todos, "majesticamente alto". Reúne os animais no celeiro para o discurso fundador da revolução três noites antes de morrer.
+                </div>
+                <div class="space-y-4 text-stone-300">
+                    <p>
+                        <strong class="text-white">Descrição:</strong> Porco Middle White de 12 anos, respeitado por todos, "majesticamente alto". Reúne os animais no celeiro para o discurso fundador da revolução três noites antes de morrer.
+                    </p>
+                    <p>
+                        <strong class="text-white">Discurso-chave:</strong> Identifica o homem como única fonte de problemas ("o único animal que consome sem produzir"). Profetiza a Rebelião. Ensina "Beasts of England" (hino adaptado do "L'Internationale" socialista).
+                    </p>
+                    <div class="analysis-box p-4 rounded mt-4">
+                        <p class="text-sm text-stone-300">
+                            <strong class="text-soviet-red">Análise:</strong> Old Major representa o <em>potencial utópico</em> não corrompido. Sua morte antes da revolução é simbólica: os ideais puros não sobrevivem à prática do poder. A divisão entre teoria (Marx) e prática revolucionária (Lênin) já contém as sementes da degeneração.
                         </p>
-                        <p>
-                            <strong class="text-white">Discurso-chave:</strong> Identifica o homem como única fonte de problemas ("o único animal que consome sem produzir"). Profetiza a Rebelião. Ensina "Beasts of England" (hino adaptado do "L'Internationale" socialista).
-                        </p>
-                        <div class="analysis-box p-4 rounded mt-4">
-                            <p class="text-sm text-stone-300">
-                                <strong class="text-soviet-red">Análise:</strong> Old Major representa o <em>potencial utópico</em> não corrompido. Sua morte antes da revolução é simbólica: os ideais puros não sobrevivem à prática do poder. A divisão entre teoria (Marx) e prática revolucionária (Lênin) já contém as sementes da degeneração.
-                            </p>
-                        </div>
                     </div>
                 </div>
             </div>
 
             <!-- Napoleon -->
-            <div class="scroll-reveal bg-stone-800 p-8 rounded-2xl border border-soviet-red/50 relative overflow-hidden">
-                <div class="chapter-number">02</div>
-                <div class="relative z-10">
-                    <div class="flex items-center gap-4 mb-6">
-                        <div class="w-16 h-16 bg-soviet-red/20 rounded-xl flex items-center justify-center text-3xl border-2 border-soviet-red/50">🐷</div>
-                        <div>
-                            <h3 class="font-display text-3xl font-bold text-soviet-red">Napoleon</h3>
-                            <p class="text-xs text-stone-500 uppercase tracking-wider">O Tirano / Stalin</p>
+            <div class="scroll-reveal bg-stone-800 p-8 rounded-2xl border border-soviet-red/50">
+                <div class="flex items-start gap-4 mb-6">
+                    <div class="chapter-badge text-soviet-red">02</div>
+                    <div class="flex-1">
+                        <div class="flex items-center gap-4 mb-2">
+                            <div class="w-16 h-16 bg-soviet-red/20 rounded-xl flex items-center justify-center text-3xl border-2 border-soviet-red/50">🐷</div>
+                            <div>
+                                <h3 class="font-display text-3xl font-bold text-soviet-red">Napoleon</h3>
+                                <p class="text-xs text-stone-500 uppercase tracking-wider">O Tirano / Stalin</p>
+                            </div>
                         </div>
                     </div>
-                    <div class="space-y-4 text-stone-300">
-                        <p>
-                            <strong class="text-white">Descrição:</strong> Porco Berkshire, "grande e feroz de aparência", nunca fala em público, mas sempre tem sua própria maneira. Assume liderança após expulsar Snowball.
+                </div>
+                <div class="space-y-4 text-stone-300">
+                    <p>
+                        <strong class="text-white">Descrição:</strong> Porco Berkshire, "grande e feroz de aparência", nunca fala em público, mas sempre tem sua própria maneira. Assume liderança após expulsar Snowball.
+                    </p>
+                    <p>
+                        <strong class="text-white">Métodos:</strong> Usa nove cães (NKVD) como polícia secreta. Elimina assembleias. Centraliza economia. Cria culto à personalidade. Revisa história continuamente.
+                    </p>
+                    <p>
+                        <strong class="text-white">Degeneração:</strong> Começa a andar nas patas traseiras, usar roupas, dormir em cama, beber álcool, negociar com humanos. No final, é indistinguível de Mr. Jones.
+                    </p>
+                    <div class="analysis-box p-4 rounded mt-4">
+                        <p class="text-sm text-stone-300">
+                            <strong class="text-soviet-red">Análise:</strong> Napoleon encarna a <em>teoria do poder de Michels</em> ("lei de ferro da oligarquia"): toda organização, por mais democrática que seja, tende à aristocratização. Stalin representa a burocracia revolucionária que substitui a velha classe dominante, tornando-se mais eficiente na opressão porque conhece as técnicas da revolução.
                         </p>
-                        <p>
-                            <strong class="text-white">Métodos:</strong> Usa nove cães (NKVD) como polícia secreta. Elimina assembleias. Centraliza economia. Cria culto à personalidade. Revisa história continuamente.
-                        </p>
-                        <p>
-                            <strong class="text-white">Degeneração:</strong> Começa a andar nas patas traseiras, usar roupas, dormir em cama, beber álcool, negociar com humanos. No final, é indistinguível de Mr. Jones.
-                        </p>
-                        <div class="analysis-box p-4 rounded mt-4">
-                            <p class="text-sm text-stone-300">
-                                <strong class="text-soviet-red">Análise:</strong> Napoleon encarna a <em>teoria do poder de Michels</em> ("lei de ferro da oligarquia"): toda organização, por mais democrática que seja, tende à aristocratização. Stalin representa a burocracia revolucionária que substitui a velha classe dominante, tornando-se mais eficiente na opressão porque conhece as técnicas da revolução.
-                            </p>
-                        </div>
                     </div>
                 </div>
             </div>
 
             <!-- Snowball -->
-            <div class="scroll-reveal bg-stone-800 p-8 rounded-2xl border border-stone-700 relative overflow-hidden">
-                <div class="chapter-number">03</div>
-                <div class="relative z-10">
-                    <div class="flex items-center gap-4 mb-6">
-                        <div class="w-16 h-16 bg-blue-500/20 rounded-xl flex items-center justify-center text-3xl border-2 border-blue-500/50">🐖</div>
-                        <div>
-                            <h3 class="font-display text-3xl font-bold text-blue-400">Snowball</h3>
-                            <p class="text-xs text-stone-500 uppercase tracking-wider">O Idealista / Trotsky</p>
+            <div class="scroll-reveal bg-stone-800 p-8 rounded-2xl border border-stone-700">
+                <div class="flex items-start gap-4 mb-6">
+                    <div class="chapter-badge text-blue-400 border-blue-400/30 bg-blue-400/10">03</div>
+                    <div class="flex-1">
+                        <div class="flex items-center gap-4 mb-2">
+                            <div class="w-16 h-16 bg-blue-500/20 rounded-xl flex items-center justify-center text-3xl border-2 border-blue-500/50">🐖</div>
+                            <div>
+                                <h3 class="font-display text-3xl font-bold text-blue-400">Snowball</h3>
+                                <p class="text-xs text-stone-500 uppercase tracking-wider">O Idealista / Trotsky</p>
+                            </div>
                         </div>
                     </div>
-                    <div class="space-y-4 text-stone-300">
-                        <p>
-                            <strong class="text-white">Descrição:</strong> Porco mais esperto e eloquente, criador dos comitês de educação (Alfabetização), do Comitê de Ovos (produção), e idealizador do moinho de vento para eletrificar a fazenda.
+                </div>
+                <div class="space-y-4 text-stone-300">
+                    <p>
+                        <strong class="text-white">Descrição:</strong> Porco mais esperto e eloquente, criador dos comitês de educação (Alfabetização), do Comitê de Ovos (produção), e idealizador do moinho de vento para eletrificar a fazenda.
+                    </p>
+                    <p>
+                        <strong class="text-white">Batalha do Cowshed:</strong> Lidera heroicamente a defesa contra invasão de Mr. Jones, sendo ferido no ombro (medalha "Animal Hero, First Class").
+                    </p>
+                    <p>
+                        <strong class="text-white">Expulsão:</strong> Durante assembleia sobre o moinho, Napoleon solta cães. Snowball escapa por pouco, nunca mais visto. Posteriormente demonizado como traidor desde o início, colaboracionista de Jones, saboteador de todas as falhas.
+                    </p>
+                    <div class="analysis-box p-4 rounded mt-4">
+                        <p class="text-sm text-stone-300">
+                            <strong class="text-soviet-red">Análise:</strong> Snowball representa a <em>esquerda revolucionária destruída</em>. Trotsky, teórico da "revolução permanente", foi exilado e depois assassinado (1940) por Ramón Mercader, agente soviético. A demonização de Snowball espelha a reescrita stalinista da história, onde Trotsky foi apagado de fotografias e acusado de conspirações absurdas.
                         </p>
-                        <p>
-                            <strong class="text-white">Batalha do Cowshed:</strong> Lidera heroicamente a defesa contra invasão de Mr. Jones, sendo ferido no ombro (medalha "Animal Hero, First Class").
-                        </p>
-                        <p>
-                            <strong class="text-white">Expulsão:</strong> Durante assembleia sobre o moinho, Napoleon solta cães. Snowball escapa por pouco, nunca mais visto. Posteriormente demonizado como traidor desde o início, colaboracionista de Jones, saboteador de todas as falhas.
-                        </p>
-                        <div class="analysis-box p-4 rounded mt-4">
-                            <p class="text-sm text-stone-300">
-                                <strong class="text-soviet-red">Análise:</strong> Snowball representa a <em>esquerda revolucionária destruída</em>. Trotsky, teórico da "revolução permanente", foi exilado e depois assassinado (1940) por Ramón Mercader, agente soviético. A demonização de Snowball espelha a reescrita stalinista da história, onde Trotsky foi apagado de fotografias e acusado de conspirações absurdas.
-                            </p>
-                        </div>
                     </div>
                 </div>
             </div>
 
             <!-- Squealer -->
-            <div class="scroll-reveal bg-stone-800 p-8 rounded-2xl border border-stone-700 relative overflow-hidden">
-                <div class="chapter-number">04</div>
-                <div class="relative z-10">
-                    <div class="flex items-center gap-4 mb-6">
-                        <div class="w-16 h-16 bg-purple-500/20 rounded-xl flex items-center justify-center text-3xl border-2 border-purple-500/50">🗣️</div>
-                        <div>
-                            <h3 class="font-display text-3xl font-bold text-purple-400">Squealer</h3>
-                            <p class="text-xs text-stone-500 uppercase tracking-wider">O Propagandista / Molotov & Pravda</p>
+            <div class="scroll-reveal bg-stone-800 p-8 rounded-2xl border border-stone-700">
+                <div class="flex items-start gap-4 mb-6">
+                    <div class="chapter-badge text-purple-400 border-purple-400/30 bg-purple-400/10">04</div>
+                    <div class="flex-1">
+                        <div class="flex items-center gap-4 mb-2">
+                            <div class="w-16 h-16 bg-purple-500/20 rounded-xl flex items-center justify-center text-3xl border-2 border-purple-500/50">🗣️</div>
+                            <div>
+                                <h3 class="font-display text-3xl font-bold text-purple-400">Squealer</h3>
+                                <p class="text-xs text-stone-500 uppercase tracking-wider">O Propagandista / Molotov & Pravda</p>
+                            </div>
                         </div>
                     </div>
-                    <div class="space-y-4 text-stone-300">
-                        <p>
-                            <strong class="text-white">Descrição:</strong> Porco pequeno e gordo, "olhos brilhantes", "voz aguda", "talento extraordinário para falar". Move-se de um lado para outro gesticulando, "saltando um pouco de um lado para outro e balançando o rabo de uma maneira tão persuasiva".
+                </div>
+                <div class="space-y-4 text-stone-300">
+                    <p>
+                        <strong class="text-white">Descrição:</strong> Porco pequeno e gordo, "olhos brilhantes", "voz aguda", "talento extraordinário para falar". Move-se de um lado para outro gesticulando, "saltando um pouco de um lado para outro e balançando o rabo de uma maneira tão persuasiva".
+                    </p>
+                    <p>
+                        <strong class="text-white">Técnicas:</strong> Estatísticas falsas ("produção aumentou 125%"), argumentos lógicos tortos, apelo à autoridade de Napoleon, ameaças veladas ("Jones voltará"), lágrimas de preocupação pelo bem dos animais.
+                    </p>
+                    <p>
+                        <strong class="text-white">Alteração dos Mandamentos:</strong> É quem pinta as revisões noturnas nos muros do celeiro, justificando que os animais "se lembravam errado" ou que as mudanças eram "interpretações mais corretas".
+                    </p>
+                    <div class="analysis-box p-4 rounded mt-4">
+                        <p class="text-sm text-stone-300">
+                            <strong class="text-soviet-red">Análise:</strong> Squealer encarna a <em>teoria do "duplipensar" (doublethink)</em> de Orwell em 1984: capacidade de manter duas crenças contraditórias simultaneamente. Representa o aparato ideológico do Estado: não apenas mentir, mas fazer a população participar de suas próprias ilusões. É o precursor do "pós-verdade" contemporâneo.
                         </p>
-                        <p>
-                            <strong class="text-white">Técnicas:</strong> Estatísticas falsas ("produção aumentou 125%"), argumentos lógicos tortos, apelo à autoridade de Napoleon, ameaças veladas ("Jones voltará"), lágrimas de preocupação pelo bem dos animais.
-                        </p>
-                        <p>
-                            <strong class="text-white">Alteração dos Mandamentos:</strong> É quem pinta as revisões noturnas nos muros do celeiro, justificando que os animais "se lembravam errado" ou que as mudanças eram "interpretações mais corretas".
-                        </p>
-                        <div class="analysis-box p-4 rounded mt-4">
-                            <p class="text-sm text-stone-300">
-                                <strong class="text-soviet-red">Análise:</strong> Squealer encarna a <em>teoria do "duplipensar" (doublethink)</em> de Orwell em 1984: capacidade de manter duas crenças contraditórias simultaneamente. Representa o aparato ideológico do Estado: não apenas mentir, mas fazer a população participar de suas próprias ilusões. É o precursor do "pós-verdade" contemporâneo.
-                            </p>
-                        </div>
                     </div>
                 </div>
             </div>
 
             <!-- Boxer -->
-            <div class="scroll-reveal bg-stone-800 p-8 rounded-2xl border border-amber-600/30 relative overflow-hidden lg:col-span-2">
-                <div class="chapter-number">05</div>
-                <div class="relative z-10">
-                    <div class="flex items-center gap-4 mb-6">
-                        <div class="w-16 h-16 bg-amber-600/20 rounded-xl flex items-center justify-center text-3xl border-2 border-amber-600/50">🐴</div>
-                        <div>
-                            <h3 class="font-display text-3xl font-bold text-amber-600">Boxer</h3>
-                            <p class="text-xs text-stone-500 uppercase tracking-wider">O Proletariado / Classe Trabalhadora</p>
+            <div class="scroll-reveal bg-stone-800 p-8 rounded-2xl border border-amber-600/30 lg:col-span-2">
+                <div class="flex items-start gap-4 mb-6">
+                    <div class="chapter-badge text-amber-600 border-amber-600/30 bg-amber-600/10">05</div>
+                    <div class="flex-1">
+                        <div class="flex items-center gap-4 mb-2">
+                            <div class="w-16 h-16 bg-amber-600/20 rounded-xl flex items-center justify-center text-3xl border-2 border-amber-600/50">🐴</div>
+                            <div>
+                                <h3 class="font-display text-3xl font-bold text-amber-600">Boxer</h3>
+                                <p class="text-xs text-stone-500 uppercase tracking-wider">O Proletariado / Classe Trabalhadora</p>
+                            </div>
                         </div>
                     </div>
-                    <div class="grid md:grid-cols-2 gap-8">
-                        <div class="space-y-4 text-stone-300">
-                            <p>
-                                <strong class="text-white">Descrição:</strong> Cavalo de tração, "quase um metro e oitenta de altura", "força de dois cavalos comuns". Personalidade simples, leal, ingênua politicamente. Sua força física sustenta toda a produção da fazenda.
-                            </p>
-                            <p>
-                                <strong class="text-white">Dois Lema:</strong> "Vou trabalhar mais forte" (resposta a qualquer problema) e "Napoleon está sempre certo" (fé cega no líder).
-                            </p>
-                            <p>
-                                <strong class="text-white">Colapso:</strong> Após anos de trabalho pesado (especialmente na reconstrução do moinho destruído duas vezes), desmaia no trabalho. Napoleon anuncia que será enviado a hospital veterinário. Na realidade, vendido ao abatedouro "Alfred Simmonds, Cavalariço e Abatedor de Cavalos, Willingdon" por uísque.
-                            </p>
+                </div>
+                <div class="grid md:grid-cols-2 gap-8">
+                    <div class="space-y-4 text-stone-300">
+                        <p>
+                            <strong class="text-white">Descrição:</strong> Cavalo de tração, "quase um metro e oitenta de altura", "força de dois cavalos comuns". Personalidade simples, leal, ingênua politicamente. Sua força física sustenta toda a produção da fazenda.
+                        </p>
+                        <p>
+                            <strong class="text-white">Dois Lema:</strong> "Vou trabalhar mais forte" (resposta a qualquer problema) e "Napoleon está sempre certo" (fé cega no líder).
+                        </p>
+                        <p>
+                            <strong class="text-white">Colapso:</strong> Após anos de trabalho pesado (especialmente na reconstrução do moinho destruído duas vezes), desmaia no trabalho. Napoleon anuncia que será enviado a hospital veterinário. Na realidade, vendido ao abatedouro "Alfred Simmonds, Cavalariço e Abatedor de Cavalos, Willingdon" por uísque.
+                        </p>
+                    </div>
+                    <div class="space-y-4">
+                        <div class="bg-stone-900/50 p-6 rounded-xl border-l-4 border-amber-600">
+                            <p class="font-quote italic text-amber-200 text-lg mb-2">"Vou trabalhar mais forte"</p>
+                            <p class="text-xs text-amber-600/70 uppercase tracking-wider">Auto-exploração como virtude</p>
                         </div>
-                        <div class="space-y-4">
-                            <div class="bg-stone-900/50 p-6 rounded-xl border-l-4 border-amber-600">
-                                <p class="font-quote italic text-amber-200 text-lg mb-2">"Vou trabalhar mais forte"</p>
-                                <p class="text-xs text-amber-600/70 uppercase tracking-wider">Auto-exploração como virtude</p>
-                            </div>
-                            <div class="bg-stone-900/50 p-6 rounded-xl border-l-4 border-soviet-red">
-                                <p class="font-quote italic text-red-300 text-lg mb-2">"Napoleon está sempre certo"</p>
-                                <p class="text-xs text-soviet-red/70 uppercase tracking-wider">Fideísmo político</p>
-                            </div>
-                            <div class="analysis-box p-4 rounded mt-4">
-                                <p class="text-sm text-stone-300">
-                                    <strong class="text-soviet-red">Análise:</strong> Boxer é a tragédia do <em>proletariado heroizado e traído</em>. Representa os trabalhadores soviéticos que construíram o socialismo real com suas mãos, enquanto a burocracia usufruía. Sua fé cega na ideologia ("se Napoleon disse, deve estar certo") é a alienação de classe. O abatedouro é o destino de todo trabalhador que não serve mais ao sistema — mesmo tendo sustentado todo o sistema.
-                                </p>
-                            </div>
+                        <div class="bg-stone-900/50 p-6 rounded-xl border-l-4 border-soviet-red">
+                            <p class="font-quote italic text-red-300 text-lg mb-2">"Napoleon está sempre certo"</p>
+                            <p class="text-xs text-soviet-red/70 uppercase tracking-wider">Fideísmo político</p>
+                        </div>
+                        <div class="analysis-box p-4 rounded mt-4">
+                            <p class="text-sm text-stone-300">
+                                <strong class="text-soviet-red">Análise:</strong> Boxer é a tragédia do <em>proletariado heroizado e traído</em>. Representa os trabalhadores soviéticos que construíram o socialismo com suas mãos, aceitaram privações inumanas ("apertem os cintos"), e foram descartados quando esgotados. O <strong>gulag</strong> não era apenas para dissidentes políticos, mas para "elementos sociais desviados" — incluindo trabalhadores que reclamavam.
+                            </p>
                         </div>
                     </div>
                 </div>
@@ -396,292 +406,319 @@
         </div>
 
         <!-- Capítulo 1 -->
-        <div class="scroll-reveal mb-16 relative pl-0 md:pl-24">
-            <div class="absolute left-0 top-0 w-16 h-16 bg-wheat/20 rounded-2xl flex items-center justify-center font-display text-2xl font-bold text-wheat border border-wheat/30">I</div>
-            <div>
-                <h3 class="font-display text-3xl font-bold text-white mb-4">O Discurso de Old Major</h3>
-                <div class="space-y-4 text-stone-300 leading-relaxed">
-                    <p>
-                        Na noite de uma quinta-feira de junho, após o retorno de Mr. Jones embriagado para a cama, Old Major reúne todos os animais da Manor Farm no celeiro grande. Ele descreve a vida animal como "miserável, laboriosa e curta", identificando a causa única: <strong>a exploração humana</strong>. Expõe que o homem é o único criatura que consome sem produzir, que não dá nada de volta, que rouba todo o produto do trabalho animal — leite, ovos, lã, força física — para vender e enriquecer.
+        <div class="scroll-reveal mb-16">
+            <div class="flex items-center gap-4 mb-8">
+                <div class="chapter-badge text-wheat border-wheat/30 bg-wheat/10">I</div>
+                <div>
+                    <h3 class="font-display text-3xl font-bold text-white">O Discurso de Old Major</h3>
+                    <p class="text-stone-500 font-mono text-sm">O sonho revolucionário</p>
+                </div>
+            </div>
+            <div class="pl-0 md:pl-16 space-y-4 text-stone-300 leading-relaxed">
+                <p>
+                    Na noite de uma quinta-feira de junho, após o retorno de Mr. Jones embriagado para a cama, Old Major reúne todos os animais da Manor Farm no celeiro grande. Ele descreve a vida animal como "miserável, laboriosa e curta", identificando a causa única: <strong>a exploração humana</strong>. Expõe que o homem é o único criatura que consome sem produzir, que não dá nada de volta, que rouba todo o produto do trabalho animal — leite, ovos, lã, força física — para vender e enriquecer.
+                </p>
+                <p>
+                    Old Major propõe a <span class="text-wheat font-semibold">Rebelião</span>, não especificando quando, mas afirmando que é o dever dos animais preparar-se. Apresenta o sonho de uma sociedade sem humanos, onde a terra seria comum, os animais livres, o trabalho cooperativo. Antes de morrer três dias depois, ensina "Beasts of England", hino adaptado de uma canção revolucionária, que se torna o cântico do movimento.
+                </p>
+                <div class="bg-stone-800/50 p-6 rounded-xl border-l-4 border-wheat my-6 relative">
+                    <span class="quote-mark text-wheat">"</span>
+                    <p class="font-quote italic text-xl text-stone-200 relative z-10 pt-4">
+                        "O homem é o único inimigo. Tirai o homem, e a causa da fome e do trabalho excessivo será removida para sempre."
                     </p>
-                    <p>
-                        Old Major propõe a <span class="text-wheat font-semibold">Rebelião</span>, não especificando quando, mas afirmando que é o dever dos animais preparar-se. Apresenta o sonho de uma sociedade sem humanos, onde a terra seria comum, os animais livres, o trabalho cooperativo. Antes de morrer três dias depois, ensina "Beasts of England", hino adaptado de uma canção revolucionária, que se torna o cântico do movimento.
+                </div>
+                <div class="analysis-box p-6 rounded-lg">
+                    <h4 class="font-display font-bold text-soviet-red mb-3">Análise do Capítulo</h4>
+                    <p class="text-stone-300">
+                        Este capítulo estabelece o <em>contrato social original</em> da revolução: liberdade através da eliminação da classe exploradora. A ironia trágica está na ingenuidade de Old Major sobre a natureza do poder: ele acredita que remover os humanos resolverá todos os problemas, ignorando que <strong>novas estruturas de poder surgirão entre os próprios animais</strong>. O hino "Beasts of England" funciona como o "L'Internationale" — um chamado utópico que será posteriormente proibido quando se torna inconveniente aos novos líderes.
                     </p>
-                    <div class="bg-stone-800/50 p-6 rounded-xl border-l-4 border-wheat my-6">
-                        <span class="quote-mark text-wheat">"</span>
-                        <p class="font-quote italic text-xl text-stone-200 relative z-10 pt-4">
-                            "O homem é o único inimigo. Tirai o homem, e a causa da fome e do trabalho excessivo será removida para sempre."
-                        </p>
-                    </div>
-                    <div class="analysis-box p-6 rounded-lg">
-                        <h4 class="font-display font-bold text-soviet-red mb-3">Análise do Capítulo</h4>
-                        <p class="text-stone-300">
-                            Este capítulo estabelece o <em>contrato social original</em> da revolução: liberdade através da eliminação da classe exploradora. A ironia trágica está na ingenuidade de Old Major sobre a natureza do poder: ele acredita que remover os humanos resolverá todos os problemas, ignorando que <strong>novas estruturas de poder surgirão entre os próprios animais</strong>. O hino "Beasts of England" funciona como o "L'Internationale" — um chamado utópico que será posteriormente proibido quando se torna inconveniente aos novos líderes.
-                        </p>
-                    </div>
                 </div>
             </div>
         </div>
 
         <!-- Capítulo 2 -->
-        <div class="scroll-reveal mb-16 relative pl-0 md:pl-24">
-            <div class="absolute left-0 top-0 w-16 h-16 bg-soviet-red/20 rounded-2xl flex items-center justify-center font-display text-2xl font-bold text-soviet-red border border-soviet-red/30">II</div>
-            <div>
-                <h3 class="font-display text-3xl font-bold text-white mb-4">A Revolução e os Sete Mandamentos</h3>
-                <div class="space-y-4 text-stone-300 leading-relaxed">
-                    <p>
-                        Após a morte de Old Major, os porcos (considerados os mais inteligentes) assumem a liderança ideológica. Dois jovens porcos se destacam: <strong>Snowball</strong> (eloquente, criativo) e <strong>Napoleon</strong> (grande, feroz, nunca fala em público mas sempre tem sua maneira). Com eles está <strong>Squealer</strong> (pequeno, gordo, voz aguda, persuasivo).
+        <div class="scroll-reveal mb-16">
+            <div class="flex items-center gap-4 mb-8">
+                <div class="chapter-badge text-soviet-red">II</div>
+                <div>
+                    <h3 class="font-display text-3xl font-bold text-white">A Revolução e os Sete Mandamentos</h3>
+                    <p class="text-stone-500 font-mono text-sm">A tomada do poder</p>
+                </div>
+            </div>
+            <div class="pl-0 md:pl-16 space-y-4 text-stone-300 leading-relaxed">
+                <p>
+                    Após a morte de Old Major, os porcos (considerados os mais inteligentes) assumem a liderança ideológica. Dois jovens porcos se destacam: <strong>Snowball</strong> (eloquente, criativo) e <strong>Napoleon</strong> (grande, feroz, nunca fala em público mas sempre tem sua maneira). Com eles está <strong>Squealer</strong> (pequeno, gordo, voz aguda, persuasivo).
+                </p>
+                <p>
+                    Os porcos revelam ter aprendido a ler e escrever (do livro de crianças de Jones) e reduzem os ensinamentos de Old Major a um sistema chamado <span class="text-wheat font-semibold">Animalismo</span>. Os Sete Mandamentos são escritos em letras brancas enormes no celeiro:
+                </p>
+                <div class="bg-stone-800 p-8 rounded-2xl my-6 border border-stone-700">
+                    <h4 class="font-display text-xl font-bold text-wheat mb-6 text-center">Os Sete Mandamentos do Animalismo</h4>
+                    <ol class="space-y-3 font-mono text-sm md:text-base text-stone-300">
+                        <li class="flex items-start gap-3"><span class="text-wheat font-bold">1.</span> Tudo que anda sobre duas pernas é inimigo.</li>
+                        <li class="flex items-start gap-3"><span class="text-wheat font-bold">2.</span> Tudo que anda sobre quatro pernas ou tem asas é amigo.</li>
+                        <li class="flex items-start gap-3"><span class="text-wheat font-bold">3.</span> Nenhum animal usará roupas.</li>
+                        <li class="flex items-start gap-3"><span class="text-wheat font-bold">4.</span> Nenhum animal dormirá em cama.</li>
+                        <li class="flex items-start gap-3"><span class="text-wheat font-bold">5.</span> Nenhum animal beberá álcool.</li>
+                        <li class="flex items-start gap-3"><span class="text-wheat font-bold">6.</span> Nenhum animal matará outro animal.</li>
+                        <li class="flex items-start gap-3"><span class="text-wheat font-bold">7.</span> Todos os animais são iguais.</li>
+                    </ol>
+                </div>
+                <p>
+                    A revolução acontece "quase por acidente" em uma noite de junho, quando Jones, embriagado, esquece de alimentar os animais. Eles invadem o depósito de comida; Jones e seus homens tentam reprimir, mas são expulsos. A Manor Farm torna-se <span class="text-soviet-red font-bold text-xl">Animal Farm</span>.
+                </p>
+                <div class="analysis-box p-6 rounded-lg">
+                    <h4 class="font-display font-bold text-soviet-red mb-3">Análise do Capítulo</h4>
+                    <p class="text-stone-300">
+                        A revolução "por acidente" reflete a natureza espontânea da Revolução Russa de 1917, que começou com greves e motins de fome. Os Sete Mandamentos são a <em>constituição utópica</em> que será sistematicamente violada.
                     </p>
-                    <p>
-                        Os porcos revelam ter aprendido a ler e escrever (do livro de crianças de Jones) e reduzem os ensinamentos de Old Major a um sistema chamado <span class="text-wheat font-semibold">Animalismo</span>. Os Sete Mandamentos são escritos em letras brancas enormes no celeiro:
+                    <p class="text-stone-300 mt-2">
+                        A distinção entre Snowball e Napoleon já estabelece o conflito ideológico: Snowball quer comitês de educação (empoderamento), Napoleon quer reserva de comida para porcos (privilégio de classe). A supremacia dos porcos como "cérebros" estabelece a justificativa ideológica para a futura ditadura burocrática.
                     </p>
-                    <div class="bg-stone-800 p-8 rounded-2xl my-6 border border-stone-700">
-                        <h4 class="font-display text-xl font-bold text-wheat mb-6 text-center">Os Sete Mandamentos do Animalismo</h4>
-                        <ol class="space-y-3 font-mono text-sm md:text-base text-stone-300">
-                            <li class="flex items-start gap-3"><span class="text-wheat font-bold">1.</span> Tudo que anda sobre duas pernas é inimigo.</li>
-                            <li class="flex items-start gap-3"><span class="text-wheat font-bold">2.</span> Tudo que anda sobre quatro pernas ou tem asas é amigo.</li>
-                            <li class="flex items-start gap-3"><span class="text-wheat font-bold">3.</span> Nenhum animal usará roupas.</li>
-                            <li class="flex items-start gap-3"><span class="text-wheat font-bold">4.</span> Nenhum animal dormirá em cama.</li>
-                            <li class="flex items-start gap-3"><span class="text-wheat font-bold">5.</span> Nenhum animal beberá álcool.</li>
-                            <li class="flex items-start gap-3"><span class="text-wheat font-bold">6.</span> Nenhum animal matará outro animal.</li>
-                            <li class="flex items-start gap-3"><span class="text-wheat font-bold">7.</span> Todos os animais são iguais.</li>
-                        </ol>
-                    </div>
-                    <p>
-                        A revolução acontece "quase por acidente" em uma noite de junho, quando Jones, embriagado, esquece de alimentar os animais. Eles invadem o depósito de comida; Jones e seus homens tentam reprimir, mas são expulsos. A Manor Farm torna-se <span class="text-soviet-red font-bold text-xl">Animal Farm</span>.
-                    </p>
-                    <div class="analysis-box p-6 rounded-lg">
-                        <h4 class="font-display font-bold text-soviet-red mb-3">Análise do Capítulo</h4>
-                        <p class="text-stone-300 mb-3">
-                            A revolução "por acidente" reflete a natureza espontânea da Revolução Russa de 1917, que começou com greves e motins de fome. Os Sete Mandamentos são a <em>constituição utópica</em> que será sistematicamente violada.
-                        </p>
-                        <p class="text-stone-300">
-                            A distinção entre Snowball e Napoleon já estabelece o conflito ideológico: Snowball quer comitês de educação (empoderamento), Napoleon quer reserva de comida para porcos (privilégio de classe). A supremacia dos porcos como "cérebros" estabelece a justificativa ideológica para a futura ditadura burocrática.
-                        </p>
-                    </div>
                 </div>
             </div>
         </div>
 
         <!-- Capítulo 3-4 -->
-        <div class="scroll-reveal mb-16 relative pl-0 md:pl-24">
-            <div class="absolute left-0 top-0 w-16 h-16 bg-blue-500/20 rounded-2xl flex items-center justify-center font-display text-2xl font-bold text-blue-400 border border-blue-500/30">III-IV</div>
-            <div>
-                <h3 class="font-display text-3xl font-bold text-white mb-4">A Organização e a Batalha do Celeiro</h3>
-                <div class="space-y-4 text-stone-300 leading-relaxed">
-                    <p>
-                        Os primeiros meses são de entusiasmo coletivo. A colheita é mais bem-sucedida que nunca. Os animais trabalham como nunca trabalharam antes — não por medo do chicote de Jones, mas por si mesmos. <strong>Boxer</strong> emerge como o herói do trabalho, sustentando a produção quase sozinho com sua força sobre-humana.
+        <div class="scroll-reveal mb-16">
+            <div class="flex items-center gap-4 mb-8">
+                <div class="chapter-badge text-blue-400 border-blue-400/30 bg-blue-400/10">III-IV</div>
+                <div>
+                    <h3 class="font-display text-3xl font-bold text-white">A Organização e a Batalha do Celeiro</h3>
+                    <p class="text-stone-500 font-mono text-sm">Consolidação e defesa</p>
+                </div>
+            </div>
+            <div class="pl-0 md:pl-16 space-y-4 text-stone-300 leading-relaxed">
+                <p>
+                    Os primeiros meses são de entusiasmo coletivo. A colheita é mais bem-sucedida que nunca. Os animais trabalham como nunca trabalharam antes — não por medo do chicote de Jones, mas por si mesmos. <strong>Boxer</strong> emerge como o herói do trabalho, sustentando a produção quase sozinho com sua força sobre-humana.
+                </p>
+                <p>
+                    Snowball organiza o <span class="text-blue-400 font-semibold">Comitê de Ovos</span> (galinhas), o <span class="text-blue-400 font-semibold">Comitê do Rabo de Porco</span> (limpeza), e principalmente os <span class="text-blue-400 font-semibold">Comitês de Educação</span> — tentando alfabetizar todos os animais. Napoleon, silenciosamente, tira nove cachorros recém-nascidos de suas mães para "educá-los" em isolamento (ninguém sabe onde).
+                </p>
+                <p>
+                    Em outubro, Mr. Jones retorna com seis homens armados para retomar a fazenda — a <strong>Batalha do Celeiro</strong> (representando a Guerra Civil Russa e intervenção estrangeira). Snowball planeja a defesa taticamente, liderando uma carga que expulsa os humanos. Um homem cai morto (provavelmente por Boxer). Snowball é ferido levemente; um carneiro morre.
+                </p>
+                <p>
+                    Institui-se a condecoração "Animal Hero, First Class" (Snowball e Boxer) e "Animal Hero, Second Class" (carneiro morto). Descobre-se que Mollie (égua vaidosa) desertou para outra fazenda humana. Encontram o estandarte de Jones, convertem-no em bandeira verde com casco e chifres.
+                </p>
+                <div class="analysis-box p-6 rounded-lg">
+                    <h4 class="font-display font-bold text-soviet-red mb-3">Análise dos Capítulos</h4>
+                    <p class="text-stone-300">
+                        O entusiasmo inicial reflete o <em>comunismo de guerra</em> (1918-1921), quando a sociedade soviética, apesar da fome e da guerra civil, experimentou uma energia revolucionária genuína. A educação de Snowball representa o projeto cultural bolchevique de Lenin; o isolamento dos cachorros por Napoleon prefigura a criação da polícia secreta stalinista.
                     </p>
-                    <p>
-                        Snowball organiza o <span class="text-blue-400 font-semibold">Comitê de Ovos</span> (galinhas), o <span class="text-blue-400 font-semibold">Comitê do Rabo de Porco</span> (limpeza), e principalmente os <span class="text-blue-400 font-semibold">Comitês de Educação</span> — tentando alfabetizar todos os animais. Napoleon, silenciosamente, tira nove cachorros recém-nascidos de suas mães para "educá-los" em isolamento (ninguém sabe onde).
+                    <p class="text-stone-300 mt-2">
+                        A Batalha do Celeiro é a <strong>defesa revolucionária legitima</strong> — diferente das guerras imperialistas posteriores. A deserção de Mollie (que ama fitas e açúcar) representa a emigração da classe média/alta que não suporta a austeridade revolucionária.
                     </p>
-                    <p>
-                        Em outubro, Mr. Jones retorna com seis homens armados para retomar a fazenda — a <strong>Batalha do Celeiro</strong> (representando a Guerra Civil Russa e intervenção estrangeira). Snowball planeja a defesa taticamente, liderando uma carga que expulsa os humanos. Um homem cai morto (provavelmente por Boxer). Snowball é ferido levemente; um carneiro morre.
-                    </p>
-                    <p>
-                        Institui-se a condecoração "Animal Hero, First Class" (Snowball e Boxer) e "Animal Hero, Second Class" (carneiro morto). Descobre-se que Mollie (égua vaidosa) desertou para outra fazenda humana. Encontram o estandarte de Jones, convertem-no em bandeira verde com casco e chifres.
-                    </p>
-                    <div class="analysis-box p-6 rounded-lg">
-                        <h4 class="font-display font-bold text-soviet-red mb-3">Análise dos Capítulos</h4>
-                        <p class="text-stone-300 mb-3">
-                            O entusiasmo inicial reflete o <em>comunismo de guerra</em> (1918-1921), quando a sociedade soviética, apesar da fome e da guerra civil, experimentou uma energia revolucionária genuína. A educação de Snowball representa o projeto cultural bolchevique de Lenin; o isolamento dos cachorros por Napoleon prefigura a criação da polícia secreta stalinista.
-                        </p>
-                        <p class="text-stone-300">
-                            A Batalha do Celeiro é a <strong>defesa revolucionária legitima</strong> — diferente das guerras imperialistas posteriores. A deserção de Mollie (que ama fitas e açúcar) representa a emigração da classe média/alta que não suporta a austeridade revolucionária.
-                        </p>
-                    </div>
                 </div>
             </div>
         </div>
 
         <!-- Capítulo 5 -->
-        <div class="scroll-reveal mb-16 relative pl-0 md:pl-24">
-            <div class="absolute left-0 top-0 w-16 h-16 bg-purple-500/20 rounded-2xl flex items-center justify-center font-display text-2xl font-bold text-purple-400 border border-purple-500/30">V</div>
-            <div>
-                <h3 class="font-display text-3xl font-bold text-white mb-4">O Expurgo de Snowball</h3>
-                <div class="space-y-4 text-stone-300 leading-relaxed">
-                    <p>
-                        A tensão entre Snowball e Napoleon explode sobre o <strong>moinho de vento</strong>. Snowball quer construí-lo para gerar eletricidade, reduzir trabalho a três dias/semana, iluminar estábulos, aquecer água. Napoleon (que nunca contribuiu com ideias) opõe-se silenciosamente, urinando nos planos de Snowball quando ninguém vê.
+        <div class="scroll-reveal mb-16">
+            <div class="flex items-center gap-4 mb-8">
+                <div class="chapter-badge text-purple-400 border-purple-400/30 bg-purple-400/10">V</div>
+                <div>
+                    <h3 class="font-display text-3xl font-bold text-white">O Expurgo de Snowball</h3>
+                    <p class="text-stone-500 font-mono text-sm">O golpe de estado</p>
+                </div>
+            </div>
+            <div class="pl-0 md:pl-16 space-y-4 text-stone-300 leading-relaxed">
+                <p>
+                    A tensão entre Snowball e Napoleon explode sobre o <strong>moinho de vento</strong>. Snowball quer construí-lo para gerar eletricidade, reduzir trabalho a três dias/semana, iluminar estábulos, aquecer água. Napoleon (que nunca contribuiu com ideias) opõe-se silenciosamente, urinando nos planos de Snowball quando ninguém vê.
+                </p>
+                <p>
+                    Durante a assembleia para votar o moinho, Napoleon assobia. Nove cães enormes (agora adultos, treinados como assassinos leais) invadem o celeiro e perseguem Snowball, que escapa por milagre, nunca mais visto na fazenda.
+                </p>
+                <p>
+                    Napoleon assume liderança total, anuncia que não haverá mais assembleias. Decisões serão tomadas por um comitê de porcos, com ele como presidente. Os animais, especialmente Boxer, aceitam: "Se Napoleon disse, deve estar certo." Quatro porcos jovens protestam com "hum" — são imediatamente atacados pelos cães, rasgando suas gargantas. A morte é atribuída a "erro", mas o recado está dado.
+                </p>
+                <p>
+                    Napoleon anuncia que o moinho será construído afinal — exatamente a ideia de Snowball que ele antes sabotara. Squealer explica que Napoleon sempre apoiou o moinho, que na verdade Snowball roubou os planos de Napoleon, que a expulsão foi necessária porque Snowball era traidor desde o início, agente secreto de Jones.
+                </p>
+                <div class="analysis-box p-6 rounded-lg">
+                    <h4 class="font-display font-bold text-soviet-red mb-3">Análise do Capítulo</h4>
+                    <p class="text-stone-300">
+                        Este é o <em>momento stalinista crucial</em>: a eliminação da oposição de esquerda. Trotsky foi expulso do Partido em 1927, exilado em 1929, assassinado em 1940. O "urinar nos planos" é a sabotagem burocrática de projetos populares. A proibição das assembleias é o fim do soviete (conselho operário) democrático.
                     </p>
-                    <p>
-                        Durante a assembleia para votar o moinho, Napoleon assobia. Nove cães enormes (agora adultos, treinados como assassinos leais) invadem o celeiro e perseguem Snowball, que escapa por milagre, nunca mais visto na fazenda.
+                    <p class="text-stone-300 mt-2">
+                        A apropriação da ideia do oponente morto é típica: Stalin implementou planos que antes atribuía a "desvios trotskistas". O assassinato dos quatro porcos é o início das <strong>Grandes Purga</strong> (1936-1938), onde velhos bolcheviques "confessavam" crimes absurdos antes de serem executados.
                     </p>
-                    <p>
-                        Napoleon assume liderança total, anuncia que não haverá mais assembleias. Decisões serão tomadas por um comitê de porcos, com ele como presidente. Os animais, especialmente Boxer, aceitam: "Se Napoleon disse, deve estar certo." Quatro porcos jovens protestam com "hum" — são imediatamente atacados pelos cães, rasgando suas gargantas. A morte é atribuída a "erro", mas o recado está dado.
-                    </p>
-                    <p>
-                        Napoleon anuncia que o moinho será construído afinal — exatamente a ideia de Snowball que ele antes sabotara. Squealer explica que Napoleon sempre apoiou o moinho, que na verdade Snowball roubou os planos de Napoleon, que a expulsão foi necessária porque Snowball era traidor desde o início, agente secreto de Jones.
-                    </p>
-                    <div class="analysis-box p-6 rounded-lg">
-                        <h4 class="font-display font-bold text-soviet-red mb-3">Análise do Capítulo</h4>
-                        <p class="text-stone-300 mb-3">
-                            Este é o <em>momento stalinista crucial</em>: a eliminação da oposição de esquerda. Trotsky foi expulso do Partido em 1927, exilado em 1929, assassinado em 1940. O "urinar nos planos" é a sabotagem burocrática de projetos populares. A proibição das assembleias é o fim do soviete (conselho operário) democrático.
-                        </p>
-                        <p class="text-stone-300">
-                            A apropriação da ideia do oponente morto é típica: Stalin implementou planos que antes atribuía a "desvios trotskistas". O assassinato dos quatro porcos é o início das <strong>Grandes Purga</strong> (1936-1938), onde velhos bolcheviques "confessavam" crimes absurdos antes de serem executados.
-                        </p>
-                    </div>
                 </div>
             </div>
         </div>
 
         <!-- Capítulo 6 -->
-        <div class="scroll-reveal mb-16 relative pl-0 md:pl-24">
-            <div class="absolute left-0 top-0 w-16 h-16 bg-amber-600/20 rounded-2xl flex items-center justify-center font-display text-2xl font-bold text-amber-600 border border-amber-600/30">VI</div>
-            <div>
-                <h3 class="font-display text-3xl font-bold text-white mb-4">Trabalho Forçado e Traição dos Mandamentos</h3>
-                <div class="space-y-4 text-stone-300 leading-relaxed">
-                    <p>
-                        Os animais trabalham como escravos na construção do moinho, sob condições brutais, 60 horas/semana. Boxer carrega pedras sozinho equivalente a dez cavalos. Napoleão anuncia que Animal Farm negociará com humanos (comércio externo), usando o advogado <strong>Mr. Whymper</strong> como intermediário.
+        <div class="scroll-reveal mb-16">
+            <div class="flex items-center gap-4 mb-8">
+                <div class="chapter-badge text-amber-600 border-amber-600/30 bg-amber-600/10">VI</div>
+                <div>
+                    <h3 class="font-display text-3xl font-bold text-white">Trabalho Forçado e Traição dos Mandamentos</h3>
+                    <p class="text-stone-500 font-mono text-sm">A primeira corrupção</p>
+                </div>
+            </div>
+            <div class="pl-0 md:pl-16 space-y-4 text-stone-300 leading-relaxed">
+                <p>
+                    Os animais trabalham como escravos na construção do moinho, sob condições brutais, 60 horas/semana. Boxer carrega pedras sozinho equivalente a dez cavalos. Napoleão anuncia que Animal Farm negociará com humanos (comércio externo), usando o advogado <strong>Mr. Whymper</strong> como intermediário.
+                </p>
+                <p>
+                    Venda de quatrocentos ovos/semana para comprar cereais e materiais. As <strong>galinhas</strong> rebelam-se (representando a resistência kulak à coletivização forçada), escondendo ovos nos tetos. Napoleon ordena confinamento à fome — nove galinhas morrem. Comércio continua.
+                </p>
+                <p>
+                    <strong>Primeira revisão dos Mandamentos:</strong> Acordam uma manhã e descobrem que o 4º mandamento ("Nenhum animal dormirá em cama") agora inclui "com lençóis". Os porcos instalam-se na casa de Jones, dormem em camas. Squealer explica que os porcos precisam de descanso para bem do cérebro, que "lençol" é diferente de "cama", e que de qualquer forma o mandamento sempre se referiu a "camas com lençóis".
+                </p>
+                <p>
+                    O moinho desaba em uma tempestade (construção apressada, alicerces fracos). Napoleon e Squealer acusam <strong>Snowball</strong> de sabotagem noturna. Recompensa de "Animal Hero, Second Class" para quem capturar Snowball.
+                </p>
+                <div class="analysis-box p-6 rounded-lg">
+                    <h4 class="font-display font-bold text-soviet-red mb-3">Análise do Capítulo</h4>
+                    <p class="text-stone-300">
+                        A <em>coletivização forçada</em> (1928-1933) custou 5-7 milhões de vidas (Holodomor na Ucrânia). A justificativa de "bem maior" para privilégios dos líderes é o início da nova classe dominante. A revisão silenciosa dos mandamentos é a <strong>neolinguagem (Newspeak)</strong> que Orwell expandirá em 1984: controlar a linguagem é controlar o pensamento.
                     </p>
-                    <p>
-                        Venda de quatrocentos ovos/semana para comprar cereais e materiais. As <strong>galinhas</strong> rebelam-se (representando a resistência kulak à coletivização forçada), escondendo ovos nos tetos. Napoleon ordena confinamento à fome — nove galinhas morrem. Comércio continua.
+                    <p class="text-stone-300 mt-2">
+                        A acusação de sabotagem a Snowball (agora exilado, fisicamente impossibilitado) estabelece o <em>bode expiatório permanente</em>: toda falha do regime é atribuída a conspirações invisíveis de inimigos derrotados, justificando terror contínuo.
                     </p>
-                    <p>
-                        <strong>Primeira revisão dos Mandamentos:</strong> Acordam uma manhã e descobrem que o 4º mandamento ("Nenhum animal dormirá em cama") agora inclui "com lençóis". Os porcos instalam-se na casa de Jones, dormem em camas. Squealer explica que os porcos precisam de descanso para bem do cérebro, que "lençol" é diferente de "cama", e que de qualquer forma o mandamento sempre se referiu a "camas com lençóis".
-                    </p>
-                    <p>
-                        O moinho desaba em uma tempestade (construção apressada, alicerces fracos). Napoleon e Squealer acusam <strong>Snowball</strong> de sabotagem noturna. Recompensa de "Animal Hero, Second Class" para quem capturar Snowball.
-                    </p>
-                    <div class="analysis-box p-6 rounded-lg">
-                        <h4 class="font-display font-bold text-soviet-red mb-3">Análise do Capítulo</h4>
-                        <p class="text-stone-300 mb-3">
-                            A <em>coletivização forçada</em> (1928-1933) custou 5-7 milhões de vidas (Holodomor na Ucrânia). A justificativa de "bem maior" para privilégios dos líderes é o início da nova classe dominante. A revisão silenciosa dos mandamentos é a <strong>neolinguagem (Newspeak)</strong> que Orwell expandirá em 1984: controlar a linguagem é controlar o pensamento.
-                        </p>
-                        <p class="text-stone-300">
-                            A acusação de sabotagem a Snowball (agora exilado, fisicamente impossibilitado) estabelece o <em>bode expiatório permanente</em>: toda falha do regime é atribuída a conspirações invisíveis de inimigos derrotados, justificando terror contínuo.
-                        </p>
-                    </div>
                 </div>
             </div>
         </div>
 
         <!-- Capítulo 7 -->
-        <div class="scroll-reveal mb-16 relative pl-0 md:pl-24">
-            <div class="absolute left-0 top-0 w-16 h-16 bg-deep-red/40 rounded-2xl flex items-center justify-center font-display text-2xl font-bold text-red-400 border border-red-500/30">VII</div>
-            <div>
-                <h3 class="font-display text-3xl font-bold text-white mb-4">O Terror e os Julgamentos</h3>
-                <div class="space-y-4 text-stone-300 leading-relaxed">
-                    <p>
-                        Inverno severo. Racionamento severo — exceto para porcos e cães. Napoleon ordena que o ovo falso de uma galinha (que caiu do ninho) seja pintado e vendido como real. Quando descoberto, acusa Snowball de ter colocado lá.
+        <div class="scroll-reveal mb-16">
+            <div class="flex items-center gap-4 mb-8">
+                <div class="chapter-badge text-red-400 border-red-400/30 bg-red-400/10">VII</div>
+                <div>
+                    <h3 class="font-display text-3xl font-bold text-white">O Terror e os Julgamentos</h3>
+                    <p class="text-stone-500 font-mono text-sm">O estado policial</p>
+                </div>
+            </div>
+            <div class="pl-0 md:pl-16 space-y-4 text-stone-300 leading-relaxed">
+                <p>
+                    Inverno severo. Racionamento severo — exceto para porcos e cães. Napoleon ordena que o ovo falso de uma galinha (que caiu do ninho) seja pintado e vendido como real. Quando descoberto, acusa Snowball de ter colocado lá.
+                </p>
+                <p>
+                    <strong>Os Julgamentos:</strong> Napoleão convoca todos os animais. Quatro porcos confessam ter conspirado com Snowball desde o início, destruído o moinho, traído informações a Frederick. Confessam ter sido instigados pelo sonho de Snowball de um moinho melhor. São imediatamente executados pelos cães.
+                </p>
+                <p>
+                    Três galinhas (que lideraram a rebelião dos ovos), três ovelhas, um ganso, e vários outros confessam crimes — todos executados. O chão do celeiro está molhado de sangue. Animais horrorizados; Boxer e Clover afastam-se em silêncio.
+                </p>
+                <p>
+                    <strong>Segunda revisão:</strong> O 6º mandamento ("Nenhum animal matará outro animal") agora inclui "sem motivo". Squealer explica que os assassinados eram traidores, portanto não contam. Os animais lembram ter votado contra assassinatos, mas Squealer mostra estatísticas provando que estão melhor que sob Jones (mentiras numéricas).
+                </p>
+                <p>
+                    "Beasts of England" é proibido — substituído por hino composto por Minimus (poeta porco) elogiando Napoleon pessoalmente.
+                </p>
+                <div class="analysis-box p-6 rounded-lg">
+                    <h4 class="font-display font-bold text-soviet-red mb-3">Análise do Capítulo</h4>
+                    <p class="text-stone-300">
+                        Os <strong>Show Trials (Processos Espectáculo)</strong> de Moscou (1936-1938): Zinoviev, Kamenev, Bukharin e dezenas de velhos bolcheviques confessaram crimes absurdos (conspiração com Trotsky, nazistas, japoneses, sabotagem industrial) antes de serem executados. Muitos foram torturados; outros confessaram crendo servir à revolução mesmo inocentes.
                     </p>
-                    <p>
-                        <strong>Os Julgamentos:</strong> Napoleão convoca todos os animais. Quatro porcos confessam ter conspirado com Snowball desde o início, destruído o moinho, traído informações a Frederick. Confessam ter sido instigados pelo sonho de Snowball de um moinho melhor. São imediatamente executados pelos cães.
+                    <p class="text-stone-300 mt-2">
+                        A proibição do hino revolucionário é a <em>substituição do culto da ideia pelo culto da personalidade</em>. Stalin eliminou referências a Lenin (exceto como predecessor) e criou mitologia própria. O terror não é mais defesa revolucionária, mas <strong>poder pelo terror</strong>.
                     </p>
-                    <p>
-                        Três galinhas (que lideraram a rebelião dos ovos), três ovelhas, um ganso, e vários outros confessam crimes — todos executados. O chão do celeiro está molhado de sangue. Animais horrorizados; Boxer e Clover afastam-se em silêncio.
-                    </p>
-                    <p>
-                        <strong>Segunda revisão:</strong> O 6º mandamento ("Nenhum animal matará outro animal") agora inclui "sem motivo". Squealer explica que os assassinados eram traidores, portanto não contam. Os animais lembram ter votado contra assassinatos, mas Squealer mostra estatísticas provando que estão melhor que sob Jones (mentiras numéricas).
-                    </p>
-                    <p>
-                        "Beasts of England" é proibido — substituído por hino composto por Minimus (poeta porco) elogiando Napoleon pessoalmente.
-                    </p>
-                    <div class="analysis-box p-6 rounded-lg">
-                        <h4 class="font-display font-bold text-soviet-red mb-3">Análise do Capítulo</h4>
-                        <p class="text-stone-300 mb-3">
-                            Os <strong>Show Trials (Processos Espectáculo)</em> de Moscou (1936-1938): Zinoviev, Kamenev, Bukharin e dezenas de velhos bolcheviques confessaram crimes absurdos (conspiração com Trotsky, nazistas, japoneses, sabotagem industrial) antes de serem executados. Muitos foram torturados; outros confessaram crendo servir à revolução mesmo inocentes.
-                        </p>
-                        <p class="text-stone-300">
-                            A proibição do hino revolucionário é a <em>substituição do culto da ideia pelo culto da personalidade</em>. Stalin eliminou referências a Lenin (exceto como predecessor) e criou mitologia própria. O terror não é mais defesa revolucionária, mas <strong>poder pelo terror</strong>.
-                        </p>
-                    </div>
                 </div>
             </div>
         </div>
 
         <!-- Capítulo 8 -->
-        <div class="scroll-reveal mb-16 relative pl-0 md:pl-24">
-            <div class="absolute left-0 top-0 w-16 h-16 bg-stone-600/30 rounded-2xl flex items-center justify-center font-display text-2xl font-bold text-stone-400 border border-stone-500/30">VIII</div>
-            <div>
-                <h3 class="font-display text-3xl font-bold text-white mb-4">A Batalha do Moinho e a Degeneração Total</h3>
-                <div class="space-y-4 text-stone-300 leading-relaxed">
-                    <p>
-                        Os animais descobrem que Napoleon tem um <strong>duplo</strong> (representando a paranoia stalinista de ser substituído). O 5º mandamento ("Nenhum animal beberá álcool") é alterado para "em excesso" quando os porcos são encontrados embriagados após beber uísque encontrado no porão de Jones.
+        <div class="scroll-reveal mb-16">
+            <div class="flex items-center gap-4 mb-8">
+                <div class="chapter-badge text-stone-400 border-stone-400/30 bg-stone-400/10">VIII</div>
+                <div>
+                    <h3 class="font-display text-3xl font-bold text-white">A Batalha do Moinho e a Degeneração Total</h3>
+                    <p class="text-stone-500 font-mono text-sm">Guerra e decadência</p>
+                </div>
+            </div>
+            <div class="pl-0 md:pl-16 space-y-4 text-stone-300 leading-relaxed">
+                <p>
+                    Os animais descobrem que Napoleon tem um <strong>duplo</strong> (representando a paranoia stalinista de ser substituído). O 5º mandamento ("Nenhum animal beberá álcool") é alterado para "em excesso" quando os porcos são encontrados embriagados após beber uísque encontrado no porão de Jones.
+                </p>
+                <p>
+                    <strong>Frederick</strong> (vizinho fascista) negocia compra de madeira. Paga com notas falsas. Napoleon declara guerra a Frederick. Na <strong>Batalha do Moinho</strong>, Frederick e homens explodem o moinho recém-construído com dinamite e armas de fogo. Animais lutam heroicamente, mas são massacrados. Boxer ferra um homem. Muitos animais morrem ou são feridos.
+                </p>
+                <p>
+                    Napoleon condecora-se a si mesmo com "Animal Hero, First Class" e "Animal Hero, Second Class" (criando nova medalha). Bebe uísque na casa de Jones. Compra mais uísque com dinheiro da venda de madeira (agora real, de Pilkington).
+                </p>
+                <div class="analysis-box p-6 rounded-lg">
+                    <h4 class="font-display font-bold text-soviet-red mb-3">Análise do Capítulo</h4>
+                    <p class="text-stone-300">
+                        A <strong>Operação Barbarossa</strong> (junho 1941): invasão nazista da URSS. Stalin, que antes assinara pacto de não-agressão com Hitler (1939) e invadira a Polônia Oriental, foi surpreendido. A destruição do moinho representa a devastação da guerra, que custou 27 milhões de vidas soviéticas.
                     </p>
-                    <p>
-                        <strong>Frederick</strong> (vizinho fascista) negocia compra de madeira. Paga com notas falsas. Napoleon declara guerra a Frederick. Na <strong>Batalha do Moinho</strong>, Frederick e homens explodem o moinho recém-construído com dinamite e armas de fogo. Animais lutam heroicamente, mas são massacrados. Boxer ferra um homem. Muitos animais morrem ou são feridos.
+                    <p class="text-stone-300 mt-2">
+                        A auto-condecoração de Napoleon é o ápice do culto à personalidade. Stalin tornou-se Marechal, Generalíssimo, recebeu títulos de cidades, prêmios que inventou para si. O álcool é símbolo de <em>decadência da classe revolucionária</em>, tornando-se o que combatiam.
                     </p>
-                    <p>
-                        Napoleon condecora-se a si mesmo com "Animal Hero, First Class" e "Animal Hero, Second Class" (criando nova medalha). Bebe uísque na casa de Jones. Compra mais uísque com dinheiro da venda de madeira (agora real, de Pilkington).
-                    </p>
-                    <div class="analysis-box p-6 rounded-lg">
-                        <h4 class="font-display font-bold text-soviet-red mb-3">Análise do Capítulo</h4>
-                        <p class="text-stone-300 mb-3">
-                            A <strong>Operação Barbarossa</strong> (junho 1941): invasão nazista da URSS. Stalin, que antes assinara pacto de não-agressão com Hitler (1939) e invadira a Polônia Oriental, foi surpreendido. A destruição do moinho representa a devastação da guerra, que custou 27 milhões de vidas soviéticas.
-                        </p>
-                        <p class="text-stone-300">
-                            A auto-condecoração de Napoleon é o ápice do culto à personalidade. Stalin tornou-se Marechal, Generalíssimo, recebeu títulos de cidades, prêmios que inventou para si. O álcool é símbolo de <em>decadência da classe revolucionária</em>, tornando-se o que combatiam.
-                        </p>
-                    </div>
                 </div>
             </div>
         </div>
 
         <!-- Capítulo 9 -->
-        <div class="scroll-reveal mb-16 relative pl-0 md:pl-24">
-            <div class="absolute left-0 top-0 w-16 h-16 bg-amber-700/30 rounded-2xl flex items-center justify-center font-display text-2xl font-bold text-amber-700 border border-amber-600/30">IX</div>
-            <div>
-                <h3 class="font-display text-3xl font-bold text-white mb-4">A Morte de Boxer</h3>
-                <div class="space-y-4 text-stone-300 leading-relaxed">
-                    <p>
-                        Reconstrução do moinho, agora em pedra (não madeira). Boxer, agora com 11 anos (equivalente a 60+ humanos), trabalha ainda mais, apesar de ferida no pulmão. Seu lema agora é "Napoleon está sempre certo" (substituindo "vou trabalhar mais" — a fé cega substitui o esforço consciente).
+        <div class="scroll-reveal mb-16">
+            <div class="flex items-center gap-4 mb-8">
+                <div class="chapter-badge text-amber-700 border-amber-700/30 bg-amber-700/10">IX</div>
+                <div>
+                    <h3 class="font-display text-3xl font-bold text-white">A Morte de Boxer</h3>
+                    <p class="text-stone-500 font-mono text-sm">A traição final</p>
+                </div>
+            </div>
+            <div class="pl-0 md:pl-16 space-y-4 text-stone-300 leading-relaxed">
+                <p>
+                    Reconstrução do moinho, agora em pedra (não madeira). Boxer, agora com 11 anos (equivalente a 60+ humanos), trabalha ainda mais, apesar de ferida no pulmão. Seu lema agora é "Napoleon está sempre certo" (substituindo "vou trabalhar mais" — a fé cega substitui o esforço consciente).
+                </p>
+                <p>
+                    <strong>A aposentadoria abolida:</strong> Squealer anuncia que aposentadoria foi "abolida" (nunca existiu de fato; era promessa de Old Major). Animais velhos serão "relocalizados" (eufemismo).
+                </p>
+                <p>
+                    <strong>Colapso de Boxer:</strong> Carregando pedras para o moinho, desmaia. Napoleon envia para "hospital veterinário" (na verdade, vende para Alfred Simmonds, Cavalariço e Abatedor de Cavalos, Willingdon). Boxer é carregado em caminhão do abatedouro.
+                </p>
+                <p>
+                    Benjamin (burro) lê a inscrição no caminhão: "Alfred Simmonds, Cavalariço e Abatedor de Cavalos, Willingdon. Comprador de Cavalos e Cães em Consignação. Estupedificantes para Cães." Tenta salvar Boxer, mas tarde demais.
+                </p>
+                <p>
+                    Squealer anuncia que Boxer morreu no hospital, recebendo os melhores cuidados, com Napoleon ao lado em seus últimos momentos. Mentira descarada. O uísque comprado com o dinheiro de Boxer é consumido pelos porcos na noite seguinte.
+                </p>
+                <div class="analysis-box p-6 rounded-lg">
+                    <h4 class="font-display font-bold text-soviet-red mb-3">Análise do Capítulo</h4>
+                    <p class="text-stone-300">
+                        Este é o <em>coração trágico</em> da obra. Boxer representa a classe trabalhadora soviética que construiu o socialismo com suas mãos, aceitou privações inumanas ("apertem os cintos"), e foi descartada quando esgotada. O <strong>gulag</strong> não era apenas para dissidentes políticos, mas para "elementos sociais desviados" — incluindo trabalhadores que reclamavam.
                     </p>
-                    <p>
-                        <strong>A aposentadoria abolida:</strong> Squealer anuncia que aposentadoria foi "abolida" (nunca existiu de fato; era promessa de Old Major). Animais velhos serão "relocalizados" (eufemismo).
+                    <p class="text-stone-300 mt-2">
+                        A leitura tardia de Benjamin simboliza o intelectual que vê a verdade mas age tarde demais. O uísque comprado com o corpo do trabalhador é a <strong>canibalização do proletariado pela burocracia</strong> — literalmente, os líderes bebem o sangue dos trabalhadores.
                     </p>
-                    <p>
-                        <strong>Colapso de Boxer:</strong> Carregando pedras para o moinho, desmaia. Napoleon envia para "hospital veterinário" (na verdade, vende para Alfred Simmonds, Cavalariço e Abatedor de Cavalos, Willingdon). Boxer é carregado em caminhão do abatedouro.
-                    </p>
-                    <p>
-                        Benjamin (burro) lê a inscrição no caminhão: "Alfred Simmonds, Cavalariço e Abatedor de Cavalos, Willingdon. Comprador de Cavalos e Cães em Consignação. Estupedificantes para Cães." Tenta salvar Boxer, mas tarde demais.
-                    </p>
-                    <p>
-                        Squealer anuncia que Boxer morreu no hospital, recebendo os melhores cuidados, com Napoleon ao lado em seus últimos momentos. Mentira descarada. O uísque comprado com o dinheiro de Boxer é consumido pelos porcos na noite seguinte.
-                    </p>
-                    <div class="analysis-box p-6 rounded-lg">
-                        <h4 class="font-display font-bold text-soviet-red mb-3">Análise do Capítulo</h4>
-                        <p class="text-stone-300 mb-3">
-                            Este é o <em>coração trágico</em> da obra. Boxer representa a classe trabalhadora soviética que construiu o socialismo com suas mãos, aceitou privações inumanas ("apertem os cintos"), e foi descartada quando esgotada. O <strong>gulag</strong> não era apenas para dissidentes políticos, mas para "elementos sociais desviados" — incluindo trabalhadores que reclamavam.
-                        </p>
-                        <p class="text-stone-300">
-                            A leitura tardia de Benjamin simboliza o intelectual que vê a verdade mas age tarde demais. O uísque comprado com o corpo do trabalhador é a <strong>canibalização do proletariado pela burocracia</strong> — literalmente, os líderes bebem o sangue dos trabalhadores.
-                        </p>
-                    </div>
                 </div>
             </div>
         </div>
 
         <!-- Capítulo 10 -->
-        <div class="scroll-reveal mb-16 relative pl-0 md:pl-24">
-            <div class="absolute left-0 top-0 w-16 h-16 bg-stone-800 rounded-2xl flex items-center justify-center font-display text-2xl font-bold text-stone-500 border border-stone-600">X</div>
-            <div>
-                <h3 class="font-display text-3xl font-bold text-white mb-4">Os Porcos tornam-se Humanos</h3>
-                <div class="space-y-4 text-stone-300 leading-relaxed">
-                    <p>
-                        Anos se passaram. Muitos animais da revolução morreram. Clover, Benjamin, e alguns ovelhas sobrevivem, mas sem memória clara do passado. A fazenda está mais rica, mas os animais (exceto porcos e cães) não parecem beneficiar-se.
+        <div class="scroll-reveal mb-16">
+            <div class="flex items-center gap-4 mb-8">
+                <div class="chapter-badge text-stone-500 border-stone-500/30 bg-stone-500/10">X</div>
+                <div>
+                    <h3 class="font-display text-3xl font-bold text-white">Os Porcos tornam-se Humanos</h3>
+                    <p class="text-stone-500 font-mono text-sm">O círculo se fecha</p>
+                </div>
+            </div>
+            <div class="pl-0 md:pl-16 space-y-4 text-stone-300 leading-relaxed">
+                <p>
+                    Anos se passaram. Muitos animais da revolução morreram. Clover, Benjamin, e alguns ovelhas sobrevivem, mas sem memória clara do passado. A fazenda está mais rica, mas os animais (exceto porcos e cães) não parecem beneficiar-se.
+                </p>
+                <p>
+                    Os porcos agora andam nas patas traseiras (primeiro treinamento em segredo, depois publicamente). Usam roupas (roupões de Jones). Carregam chicotes. Napoleon tem um cachimbo. Instalam-se na casa de Jones, com fechaduras e telefone.
+                </p>
+                <p>
+                    <strong>Última revisão:</strong> Os Sete Mandamentos são apagados. Substituídos por único mandamento: <span class="text-soviet-red font-bold text-xl">"Todos os animais são iguais, mas alguns animais são mais iguais que outros."</span>
+                </p>
+                <p>
+                    <strong>O Jantar:</strong> Napoleon recebe Mr. Pilkington e fazendeiros vizinhos para jantar. Brindam à prosperidade mútua. Napoleon anuncia que o nome "Animal Farm" será abolido — volta a ser <strong>Manor Farm</strong>. Brindam à reconciliação entre porcos e humanos, à ignorância dos trabalhadores de ambos os mundos.
+                </p>
+                <p>
+                    Os animais comuns, olhando pela janela, não conseguem distinguir quem é porco e quem é humano. "As caras dos porcos, os rostos dos homens, as caras dos porcos, os rostos dos homens — já era impossível dizer qual era qual."
+                </p>
+                <div class="analysis-box p-6 rounded-lg">
+                    <h4 class="font-display font-bold text-soviet-red mb-3">Análise Final</h4>
+                    <p class="text-stone-300">
+                        O fechamento circular (Manor Farm → Animal Farm → Manor Farm) demonstra a <em>teoria das elites de Pareto e Michels</em>: toda revolução é uma substituição de elites, não sua eliminação. Os porcos tornam-se indistinguíveis dos humanos porque <strong>a posição de classe determina o comportamento, não a ideologia</strong>.
                     </p>
-                    <p>
-                        Os porcos agora andam nas patas traseiras (primeiro treinamento em segredo, depois publicamente). Usam roupas (roupões de Jones). Carregam chicotes. Napoleon tem um cachimbo. Instalam-se na casa de Jones, com fechaduras e telefone.
+                    <p class="text-stone-300 mt-2">
+                        A aliança final com Pilkington (Ocidente capitalista) prefigura a Guerra Fria: após 1945, USSR e EUA tornaram-se superpotências rivais, mas ambas burocráticas, imperialistas, exploradoras. A ironia final é que os animais (povo) não podem mais distinguir opressores — a alienação é total.
                     </p>
-                    <p>
-                        <strong>Última revisão:</strong> Os Sete Mandamentos são apagados. Substituídos por único mandamento: <span class="text-soviet-red font-bold text-xl">"Todos os animais são iguais, mas alguns animais são mais iguais que outros."</span>
-                    </p>
-                    <p>
-                        <strong>O Jantar:</strong> Napoleon recebe Mr. Pilkington e fazendeiros vizinhos para jantar. Brindam à prosperidade mútua. Napoleon anuncia que o nome "Animal Farm" será abolido — volta a ser <strong>Manor Farm</strong>. Brindam à reconciliação entre porcos e humanos, à ignorância dos trabalhadores de ambos os mundos.
-                    </p>
-                    <p>
-                        Os animais comuns, olhando pela janela, não conseguem distinguir quem é porco e quem é humano. "As caras dos porcos, os rostos dos homens, as caras dos porcos, os rostos dos homens — já era impossível dizer qual era qual."
-                    </p>
-                    <div class="analysis-box p-6 rounded-lg">
-                        <h4 class="font-display font-bold text-soviet-red mb-3">Análise Final</h4>
-                        <p class="text-stone-300 mb-3">
-                            O fechamento circular (Manor Farm → Animal Farm → Manor Farm) demonstra a <em>teoria das elites de Pareto e Michels</em>: toda revolução é uma substituição de elites, não sua eliminação. Os porcos tornam-se indistinguíveis dos humanos porque <strong>a posição de classe determina o comportamento, não a ideologia</strong>.
-                        </p>
-                        <p class="text-stone-300">
-                            A aliança final com Pilkington (Ocidente capitalista) prefigura a Guerra Fria: após 1945, USSR e EUA tornaram-se superpotências rivais, mas ambas burocráticas, imperialistas, exploradoras. A ironia final é que os animais (povo) não podem mais distinguir opressores — a alienação é total.
-                        </p>
-                    </div>
                 </div>
             </div>
         </div>
