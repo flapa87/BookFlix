@@ -21,6 +21,7 @@
             --darker: #050508;
             --gray: #151520;
             --light-gray: #94a3b8;
+            --glass: rgba(255, 255, 255, 0.03);
         }
 
         body {
@@ -90,7 +91,7 @@
             -webkit-text-fill-color: var(--primary);
         }
 
-        /* Navigation */
+        /* Navigation - AGORA COM Z-INDEX MAIOR E POSIÇÃO FIXA CORRETA */
         nav {
             position: fixed;
             top: 0;
@@ -99,19 +100,20 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            z-index: 1000;
-            background: rgba(5, 5, 8, 0.8);
+            z-index: 9999; /* AUMENTADO PARA FICAR ACIMA DE TUDO */
+            background: rgba(5, 5, 8, 0.85);
             backdrop-filter: blur(20px);
             border-bottom: 1px solid rgba(255,255,255,0.05);
         }
 
         .nav-center {
             flex: 1;
-            max-width: 600px;
+            max-width: 700px;
             margin: 0 40px;
+            position: relative;
         }
 
-        /* Interactive Search */
+        /* Interactive Search - Modern & Enhanced */
         .search-container {
             position: relative;
             width: 100%;
@@ -125,19 +127,19 @@
             border: 1px solid rgba(255,255,255,0.1);
             border-radius: 50px;
             padding: 5px;
-            transition: all 0.3s;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         .search-wrapper:focus-within {
             background: rgba(255,255,255,0.08);
             border-color: var(--primary);
-            box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.1), 0 10px 40px rgba(0,0,0,0.3);
+            box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.15), 0 20px 50px rgba(0,0,0,0.4);
             transform: scale(1.02);
         }
 
         .search-icon-btn {
-            width: 40px;
-            height: 40px;
+            width: 42px;
+            height: 42px;
             background: linear-gradient(135deg, var(--primary), var(--primary-dark));
             border: none;
             border-radius: 50%;
@@ -146,9 +148,24 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.2rem;
+            font-size: 1.1rem;
             transition: all 0.3s;
-            margin-right: 10px;
+            margin-right: 12px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .search-icon-btn::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle, rgba(255,255,255,0.3) 0%, transparent 70%);
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .search-icon-btn:hover::before {
+            opacity: 1;
         }
 
         .search-icon-btn:hover {
@@ -162,12 +179,18 @@
             border: none;
             color: white;
             font-size: 1rem;
-            padding: 10px;
+            padding: 12px 0;
             outline: none;
+            font-weight: 500;
         }
 
         .search-box::placeholder {
             color: var(--light-gray);
+            transition: all 0.3s;
+        }
+
+        .search-wrapper:focus-within .search-box::placeholder {
+            color: rgba(255,255,255,0.4);
         }
 
         .clear-search {
@@ -178,7 +201,14 @@
             padding: 8px;
             opacity: 0;
             transition: all 0.3s;
-            font-size: 1.2rem;
+            font-size: 1.4rem;
+            width: 36px;
+            height: 36px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            margin-right: 5px;
         }
 
         .clear-search.visible {
@@ -187,27 +217,31 @@
 
         .clear-search:hover {
             color: white;
-            transform: scale(1.2);
+            background: rgba(255,255,255,0.1);
+            transform: scale(1.1) rotate(90deg);
         }
 
-        /* Search Results */
+        /* Search Results - Z-INDEX AJUSTADO PARA FICAR ABAIXO DA NAV */
         .search-results {
             position: absolute;
-            top: calc(100% + 15px);
+            top: calc(100% + 20px);
             left: 0;
             right: 0;
-            background: rgba(21, 21, 32, 0.95);
-            border-radius: 20px;
-            border: 1px solid rgba(255,255,255,0.1);
+            background: rgba(21, 21, 32, 0.98);
+            border-radius: 24px;
+            border: 1px solid rgba(255,255,255,0.08);
             overflow: hidden;
             opacity: 0;
             visibility: hidden;
-            transform: translateY(-20px) scale(0.95);
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            box-shadow: 0 25px 50px rgba(0,0,0,0.5);
-            max-height: 500px;
+            transform: translateY(-20px) scale(0.96);
+            transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+            box-shadow: 
+                0 50px 100px rgba(0,0,0,0.6),
+                0 0 0 1px rgba(255,255,255,0.05);
+            max-height: 600px;
             overflow-y: auto;
-            backdrop-filter: blur(20px);
+            backdrop-filter: blur(30px);
+            z-index: 9998; /* MENOR QUE O NAV */
         }
 
         .search-results.active {
@@ -217,37 +251,41 @@
         }
 
         .search-header {
-            padding: 20px;
-            border-bottom: 1px solid rgba(255,255,255,0.05);
+            padding: 24px;
+            border-bottom: 1px solid rgba(255,255,255,0.06);
             display: flex;
             justify-content: space-between;
             align-items: center;
+            background: linear-gradient(180deg, rgba(99, 102, 241, 0.1) 0%, transparent 100%);
         }
 
         .search-header h4 {
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             color: var(--light-gray);
             text-transform: uppercase;
-            letter-spacing: 2px;
-        }
-
-        .search-count {
-            background: var(--primary);
-            color: white;
-            padding: 4px 12px;
-            border-radius: 20px;
-            font-size: 0.8rem;
+            letter-spacing: 3px;
             font-weight: 600;
         }
 
+        .search-count {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            box-shadow: 0 4px 15px rgba(99, 102, 241, 0.3);
+        }
+
+        /* Search Items - Interactive Cards */
         .search-item {
             display: flex;
             align-items: center;
-            gap: 20px;
-            padding: 20px;
+            gap: 24px;
+            padding: 24px;
             cursor: pointer;
-            transition: all 0.3s;
-            border-bottom: 1px solid rgba(255,255,255,0.05);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            border-bottom: 1px solid rgba(255,255,255,0.04);
             position: relative;
             overflow: hidden;
         }
@@ -259,98 +297,334 @@
             top: 0;
             bottom: 0;
             width: 4px;
-            background: var(--primary);
+            background: linear-gradient(180deg, var(--primary), var(--accent));
             transform: scaleY(0);
-            transition: transform 0.3s;
+            transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .search-item::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(90deg, rgba(99, 102, 241, 0.1) 0%, transparent 100%);
+            opacity: 0;
+            transition: opacity 0.4s;
         }
 
         .search-item:hover::before {
             transform: scaleY(1);
         }
 
-        .search-item:hover {
-            background: rgba(99, 102, 241, 0.1);
-            padding-left: 30px;
+        .search-item:hover::after {
+            opacity: 1;
         }
 
+        .search-item:hover {
+            background: rgba(99, 102, 241, 0.08);
+            padding-left: 32px;
+        }
+
+        /* Book Image with 3D Effect */
         .search-item-image {
-            width: 70px;
-            height: 100px;
-            border-radius: 8px;
+            width: 85px;
+            height: 120px;
+            border-radius: 12px;
             overflow: hidden;
             flex-shrink: 0;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.4);
-            transition: transform 0.3s;
+            box-shadow: 
+                0 20px 40px rgba(0,0,0,0.5),
+                0 0 0 1px rgba(255,255,255,0.1);
+            transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+            position: relative;
+            transform-style: preserve-3d;
         }
 
         .search-item:hover .search-item-image {
-            transform: scale(1.1) rotate(-3deg);
+            transform: scale(1.15) rotateY(-10deg) translateZ(20px);
+            box-shadow: 
+                0 30px 60px rgba(0,0,0,0.6),
+                0 0 0 2px rgba(99, 102, 241, 0.5),
+                0 0 30px rgba(99, 102, 241, 0.3);
         }
 
         .search-item-image img {
             width: 100%;
             height: 100%;
             object-fit: cover;
+            transition: transform 0.4s;
+        }
+
+        .search-item:hover .search-item-image img {
+            transform: scale(1.1);
+        }
+
+        /* Shine Effect on Image */
+        .search-item-image::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(
+                45deg,
+                transparent 30%,
+                rgba(255,255,255,0.3) 50%,
+                transparent 70%
+            );
+            transform: rotate(45deg) translateX(-100%);
+            transition: transform 0.6s;
+        }
+
+        .search-item:hover .search-item-image::after {
+            transform: rotate(45deg) translateX(100%);
         }
 
         .search-item-content {
             flex: 1;
+            position: relative;
+            z-index: 1;
         }
 
         .search-item-content h4 {
             font-family: 'Playfair Display', serif;
-            font-size: 1.3rem;
-            margin-bottom: 8px;
+            font-size: 1.4rem;
+            margin-bottom: 10px;
             color: white;
-            transition: color 0.3s;
+            transition: all 0.3s;
+            font-weight: 700;
         }
 
         .search-item:hover .search-item-content h4 {
             color: var(--primary);
+            transform: translateX(5px);
         }
 
         .search-item-meta {
             display: flex;
-            gap: 15px;
+            gap: 20px;
             font-size: 0.9rem;
             color: var(--light-gray);
+            flex-wrap: wrap;
         }
 
         .search-item-meta span {
             display: flex;
             align-items: center;
-            gap: 5px;
+            gap: 6px;
+            transition: all 0.3s;
+        }
+
+        .search-item:hover .search-item-meta span {
+            color: rgba(255,255,255,0.9);
         }
 
         .search-item-year {
             margin-left: auto;
-            background: rgba(255,255,255,0.1);
+            background: rgba(255,255,255,0.08);
             color: white;
-            padding: 8px 16px;
+            padding: 8px 18px;
             border-radius: 20px;
             font-size: 0.85rem;
-            font-weight: 600;
+            font-weight: 700;
+            border: 1px solid rgba(255,255,255,0.1);
+            transition: all 0.3s;
+            position: relative;
+            z-index: 1;
         }
 
+        .search-item:hover .search-item-year {
+            background: var(--primary);
+            border-color: var(--primary);
+            transform: scale(1.05);
+            box-shadow: 0 5px 20px rgba(99, 102, 241, 0.4);
+        }
+
+        /* Quick Actions in Search */
+        .search-actions {
+            display: flex;
+            gap: 10px;
+            margin-top: 12px;
+            opacity: 0;
+            transform: translateY(10px);
+            transition: all 0.3s;
+        }
+
+        .search-item:hover .search-actions {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .search-action-btn {
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .search-action-btn.primary {
+            background: var(--primary);
+            color: white;
+        }
+
+        .search-action-btn.secondary {
+            background: rgba(255,255,255,0.1);
+            color: white;
+        }
+
+        .search-action-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+
+        /* No Results State */
         .no-results {
-            padding: 60px 40px;
+            padding: 80px 40px;
             text-align: center;
+            background: radial-gradient(circle at center, rgba(99, 102, 241, 0.05) 0%, transparent 70%);
         }
 
         .no-results-icon {
-            font-size: 4rem;
-            margin-bottom: 20px;
-            opacity: 0.3;
+            font-size: 5rem;
+            margin-bottom: 24px;
+            opacity: 0.5;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
         }
 
         .no-results h4 {
-            font-size: 1.2rem;
+            font-size: 1.4rem;
             color: white;
-            margin-bottom: 10px;
+            margin-bottom: 12px;
+            font-weight: 600;
         }
 
         .no-results p {
             color: var(--light-gray);
+            font-size: 1rem;
+        }
+
+        .no-results-suggestions {
+            margin-top: 30px;
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .suggestion-chip {
+            padding: 10px 20px;
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 30px;
+            color: var(--light-gray);
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .suggestion-chip:hover {
+            background: rgba(99, 102, 241, 0.2);
+            border-color: var(--primary);
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        /* Loading State */
+        .search-loading {
+            padding: 60px;
+            text-align: center;
+        }
+
+        .search-spinner {
+            width: 50px;
+            height: 50px;
+            border: 3px solid rgba(255,255,255,0.1);
+            border-top-color: var(--primary);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 20px;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        /* Recent Searches */
+        .recent-searches {
+            padding: 20px 24px;
+            border-bottom: 1px solid rgba(255,255,255,0.06);
+        }
+
+        .recent-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .recent-header span {
+            font-size: 0.8rem;
+            color: var(--light-gray);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: 600;
+        }
+
+        .clear-recent {
+            font-size: 0.8rem;
+            color: var(--primary);
+            cursor: pointer;
+            background: none;
+            border: none;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .clear-recent:hover {
+            color: var(--accent);
+        }
+
+        .recent-tags {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .recent-tag {
+            padding: 8px 16px;
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 20px;
+            font-size: 0.9rem;
+            color: var(--light-gray);
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .recent-tag:hover {
+            background: rgba(99, 102, 241, 0.2);
+            border-color: var(--primary);
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        .recent-tag::before {
+            content: '⏱';
+            font-size: 0.8rem;
         }
 
         .nav-links {
@@ -387,66 +661,204 @@
             width: 100%;
         }
 
-        /* Hero Section */
+        /* HERO SECTION REDESENHADA - CARD FIXO COM BACKGROUND DE CAPA */
         .hero {
             min-height: 100vh;
-            display: grid;
-            grid-template-columns: 1fr 1fr;
             position: relative;
             overflow: hidden;
-            padding-top: 80px;
+            padding-top: 100px; /* Espaço para o nav fixo */
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
-        .hero-content {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            padding: 0 10%;
+        /* Background Layer com Parallax */
+        .hero-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, #1a0f2e 0%, #0f0c29 50%, #24243e 100%);
+            z-index: 0;
+        }
+
+        /* Card Clássico Imortal - FIXO E SENSACIONAL */
+        .classic-card-container {
             position: relative;
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            z-index: 10; /* ABAIXO DO NAV (9999) */
+            perspective: 2000px;
+        }
+
+        .classic-card {
+            position: relative;
+            width: 100%;
+            min-height: 600px;
+            border-radius: 30px;
+            overflow: hidden;
+            box-shadow: 
+                0 50px 100px rgba(0,0,0,0.8),
+                0 0 0 1px rgba(255,255,255,0.1),
+                inset 0 0 100px rgba(0,0,0,0.5);
+            transform-style: preserve-3d;
+            transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        /* PLANO DE FUNDO DA CAPA DO LIVRO */
+        .classic-card-bg {
+            position: absolute;
+            top: -10%;
+            left: -10%;
+            width: 120%;
+            height: 120%;
+            background-image: url('https://kimi-web-img.moonshot.cn/img/s3.amazonaws.com/adc26d51399c2b8eb5a85fe1c87eded0f11cf1dc.jpg');
+            background-size: cover;
+            background-position: center;
+            filter: blur(30px) brightness(0.3) saturate(1.2);
+            transform: scale(1.1);
+            transition: all 0.8s ease;
+            z-index: 1;
+        }
+
+        .classic-card:hover .classic-card-bg {
+            transform: scale(1.2) rotate(2deg);
+            filter: blur(40px) brightness(0.25) saturate(1.4);
+        }
+
+        /* Overlay Gradiente para legibilidade */
+        .classic-card-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(
+                135deg,
+                rgba(10, 10, 15, 0.9) 0%,
+                rgba(10, 10, 15, 0.7) 40%,
+                rgba(10, 10, 15, 0.4) 100%
+            );
             z-index: 2;
         }
 
-        .hero-badge {
+        /* Conteúdo do Card */
+        .classic-card-content {
+            position: relative;
+            z-index: 3;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            padding: 60px;
+            align-items: center;
+            min-height: 600px;
+        }
+
+        /* Lado Esquerdo - Texto */
+        .classic-text {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            animation: fadeInLeft 1s ease-out;
+        }
+
+        @keyframes fadeInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .classic-badge {
             display: inline-flex;
             align-items: center;
             gap: 10px;
             margin-bottom: 30px;
+            width: fit-content;
         }
 
-        .hero-badge span {
-            background: linear-gradient(135deg, rgba(139, 92, 246, 0.2), rgba(99, 102, 241, 0.2));
-            color: var(--quixote);
-            padding: 10px 20px;
+        .classic-badge span {
+            background: linear-gradient(135deg, rgba(212, 175, 55, 0.2), rgba(139, 92, 246, 0.2));
+            color: #d4af37;
+            padding: 12px 24px;
             border-radius: 30px;
-            font-size: 0.8rem;
-            font-weight: 600;
+            font-size: 0.85rem;
+            font-weight: 700;
             text-transform: uppercase;
-            letter-spacing: 2px;
-            border: 1px solid rgba(139, 92, 246, 0.3);
+            letter-spacing: 3px;
+            border: 1px solid rgba(212, 175, 55, 0.4);
+            box-shadow: 0 0 30px rgba(212, 175, 55, 0.2);
+            position: relative;
+            overflow: hidden;
         }
 
-        .hero h1 {
+        .classic-badge span::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(
+                45deg,
+                transparent 30%,
+                rgba(255,255,255,0.2) 50%,
+                transparent 70%
+            );
+            transform: rotate(45deg) translateX(-100%);
+            animation: shine 3s infinite;
+        }
+
+        @keyframes shine {
+            0%, 100% { transform: rotate(45deg) translateX(-100%); }
+            50% { transform: rotate(45deg) translateX(100%); }
+        }
+
+        .classic-title {
             font-family: 'Cinzel', serif;
             font-size: 5rem;
             font-weight: 700;
             line-height: 1.1;
             margin-bottom: 25px;
-            background: linear-gradient(135deg, #f4e4c1 0%, #d4af37 50%, #8b6914 100%);
+            background: linear-gradient(135deg, #f4e4c1 0%, #d4af37 30%, #fff 50%, #d4af37 70%, #8b6914 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            text-shadow: 0 10px 30px rgba(212, 175, 55, 0.2);
+            text-shadow: 0 10px 40px rgba(212, 175, 55, 0.3);
             letter-spacing: 2px;
+            position: relative;
         }
 
-        .hero-description {
-            font-size: 1.1rem;
-            color: rgba(255,255,255,0.7);
+        .classic-title::after {
+            content: 'Dom Quixote';
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, transparent 0%, rgba(255,255,255,0.4) 50%, transparent 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: titleShine 4s ease-in-out infinite;
+        }
+
+        @keyframes titleShine {
+            0%, 100% { opacity: 0; transform: translateX(-100%); }
+            50% { opacity: 1; transform: translateX(100%); }
+        }
+
+        .classic-description {
+            font-size: 1.2rem;
+            color: rgba(255,255,255,0.85);
             max-width: 500px;
             margin-bottom: 40px;
-            line-height: 1.8;
+            line-height: 1.9;
+            font-weight: 300;
         }
 
-        .hero-buttons {
+        .classic-buttons {
             display: flex;
             gap: 20px;
         }
@@ -468,72 +880,179 @@
         }
 
         .btn-primary {
-            background: linear-gradient(135deg, var(--quixote) 0%, #7c3aed 100%);
-            color: white;
-            box-shadow: 0 10px 30px rgba(139, 92, 246, 0.3);
+            background: linear-gradient(135deg, #d4af37 0%, #b8941f 50%, #8b6914 100%);
+            color: #0a0a0f;
+            box-shadow: 0 10px 30px rgba(212, 175, 55, 0.3);
+            font-weight: 700;
         }
 
         .btn-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 15px 40px rgba(139, 92, 246, 0.4);
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 0 20px 40px rgba(212, 175, 55, 0.4);
+        }
+
+        .btn-primary::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+            transition: left 0.5s;
+        }
+
+        .btn-primary:hover::before {
+            left: 100%;
         }
 
         .btn-secondary {
-            background: rgba(255,255,255,0.05);
+            background: rgba(255,255,255,0.08);
             color: white;
             border: 1px solid rgba(255,255,255,0.2);
             backdrop-filter: blur(10px);
         }
 
         .btn-secondary:hover {
-            background: rgba(255,255,255,0.1);
+            background: rgba(255,255,255,0.15);
             border-color: rgba(255,255,255,0.4);
+            transform: translateY(-3px);
         }
 
-        .hero-visual {
-            position: relative;
+        /* Lado Direito - Visual do Livro 3D */
+        .classic-visual {
             display: flex;
-            align-items: center;
             justify-content: center;
-            background: radial-gradient(circle at center, rgba(139, 92, 246, 0.15) 0%, transparent 70%);
+            align-items: center;
+            position: relative;
+            animation: fadeInRight 1s ease-out 0.3s both;
         }
 
-        .book-showcase {
+        @keyframes fadeInRight {
+            from {
+                opacity: 0;
+                transform: translateX(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .book-showcase-3d {
             position: relative;
-            width: 400px;
-            height: 600px;
+            width: 350px;
+            height: 500px;
             transform-style: preserve-3d;
             perspective: 1000px;
-            animation: float 6s ease-in-out infinite;
+            animation: floatBook 6s ease-in-out infinite;
         }
 
-        @keyframes float {
-            0%, 100% { transform: translateY(0px) rotateY(-5deg); }
-            50% { transform: translateY(-20px) rotateY(5deg); }
+        @keyframes floatBook {
+            0%, 100% { transform: translateY(0px) rotateY(-8deg) rotateX(5deg); }
+            50% { transform: translateY(-25px) rotateY(8deg) rotateX(5deg); }
         }
 
-        .book-cover {
+        .book-cover-3d {
             width: 100%;
             height: 100%;
             border-radius: 16px;
             overflow: hidden;
             box-shadow: 
-                0 50px 100px rgba(0,0,0,0.8),
-                0 30px 60px rgba(139, 92, 246, 0.2),
-                inset 0 0 0 1px rgba(255,255,255,0.1);
+                0 50px 100px rgba(0,0,0,0.9),
+                0 30px 60px rgba(212, 175, 55, 0.2),
+                inset 0 0 0 2px rgba(255,255,255,0.1);
             position: relative;
-            transform: rotateY(-5deg);
+            transform: rotateY(-5deg) rotateX(5deg);
             transition: transform 0.5s;
+            transform-style: preserve-3d;
         }
 
-        .book-cover:hover {
-            transform: rotateY(0deg) scale(1.05);
+        .book-cover-3d:hover {
+            transform: rotateY(0deg) rotateX(0deg) scale(1.05);
         }
 
-        .book-cover img {
+        .book-cover-3d img {
             width: 100%;
             height: 100%;
             object-fit: cover;
+        }
+
+        /* Reflexo do Livro */
+        .book-reflection {
+            position: absolute;
+            bottom: -80px;
+            left: 10%;
+            right: 10%;
+            height: 80px;
+            background: linear-gradient(to bottom, rgba(255,255,255,0.2), transparent);
+            transform: scaleY(-1);
+            filter: blur(20px);
+            opacity: 0.3;
+            border-radius: 16px;
+        }
+
+        /* Partículas Douradas Flutuantes */
+        .gold-particles {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            overflow: hidden;
+            pointer-events: none;
+            z-index: 4;
+        }
+
+        .gold-particle {
+            position: absolute;
+            width: 6px;
+            height: 6px;
+            background: radial-gradient(circle, #d4af37 0%, transparent 70%);
+            border-radius: 50%;
+            animation: floatGold 8s infinite ease-in-out;
+            opacity: 0.6;
+        }
+
+        @keyframes floatGold {
+            0%, 100% { 
+                transform: translateY(100vh) rotate(0deg); 
+                opacity: 0; 
+            }
+            10% { opacity: 0.6; }
+            90% { opacity: 0.6; }
+            100% { 
+                transform: translateY(-100vh) rotate(720deg); 
+                opacity: 0; 
+            }
+        }
+
+        /* Efeito de Brilho nos Cantos */
+        .corner-glow {
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, rgba(212, 175, 55, 0.3) 0%, transparent 70%);
+            border-radius: 50%;
+            filter: blur(60px);
+            z-index: 2;
+            animation: pulseGlow 4s ease-in-out infinite;
+        }
+
+        .corner-glow.top-left {
+            top: -100px;
+            left: -100px;
+        }
+
+        .corner-glow.bottom-right {
+            bottom: -100px;
+            right: -100px;
+            animation-delay: 2s;
+        }
+
+        @keyframes pulseGlow {
+            0%, 100% { opacity: 0.5; transform: scale(1); }
+            50% { opacity: 0.8; transform: scale(1.2); }
         }
 
         /* Featured Section - 3D Interactive Cards */
@@ -1137,15 +1656,37 @@
         /* Responsive */
         @media (max-width: 1024px) {
             .nav-center {
-                display: none;
+                position: fixed;
+                top: 80px;
+                left: 5%;
+                right: 5%;
+                max-width: none;
+                margin: 0;
+                z-index: 999;
             }
 
-            .hero {
+            .classic-card-content {
                 grid-template-columns: 1fr;
+                text-align: center;
+                padding: 40px;
             }
 
-            .hero-visual {
-                display: none;
+            .classic-text {
+                order: 2;
+            }
+
+            .classic-visual {
+                order: 1;
+                margin-bottom: 40px;
+            }
+
+            .classic-title {
+                font-size: 3.5rem;
+            }
+
+            .book-showcase-3d {
+                width: 250px;
+                height: 350px;
             }
 
             .book-card-3d {
@@ -1178,11 +1719,23 @@
             .modal-title {
                 font-size: 2.5rem;
             }
+
+            .search-results {
+                max-height: 70vh;
+            }
         }
 
         @media (max-width: 768px) {
-            .hero h1 {
-                font-size: 3rem;
+            .classic-title {
+                font-size: 2.5rem;
+            }
+
+            .classic-description {
+                font-size: 1rem;
+            }
+
+            .classic-buttons {
+                flex-direction: column;
             }
 
             .section-header h2 {
@@ -1208,6 +1761,26 @@
 
             .logo-text {
                 font-size: 1.5rem;
+            }
+
+            .search-item {
+                flex-direction: column;
+                text-align: center;
+                gap: 15px;
+            }
+
+            .search-item-image {
+                width: 120px;
+                height: 170px;
+            }
+
+            .search-item-year {
+                margin-left: 0;
+                margin-top: 10px;
+            }
+
+            .search-item-meta {
+                justify-content: center;
             }
         }
 
@@ -1252,6 +1825,16 @@
             0% { background-position: 200% 0; }
             100% { background-position: -200% 0; }
         }
+
+        /* Keyboard Navigation Indicator */
+        .search-item:focus {
+            outline: none;
+            background: rgba(99, 102, 241, 0.15);
+        }
+
+        .search-item:focus::before {
+            transform: scaleY(1);
+        }
     </style>
 </head>
 <body>
@@ -1266,11 +1849,20 @@
         <div class="nav-center">
             <div class="search-container">
                 <div class="search-wrapper">
-                    <button class="search-icon-btn" onclick="focusSearch()">🔍</button>
-                    <input type="text" class="search-box" id="searchInput" placeholder="Pesquisar livros, autores, temas..." autocomplete="off">
-                    <button class="clear-search" id="clearSearch" onclick="clearSearch()">×</button>
+                    <button class="search-icon-btn" onclick="focusSearch()" aria-label="Pesquisar">🔍</button>
+                    <input 
+                        type="text" 
+                        class="search-box" 
+                        id="searchInput" 
+                        placeholder="Pesquisar livros, autores, temas..." 
+                        autocomplete="off"
+                        aria-label="Campo de pesquisa"
+                        aria-expanded="false"
+                        aria-controls="searchResults"
+                    >
+                    <button class="clear-search" id="clearSearch" onclick="clearSearch()" aria-label="Limpar pesquisa">×</button>
                 </div>
-                <div class="search-results" id="searchResults"></div>
+                <div class="search-results" id="searchResults" role="listbox" aria-label="Resultados da pesquisa"></div>
             </div>
         </div>
 
@@ -1282,29 +1874,51 @@
         </ul>
     </nav>
 
-    <!-- Hero Section -->
+    <!-- Hero Section - CARD CLÁSSICO IMORTAL REDESENHADO -->
     <section class="hero" id="inicio">
-        <div class="hero-content">
-            <div class="hero-badge">
-                <span>Clássico Imortal</span>
-            </div>
-            <h1>Dom Quixote</h1>
-            <p class="hero-description">
-                A primeira novela moderna da literatura ocidental. As aventuras do Cavaleiro da Triste Figura que nos ensinou que sonhar é a primeira forma de resistência contra a realidade.
-            </p>
-            <div class="hero-buttons">
-                <button class="btn btn-primary" onclick="openModal('quixote')">
-                    <span>▶</span> Explorar Resumo
-                </button>
-                <button class="btn btn-secondary" onclick="openModal('quixote')">
-                    Ver Detalhes
-                </button>
-            </div>
-        </div>
-        <div class="hero-visual">
-            <div class="book-showcase">
-                <div class="book-cover">
-                    <img src="domquixote.png" alt="Dom Quixote">
+        <div class="hero-background"></div>
+        
+        <div class="classic-card-container">
+            <div class="classic-card">
+                <!-- Plano de Fundo da Capa -->
+                <div class="classic-card-bg"></div>
+                <div class="classic-card-overlay"></div>
+                
+                <!-- Efeitos de Luz -->
+                <div class="corner-glow top-left"></div>
+                <div class="corner-glow bottom-right"></div>
+                
+                <!-- Partículas Douradas -->
+                <div class="gold-particles" id="goldParticles"></div>
+                
+                <!-- Conteúdo -->
+                <div class="classic-card-content">
+                    <div class="classic-text">
+                        <div class="classic-badge">
+                            <span>✦ Clássico Imortal</span>
+                        </div>
+                        <h1 class="classic-title">Dom Quixote</h1>
+                        <p class="classic-description">
+                            A primeira novela moderna da literatura ocidental. As aventuras do Cavaleiro da Triste Figura que nos ensinou que sonhar é a primeira forma de resistência contra a realidade.
+                        </p>
+                        <div class="classic-buttons">
+                            <button class="btn btn-primary" onclick="openModal('quixote')">
+                                <span>▶</span> Explorar Resumo
+                            </button>
+                            <button class="btn btn-secondary" onclick="openModal('quixote')">
+                                Ver Detalhes
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="classic-visual">
+                        <div class="book-showcase-3d">
+                            <div class="book-cover-3d">
+                                <img src="https://kimi-web-img.moonshot.cn/img/s3.amazonaws.com/adc26d51399c2b8eb5a85fe1c87eded0f11cf1dc.jpg" alt="Dom Quixote">
+                            </div>
+                            <div class="book-reflection"></div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -1428,7 +2042,7 @@
             <div class="modal-hero">
                 <div class="modal-book-display">
                     <div class="modal-book-cover">
-                        <img src="domquixote.png" alt="Dom Quixote">
+                        <img src="https://kimi-web-img.moonshot.cn/img/s3.amazonaws.com/adc26d51399c2b8eb5a85fe1c87eded0f11cf1dc.jpg" alt="Dom Quixote">
                     </div>
                 </div>
                 <div class="modal-info">
@@ -1489,7 +2103,7 @@
                 </div>
                 <div class="modal-info">
                     <span class="modal-tag" style="background: rgba(229, 9, 20, 0.2); color: #ff6b6b; border-color: rgba(229, 9, 20, 0.3);">Distopia Política</span>
-                    <h2 class="modal-title" style="font-family: 'Inter', sans-serif; font-weight: 900; text-transform: uppercase; letter-spacing: 2px; background: linear-gradient(135deg, #ff6b6b 0%, #c92a2a 100%); -webkit-background-clip: text;">A Revolução<br>dos Bichos</h2>
+                                        <h2 class="modal-title" style="font-family: 'Inter', sans-serif; font-weight: 900; text-transform: uppercase; letter-spacing: 2px; background: linear-gradient(135deg, #ff6b6b 0%, #c92a2a 100%); -webkit-background-clip: text;">A Revolução<br>dos Bichos</h2>
                     <p class="modal-author">por George Orwell</p>
                     <div class="modal-actions">
                         <a href="revolucaodosbichos.html" class="btn btn-primary btn-large" style="background: linear-gradient(135deg, #ff6b6b 0%, #c92a2a 100%); box-shadow: 0 10px 30px rgba(229, 9, 20, 0.3);">
@@ -1582,18 +2196,20 @@
     </div>
 
     <script>
-        // Book database
+        // Enhanced Book database with more metadata
         const books = [
             {
                 id: 'quixote',
                 title: 'Dom Quixote',
                 author: 'Miguel de Cervantes',
                 year: '1605',
-                image: 'domquixote.png',
+                image: 'https://kimi-web-img.moonshot.cn/img/s3.amazonaws.com/adc26d51399c2b8eb5a85fe1c87eded0f11cf1dc.jpg ',
                 genre: 'Romance de Cavalaria',
-                description: 'O primeiro romance moderno da literatura',
+                description: 'O primeiro romance moderno da literatura ocidental',
                 pages: '1020',
-                rating: '5.0'
+                rating: '5.0',
+                tags: ['clássico', 'aventura', 'espanha', 'literatura'],
+                color: '#d4af37'
             },
             {
                 id: 'revolucao',
@@ -1602,9 +2218,11 @@
                 year: '1945',
                 image: 'revolucaodosbichos.png',
                 genre: 'Distopia Política',
-                description: 'Uma alegoria sobre poder e corrupção',
+                description: 'Uma alegoria sobre poder, corrupção e totalitarismo',
                 pages: '112',
-                rating: '4.9'
+                rating: '4.9',
+                tags: ['política', 'sátira', 'inglaterra', 'fábula'],
+                color: '#ff6b6b'
             },
             {
                 id: 'principe',
@@ -1613,75 +2231,213 @@
                 year: '1943',
                 image: 'opequenoprincipe.png',
                 genre: 'Fábula Filosófica',
-                description: 'Uma história sobre amor e inocência',
+                description: 'Uma história atemporal sobre amor e inocência',
                 pages: '96',
-                rating: '5.0'
+                rating: '5.0',
+                tags: ['filosofia', 'infantil', 'frança', 'poético'],
+                color: '#ffd43b'
             }
         ];
 
-        // Search functionality
+        // Search functionality with enhanced interactivity
         const searchInput = document.getElementById('searchInput');
         const searchResults = document.getElementById('searchResults');
         const clearSearchBtn = document.getElementById('clearSearch');
+        let recentSearches = JSON.parse(localStorage.getItem('recentSearches') || '[]');
+        let selectedIndex = -1;
+        let currentResults = [];
 
         function focusSearch() {
             searchInput.focus();
+            if (searchInput.value.length === 0 && recentSearches.length > 0) {
+                showRecentSearches();
+            }
         }
 
         function clearSearch() {
             searchInput.value = '';
             searchResults.classList.remove('active');
             clearSearchBtn.classList.remove('visible');
+            selectedIndex = -1;
+            searchInput.setAttribute('aria-expanded', 'false');
             searchInput.focus();
         }
+
+        // Debounce function for smooth typing
+        function debounce(func, wait) {
+            let timeout;
+            return function executedFunction(...args) {
+                const later = () => {
+                    clearTimeout(timeout);
+                    func(...args);
+                };
+                clearTimeout(timeout);
+                timeout = setTimeout(later, wait);
+            };
+        }
+
+        const performSearch = debounce((query) => {
+            if (query.length === 0) {
+                if (recentSearches.length > 0) {
+                    showRecentSearches();
+                } else {
+                    searchResults.classList.remove('active');
+                }
+                return;
+            }
+
+            // Show loading state briefly for realism
+            showLoadingState();
+
+            setTimeout(() => {
+                const filtered = books.filter(book => 
+                    book.title.toLowerCase().includes(query) ||
+                    book.author.toLowerCase().includes(query) ||
+                    book.genre.toLowerCase().includes(query) ||
+                    book.year.includes(query) ||
+                    book.tags.some(tag => tag.toLowerCase().includes(query))
+                );
+
+                currentResults = filtered;
+                selectedIndex = -1;
+                renderSearchResults(filtered, query);
+                
+                // Save to recent searches if results found
+                if (filtered.length > 0 && !recentSearches.includes(query)) {
+                    recentSearches.unshift(query);
+                    recentSearches = recentSearches.slice(0, 5);
+                    localStorage.setItem('recentSearches', JSON.stringify(recentSearches));
+                }
+            }, 300);
+        }, 150);
 
         searchInput.addEventListener('input', (e) => {
             const query = e.target.value.toLowerCase().trim();
             
             if (query.length > 0) {
                 clearSearchBtn.classList.add('visible');
+                searchInput.setAttribute('aria-expanded', 'true');
             } else {
                 clearSearchBtn.classList.remove('visible');
-                searchResults.classList.remove('active');
-                return;
             }
 
-            const filtered = books.filter(book => 
-                book.title.toLowerCase().includes(query) ||
-                book.author.toLowerCase().includes(query) ||
-                book.genre.toLowerCase().includes(query) ||
-                book.year.includes(query)
-            );
-
-            renderSearchResults(filtered);
+            performSearch(query);
         });
 
-        function renderSearchResults(results) {
+        function showLoadingState() {
+            searchResults.innerHTML = `
+                <div class="search-loading">
+                    <div class="search-spinner"></div>
+                    <p style="color: var(--light-gray); font-size: 0.9rem;">Buscando livros...</p>
+                </div>
+            `;
+            searchResults.classList.add('active');
+        }
+
+        function showRecentSearches() {
+            const recentHTML = recentSearches.length > 0 ? `
+                <div class="recent-searches">
+                    <div class="recent-header">
+                        <span>Buscas Recentes</span>
+                        <button class="clear-recent" onclick="clearRecentSearches()">Limpar</button>
+                    </div>
+                    <div class="recent-tags">
+                        ${recentSearches.map(term => `
+                            <span class="recent-tag" onclick="searchFromRecent('${term}')">${term}</span>
+                        `).join('')}
+                    </div>
+                </div>
+            ` : '';
+
+            searchResults.innerHTML = recentHTML + `
+                <div class="search-header">
+                    <h4>Sugestões Populares</h4>
+                </div>
+                ${books.map(book => `
+                    <div class="search-item" onclick="selectBook('${book.id}')" tabindex="0">
+                        <div class="search-item-image">
+                            <img src="${book.image}" alt="${book.title}" loading="lazy">
+                        </div>
+                        <div class="search-item-content">
+                            <h4>${book.title}</h4>
+                            <div class="search-item-meta">
+                                <span>👤 ${book.author}</span>
+                                <span>📖 ${book.genre}</span>
+                                <span>⭐ ${book.rating}</span>
+                            </div>
+                        </div>
+                        <span class="search-item-year">${book.year}</span>
+                    </div>
+                `).join('')}
+            `;
+            searchResults.classList.add('active');
+        }
+
+        function searchFromRecent(term) {
+            searchInput.value = term;
+            clearSearchBtn.classList.add('visible');
+            performSearch(term.toLowerCase());
+        }
+
+        function clearRecentSearches() {
+            recentSearches = [];
+            localStorage.removeItem('recentSearches');
+            if (searchInput.value.length === 0) {
+                showRecentSearches();
+            }
+        }
+
+        function renderSearchResults(results, query = '') {
             if (results.length === 0) {
                 searchResults.innerHTML = `
                     <div class="no-results">
                         <div class="no-results-icon">📚</div>
                         <h4>Nenhum livro encontrado</h4>
-                        <p>Tente buscar por título, autor ou ano</p>
+                        <p>Tente buscar por título, autor, gênero ou ano</p>
+                        <div class="no-results-suggestions">
+                            <span class="suggestion-chip" onclick="searchSuggestion('Dom Quixote')">Dom Quixote</span>
+                            <span class="suggestion-chip" onclick="searchSuggestion('Orwell')">George Orwell</span>
+                            <span class="suggestion-chip" onclick="searchSuggestion('1943')">1943</span>
+                        </div>
                     </div>
                 `;
             } else {
+                const highlightQuery = (text) => {
+                    if (!query) return text;
+                    const regex = new RegExp(`(${query})`, 'gi');
+                    return text.replace(regex, '<mark style="background: rgba(99, 102, 241, 0.3); color: white; padding: 2px 4px; border-radius: 4px;">$1</mark>');
+                };
+
                 searchResults.innerHTML = `
                     <div class="search-header">
-                        <h4>Resultados da Busca</h4>
-                        <span class="search-count">${results.length} encontrado${results.length > 1 ? 's' : ''}</span>
+                        <h4>${results.length} resultado${results.length > 1 ? 's' : ''} encontrado${results.length > 1 ? 's' : ''}</h4>
+                        <span class="search-count">${results.length}</span>
                     </div>
-                    ${results.map(book => `
-                        <div class="search-item" onclick="selectBook('${book.id}')">
-                            <div class="search-item-image">
-                                <img src="${book.image}" alt="${book.title}">
+                    ${results.map((book, index) => `
+                        <div class="search-item" 
+                             onclick="selectBook('${book.id}')" 
+                             onkeydown="handleItemKeydown(event, ${index})"
+                             tabindex="0" 
+                             data-index="${index}"
+                             role="option"
+                             aria-selected="false">
+                            <div class="search-item-image" style="--book-color: ${book.color}">
+                                <img src="${book.image}" alt="${book.title}" loading="lazy">
                             </div>
                             <div class="search-item-content">
-                                <h4>${book.title}</h4>
+                                <h4>${highlightQuery(book.title)}</h4>
                                 <div class="search-item-meta">
-                                    <span>👤 ${book.author}</span>
-                                    <span>📖 ${book.genre}</span>
+                                    <span>👤 ${highlightQuery(book.author)}</span>
+                                    <span>📖 ${highlightQuery(book.genre)}</span>
                                     <span>⭐ ${book.rating}</span>
+                                </div>
+                                <div class="search-actions">
+                                    <button class="search-action-btn primary" onclick="event.stopPropagation(); quickView('${book.id}')">
+                                        👁️ Visualização Rápida
+                                    </button>
+                                    <button class="search-action-btn secondary" onclick="event.stopPropagation(); openModal('${book.id}')">
+                                        📖 Ler Resumo
+                                    </button>
                                 </div>
                             </div>
                             <span class="search-item-year">${book.year}</span>
@@ -1692,17 +2448,121 @@
             searchResults.classList.add('active');
         }
 
+        function searchSuggestion(term) {
+            searchInput.value = term;
+            clearSearchBtn.classList.add('visible');
+            performSearch(term.toLowerCase());
+        }
+
+        function handleItemKeydown(event, index) {
+            if (event.key === 'Enter') {
+                selectBook(currentResults[index].id);
+            } else if (event.key === 'ArrowDown') {
+                event.preventDefault();
+                selectedIndex = Math.min(selectedIndex + 1, currentResults.length - 1);
+                updateSelection();
+            } else if (event.key === 'ArrowUp') {
+                event.preventDefault();
+                selectedIndex = Math.max(selectedIndex - 1, 0);
+                updateSelection();
+            }
+        }
+
+        function updateSelection() {
+            const items = searchResults.querySelectorAll('.search-item');
+            items.forEach((item, idx) => {
+                if (idx === selectedIndex) {
+                    item.focus();
+                    item.setAttribute('aria-selected', 'true');
+                    item.style.background = 'rgba(99, 102, 241, 0.15)';
+                } else {
+                    item.setAttribute('aria-selected', 'false');
+                    item.style.background = '';
+                }
+            });
+        }
+
+        function quickView(bookId) {
+            // Quick preview without opening full modal
+            const book = books.find(b => b.id === bookId);
+            
+            // Create toast notification
+            const toast = document.createElement('div');
+            toast.style.cssText = `
+                position: fixed;
+                bottom: 30px;
+                right: 30px;
+                background: rgba(21, 21, 32, 0.98);
+                border: 1px solid rgba(255,255,255,0.1);
+                border-radius: 16px;
+                padding: 20px;
+                display: flex;
+                align-items: center;
+                gap: 15px;
+                box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+                z-index: 4000;
+                transform: translateX(400px);
+                transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+                max-width: 350px;
+            `;
+            
+            toast.innerHTML = `
+                <img src="${book.image}" style="width: 60px; height: 90px; border-radius: 8px; object-fit: cover;">
+                <div style="flex: 1;">
+                    <h5 style="font-family: 'Playfair Display', serif; margin-bottom: 5px; color: white;">${book.title}</h5>
+                    <p style="font-size: 0.85rem; color: var(--light-gray); margin-bottom: 10px;">${book.description}</p>
+                    <button onclick="openModal('${bookId}'); this.parentElement.parentElement.remove()" 
+                            style="background: var(--primary); color: white; border: none; padding: 8px 16px; border-radius: 20px; font-size: 0.8rem; cursor: pointer; font-weight: 600;">
+                        Ver Completo →
+                    </button>
+                </div>
+                <button onclick="this.parentElement.remove()" 
+                        style="background: none; border: none; color: var(--light-gray); cursor: pointer; font-size: 1.2rem; padding: 5px;">×</button>
+            `;
+            
+            document.body.appendChild(toast);
+            
+            setTimeout(() => {
+                toast.style.transform = 'translateX(0)';
+            }, 100);
+            
+            setTimeout(() => {
+                toast.style.transform = 'translateX(400px)';
+                setTimeout(() => toast.remove(), 400);
+            }, 5000);
+        }
+
         function selectBook(bookId) {
             openModal(bookId);
             searchResults.classList.remove('active');
             searchInput.value = '';
             clearSearchBtn.classList.remove('visible');
+            searchInput.setAttribute('aria-expanded', 'false');
+            selectedIndex = -1;
         }
 
         // Close search when clicking outside
         document.addEventListener('click', (e) => {
             if (!e.target.closest('.search-container')) {
                 searchResults.classList.remove('active');
+                searchInput.setAttribute('aria-expanded', 'false');
+            }
+        });
+
+        // Keyboard navigation for search input
+        searchInput.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowDown' && searchResults.classList.contains('active')) {
+                e.preventDefault();
+                const items = searchResults.querySelectorAll('.search-item');
+                if (items.length > 0) {
+                    selectedIndex = 0;
+                    items[0].focus();
+                    updateSelection();
+                }
+            } else if (e.key === 'Escape') {
+                searchResults.classList.remove('active');
+                searchInput.setAttribute('aria-expanded', 'false');
+                selectedIndex = -1;
             }
         });
 
@@ -1743,9 +2603,27 @@
             }
         }
 
+        // Create gold particles for hero card
+        function createGoldParticles() {
+            const container = document.getElementById('goldParticles');
+            if (!container) return;
+            
+            for (let i = 0; i < 20; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'gold-particle';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.animationDelay = Math.random() * 8 + 's';
+                particle.style.animationDuration = (8 + Math.random() * 8) + 's';
+                particle.style.width = (4 + Math.random() * 4) + 'px';
+                particle.style.height = particle.style.width;
+                container.appendChild(particle);
+            }
+        }
+
         createParticles('particles-quixote', 'rgba(212, 175, 55, 0.4)');
         createParticles('particles-revolucao', 'rgba(255, 107, 107, 0.4)');
         createParticles('particles-principe', 'rgba(255, 212, 59, 0.4)');
+        createGoldParticles();
 
         // Scroll animations
         const observerOptions = {
@@ -1814,6 +2692,24 @@
                     target.scrollIntoView({ behavior: 'smooth', block: 'start' });
                 }
             });
+        });
+
+        // Focus search on keyboard shortcut
+        document.addEventListener('keydown', (e) => {
+            if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
+                e.preventDefault();
+                focusSearch();
+            }
+        });
+
+        // Parallax effect for hero card background
+        document.addEventListener('mousemove', (e) => {
+            const card = document.querySelector('.classic-card-bg');
+            if (card) {
+                const x = (window.innerWidth - e.pageX * 2) / 100;
+                const y = (window.innerHeight - e.pageY * 2) / 100;
+                card.style.transform = `scale(1.1) translate(${x}px, ${y}px)`;
+            }
         });
     </script>
 </body>
