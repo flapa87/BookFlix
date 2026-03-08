@@ -1,0 +1,1103 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dom Quixote de La Mancha: Resumo Analítico Completo - Miguel de Cervantes</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Cinzel+Decorative:wght@700&family=Inter:wght@300;400;500;600;800&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=UnifrakturMaguntia&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'display': ['Cinzel', 'serif'],
+                        'decorative': ['Cinzel Decorative', 'cursive'],
+                        'body': ['Inter', 'sans-serif'],
+                        'quote': ['Playfair Display', 'serif'],
+                        'gothic': ['UnifrakturMaguntia', 'cursive'],
+                        'mono': ['JetBrains Mono', 'monospace'],
+                    },
+                    colors: {
+                        'quixote-gold': '#D4AF37',
+                        'la-mancha': '#C19A6B',
+                        'armor': '#8B8680',
+                        'blood': '#8B0000',
+                        'velvet': '#4A0404',
+                        'parchment': '#F5E6D3',
+                        'parchment-dark': '#E6D2B5',
+                        'ink': '#2C241B',
+                        'windmill': '#A0A0A0',
+                        'manchego': '#D4A574',
+                        'night': '#1a1a2e',
+                        'dawn': '#4a3b2a',
+                        'cervantes': '#8B4513',
+                    },
+                    animation: {
+                        'fade-in': 'fadeIn 1.5s ease-out',
+                        'slide-up': 'slideUp 0.8s ease-out',
+                        'windmill-turn': 'windmill 20s linear infinite',
+                        'tilt': 'tilt 3s ease-in-out infinite',
+                        'float': 'float 6s ease-in-out infinite',
+                        'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                    },
+                    keyframes: {
+                        fadeIn: { '0%': { opacity: '0' }, '100%': { opacity: '1' } },
+                        slideUp: { '0%': { transform: 'translateY(30px)', opacity: '0' }, '100%': { transform: 'translateY(0)', opacity: '1' } },
+                        windmill: { '0%': { transform: 'rotate(0deg)' }, '100%': { transform: 'rotate(360deg)' } },
+                        tilt: { '0%, 100%': { transform: 'rotate(-2deg)' }, '50%': { transform: 'rotate(2deg)' } },
+                        float: { '0%, 100%': { transform: 'translateY(0px)' }, '50%': { transform: 'translateY(-20px)' } }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .grain { position: fixed; inset: 0; pointer-events: none; z-index: 50; opacity: 0.04; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"); }
+        .text-shadow-medieval { text-shadow: 4px 4px 0 rgba(139, 0, 0, 0.2), 0 0 20px rgba(212, 175, 55, 0.3); }
+        .scroll-reveal { opacity: 0; transform: translateY(30px); transition: all 0.8s ease-out; }
+        .scroll-reveal.active { opacity: 1; transform: translateY(0); }
+        .timeline-line { background: linear-gradient(to bottom, #D4AF37 0%, #8B0000 50%, #4A0404 100%); }
+        .quote-mark { font-size: 6rem; line-height: 0; opacity: 0.2; position: absolute; top: -10px; left: -10px; color: #8B0000; font-family: 'Cinzel Decorative', cursive; }
+        .chapter-number { 
+            font-family: 'Cinzel Decorative', cursive; 
+            font-size: 10rem; 
+            font-weight: 700; 
+            color: rgba(212, 175, 55, 0.05); 
+            position: absolute; 
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 0;
+            pointer-events: none;
+            line-height: 1;
+            user-select: none;
+        }
+        .section-card { position: relative; overflow: hidden; }
+        .section-card > *:not(.chapter-number) { position: relative; z-index: 10; }
+        .windmill-blade { transform-origin: center; animation: windmill 20s linear infinite; }
+        .parchment-texture { background-color: #F5E6D3; background-image: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(139, 0, 0, 0.03) 2px, rgba(139, 0, 0, 0.03) 4px); }
+        .drop-cap::first-letter { float: left; font-family: 'Cinzel Decorative', cursive; font-size: 4rem; line-height: 0.8; margin-right: 0.1em; color: #8B0000; }
+        .hover-reveal { position: relative; overflow: hidden; }
+        .hover-reveal::after { content: ''; position: absolute; bottom: 0; left: 0; width: 100%; height: 2px; background: #D4AF37; transform: scaleX(0); transform-origin: left; transition: transform 0.3s; }
+        .hover-reveal:hover::after { transform: scaleX(1); }
+        .nav-dot { width: 12px; height: 12px; border-radius: 50%; background: rgba(212, 175, 55, 0.3); cursor: pointer; transition: all 0.3s; border: 1px solid rgba(212, 175, 55, 0.5); }
+        .nav-dot.active { background: #D4AF37; transform: scale(1.3); box-shadow: 0 0 15px rgba(212, 175, 55, 0.5); }
+        .progress-bar { position: fixed; top: 0; left: 0; height: 3px; background: linear-gradient(to right, #D4AF37, #8B0000); z-index: 100; }
+        .analysis-box { background: linear-gradient(135deg, rgba(212, 175, 55, 0.1) 0%, rgba(139, 0, 0, 0.05) 100%); border-left: 4px solid #D4AF37; }
+        .tilting-card { animation: tilt 6s ease-in-out infinite; }
+        .illuminated-border { border: 2px solid #D4AF37; box-shadow: 0 0 20px rgba(212, 175, 55, 0.2), inset 0 0 20px rgba(212, 175, 55, 0.1); }
+        .timeline-number {
+            font-family: 'Cinzel Decorative', cursive;
+            font-size: 1.5rem;
+            font-weight: 700;
+            width: 3.5rem;
+            height: 3.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(212, 175, 55, 0.15);
+            border: 2px solid rgba(212, 175, 55, 0.4);
+            border-radius: 0.75rem;
+            flex-shrink: 0;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+        }
+        .accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease-out;
+        }
+        .accordion-content.active {
+            max-height: 2000px;
+        }
+        .tab-btn.active {
+            background: rgba(212, 175, 55, 0.2);
+            border-color: #D4AF37;
+            color: #D4AF37;
+        }
+        .comparison-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            position: relative;
+        }
+        .comparison-grid::before {
+            content: 'VS';
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            background: #1a1a2e;
+            padding: 1rem;
+            border-radius: 50%;
+            border: 2px solid #D4AF37;
+            font-family: 'Cinzel Decorative', cursive;
+            color: #D4AF37;
+            font-weight: bold;
+            z-index: 10;
+        }
+        @media (max-width: 768px) {
+            .chapter-number { font-size: 6rem; opacity: 0.04; }
+            .timeline-number { width: 2.5rem; height: 2.5rem; font-size: 1.2rem; }
+            .comparison-grid { grid-template-columns: 1fr; }
+            .comparison-grid::before { display: none; }
+        }
+    </style>
+</head>
+<body class="bg-night text-parchment font-body selection:bg-quixote-gold selection:text-ink">
+
+<div class="grain"></div>
+<div class="progress-bar" id="progressBar"></div>
+
+<div class="fixed right-6 top-1/2 -translate-y-1/2 z-40 hidden lg:flex flex-col gap-4">
+    <div class="nav-dot active" onclick="scrollTo('intro')" data-section="intro"></div>
+    <div class="nav-dot" onclick="scrollTo('contexto')" data-section="contexto"></div>
+    <div class="nav-dot" onclick="scrollTo('estrutura')" data-section="estrutura"></div>
+    <div class="nav-dot" onclick="scrollTo('personagens')" data-section="personagens"></div>
+    <div class="nav-dot" onclick="scrollTo('enredo')" data-section="enredo"></div>
+    <div class="nav-dot" onclick="scrollTo('aventuras')" data-section="aventuras"></div>
+    <div class="nav-dot" onclick="scrollTo('analise-temas')" data-section="analise-temas"></div>
+    <div class="nav-dot" onclick="scrollTo('literario')" data-section="literario"></div>
+    <div class="nav-dot" onclick="scrollTo('legado')" data-section="legado"></div>
+</div>
+
+<header id="intro" class="relative min-h-screen flex items-center justify-center overflow-hidden">
+    <div class="absolute inset-0 bg-gradient-to-b from-night via-dawn to-night"></div>
+    <div class="absolute inset-0 opacity-10" style="background-image: repeating-linear-gradient(45deg, transparent, transparent 35px, rgba(212, 175, 55, 0.05) 35px, rgba(212, 175, 55, 0.05) 70px);"></div>
+    <div class="absolute top-20 right-20 opacity-10 hidden lg:block">
+        <svg width="200" height="200" viewBox="0 0 100 100" class="windmill-blade">
+            <path d="M50 50 L50 10 M50 50 L90 50 M50 50 L50 90 M50 50 L10 50" stroke="#D4AF37" stroke-width="2" fill="none"/>
+            <circle cx="50" cy="50" r="5" fill="#D4AF37"/>
+        </svg>
+    </div>
+    <div class="relative z-10 text-center px-4 max-w-5xl mx-auto">
+        <div class="mb-6 animate-fade-in">
+            <span class="text-quixote-gold font-display text-sm tracking-[0.6em] uppercase border-b-2 border-quixote-gold pb-2">Miguel de Cervantes • 1605 & 1615</span>
+        </div>
+        <h1 class="font-decorative text-6xl md:text-8xl font-black mb-6 text-shadow-medieval tracking-tighter animate-fade-in text-parchment">
+            DOM QUIXOTE<br><span class="text-quixote-gold text-5xl md:text-7xl">DE LA MANCHA</span>
+        </h1>
+        <p class="font-quote text-2xl md:text-3xl text-la-mancha italic mb-8 max-w-3xl mx-auto animate-slide-up">
+            "Não há memória que o tempo não leve, nem dor que a morte não pague."
+        </p>
+        <div class="flex justify-center gap-4 animate-slide-up flex-wrap">
+            <button onclick="scrollTo('contexto')" class="px-8 py-4 bg-quixote-gold text-ink font-display font-bold tracking-wider hover:bg-manchego transition-colors border-2 border-quixote-gold">
+                ENTRAR NA MANCHA
+            </button>
+        </div>
+        <div class="mt-12 flex justify-center gap-8 opacity-50">
+            <span class="text-4xl animate-float" style="animation-delay: 0s;">⚔️</span>
+            <span class="text-4xl animate-float" style="animation-delay: 1s;">🛡️</span>
+            <span class="text-4xl animate-float" style="animation-delay: 2s;">🏇</span>
+            <span class="text-4xl animate-float" style="animation-delay: 3s;">📜</span>
+        </div>
+    </div>
+</header>
+
+<section id="contexto" class="py-24 px-4 bg-dawn">
+    <div class="max-w-6xl mx-auto">
+        <div class="scroll-reveal mb-16">
+            <span class="text-quixote-gold font-display text-sm tracking-widest uppercase">Contexto Histórico e Biográfico</span>
+            <h2 class="font-display text-5xl font-bold mt-4 mb-6 text-parchment">A Espanha que Criou o Cavaleiro</h2>
+        </div>
+        <div class="grid lg:grid-cols-2 gap-12 mb-16">
+            <div class="scroll-reveal space-y-6 text-lg text-parchment-dark leading-relaxed">
+                <p class="drop-cap">
+                    <strong class="text-parchment">Miguel de Cervantes Saavedra</strong> (1547-1616) viveu uma vida tão aventuresca quanto a de seu personagem. Nascido em Alcalá de Henares, filho de um cirurgião-barbeiro de modesta condição, passou sua infância em constante movimento entre Valladolid, Madrid e Sevilha. Sua educação foi irregular mas sólida, dominando latim, italiano e a cultura renascentista através de contatos com intelectuais em Roma.
+                </p>
+                <p>
+                    Em 1569, fugiu para Itália após ferir um homem em duelo. Ali serviu o <strong>Cardeal Giulio Acquaviva</strong> em Roma, absorvendo o Renascimento italiano. Em 1571, alistou-se na <strong>Infanteria de Marina espanhola</strong> e participou da <span class="text-quixote-gold font-semibold">Batalha de Lepanto</span> contra o Império Otomano. Ferido gravemente por três tiros de arcabuz (no peito e mão esquerda), perdeu o uso desta última, ganhando o apelido de <em>"El manco de Lepanto"</em> (o manco de Lepanto).
+                </p>
+                <p>
+                    No retorno à Espanha em 1575, sua embarcação foi capturada por piratas argelinos comandados por <strong>Arnaut Mami</strong>. Cervantes foi levado como escravo para Argel, onde permaneceu cinco anos (1575-1580). Durante o cativeiro, tentou fugar quatro vezes — uma delas escondendo-se em uma gruta com outros cativos por meses. Foi resgatado por trinitários em 1580, após o pagamento de resgate por sua família.
+                </p>
+                <div class="analysis-box p-6 rounded-lg my-8">
+                    <h4 class="font-display text-lg font-bold text-quixote-gold mb-3">Por que La Mancha?</h4>
+                    <p class="text-parchment-dark text-base">
+                        Cervantes escolheu <em>La Mancha</em> (planície árida no centro da Espanha) estrategicamente: longe dos centros culturais (Madrid, Toledo), era terra de <strong>hidalgos empobrecidos</strong> que ainda mantinham títulos sem riqueza. O "lugar da Mancha" é genérico propositalmente — poderia ser qualquer esquina da Espanha onde vivem sonhadores. A escolha também parodia o gênero cavaleiresco, onde heróis vinham de terras exóticas.
+                    </p>
+                </div>
+            </div>
+            <div class="scroll-reveal">
+                <div class="bg-ink/50 p-8 rounded-2xl border border-quixote-gold/30 illuminated-border mb-6">
+                    <h3 class="font-display text-2xl font-bold text-quixote-gold mb-6">Linha do Tempo: Ficção e História</h3>
+                    <div class="space-y-6 relative">
+                        <div class="absolute left-4 top-2 bottom-2 w-0.5 timeline-line rounded"></div>
+                        <div class="relative pl-12">
+                            <div class="absolute left-2 top-1 w-5 h-5 bg-quixote-gold rounded-full border-4 border-dawn"></div>
+                            <span class="text-xs text-quixote-gold font-mono">1547</span>
+                            <h4 class="font-bold text-parchment">Nascimento de Cervantes</h4>
+                            <p class="text-sm text-parchment-dark">Alcalá de Henares, 29 de setembro</p>
+                        </div>
+                        <div class="relative pl-12">
+                            <div class="absolute left-2 top-1 w-5 h-5 bg-blood rounded-full border-4 border-dawn"></div>
+                            <span class="text-xs text-blood font-mono">1571</span>
+                            <h4 class="font-bold text-parchment">Batalha de Lepanto</h4>
+                            <p class="text-sm text-parchment-dark">Ferido três vezes, perde movimento da mão esquerda</p>
+                        </div>
+                        <div class="relative pl-12">
+                            <div class="absolute left-2 top-1 w-5 h-5 bg-velvet rounded-full border-4 border-dawn"></div>
+                            <span class="text-xs text-velvet font-mono">1575-1580</span>
+                            <h4 class="font-bold text-parchment">Cativeiro em Argel</h4>
+                            <p class="text-sm text-parchment-dark">Quatro tentativas de fuga, resgatado por trinitários</p>
+                        </div>
+                        <div class="relative pl-12">
+                            <div class="absolute left-2 top-1 w-5 h-5 bg-cervantes rounded-full border-4 border-dawn"></div>
+                            <span class="text-xs text-cervantes font-mono">1584</span>
+                            <h4 class="font-bold text-parchment">La Galatea</h4>
+                            <p class="text-sm text-parchment-dark">Primeira obra publicada (romance pastoril)</p>
+                        </div>
+                        <div class="relative pl-12">
+                            <div class="absolute left-2 top-1 w-5 h-5 bg-la-mancha rounded-full border-4 border-dawn"></div>
+                            <span class="text-xs text-la-mancha font-mono">1605</span>
+                            <h4 class="font-bold text-parchment">Parte I Publicada</h4>
+                            <p class="text-sm text-parchment-dark">Impresso em Madrid por Juan de la Cuesta. Sucesso imediato.</p>
+                        </div>
+                        <div class="relative pl-12">
+                            <div class="absolute left-2 top-1 w-5 h-5 bg-quixote-gold rounded-full border-4 border-dawn animate-pulse"></div>
+                            <span class="text-xs text-quixote-gold font-mono">1615</span>
+                            <h4 class="font-bold text-parchment">Parte II Publicada</h4>
+                            <p class="text-sm text-parchment-dark">Resposta à "falsa" Parte II de Avellaneda (1614)</p>
+                        </div>
+                        <div class="relative pl-12">
+                            <div class="absolute left-2 top-1 w-5 h-5 bg-parchment rounded-full border-4 border-dawn"></div>
+                            <span class="text-xs text-parchment font-mono">1616</span>
+                            <h4 class="font-bold text-parchment">Morte de Cervantes</h4>
+                            <p class="text-sm text-parchment-dark">23 de abril, mesmo dia de Shakespeare (diferente calendário)</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-blood/10 border border-blood/30 p-6 rounded-xl">
+                    <h4 class="font-display font-bold text-parchment mb-2">A Falsa Continuação (Avellaneda)</h4>
+                    <p class="text-sm text-parchment-dark">
+                        Em 1614, um escritor anônimo usando o pseudônimo <strong>Alonso Fernández de Avellaneda</strong> (possivelmente o poeta Lope de Vega ou Jerónimo de Passamonte) publicou uma continuação não-autorizada em Tarragona. Cervantes, indignado, acelerou a escrita da Parte II autêntica (1615), onde Dom Quixote e Sancho são conscientes de terem sido lidos por toda a Espanha. Na Parte II, Cervantes faz personagens criticar diretamente o livro de Avellaneda, chamando-o de "falso Quixote".
+                    </p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="scroll-reveal bg-ink/40 p-8 rounded-2xl border border-quixote-gold/20">
+            <h3 class="font-display text-2xl font-bold text-quixote-gold mb-6">O Contexto Literário: A Cavalaria em Declínio</h3>
+            <div class="grid md:grid-cols-3 gap-6">
+                <div class="space-y-3">
+                    <h4 class="font-bold text-parchment text-lg">O Gênero Cavaleiresco</h4>
+                    <p class="text-sm text-parchment-dark">Romances de cavalaria como <em>Amadís de Gaula</em> (1508), <em>Tirant lo Blanch</em> e <em>Palmeirim de Inglaterra</em> dominaram a literatura ibérica do século XVI. Estes livros apresentavam heróis invencíveis, amores platônicos e aventuras fantásticas.</p>
+                </div>
+                <div class="space-y-3">
+                    <h4 class="font-bold text-parchment text-lg">A Quimera Imperial</h4>
+                    <p class="text-sm text-parchment-dark">A Espanha de Felipe III (r. 1598-1621) vivia o declínio do império após a anexação de Portugal (1580) e derrotas militares. A "loucura" de Quixote reflete a <strong>quimera imperial espanhola</strong>: manter pretensões de grandeza medieval em mundo moderno.</p>
+                </div>
+                <div class="space-y-3">
+                    <h4 class="font-bold text-parchment text-lg">Contra-Reforma e Inquisição</h4>
+                    <p class="text-sm text-parchment-dark">O ambiente intelectual era controlado pela Igreja Católica. Cervantes navega habilmente: critica hipocrisia eclesiástica (frei Pero Pérez) mas mantém piedade aparente. O livro foi examinado pela Inquisição e aprovado sem censura.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="estrutura" class="py-24 px-4 bg-night">
+    <div class="max-w-6xl mx-auto">
+        <div class="scroll-reveal mb-16">
+            <span class="text-quixote-gold font-display text-sm tracking-widest uppercase">Arquitetura da Obra</span>
+            <h2 class="font-display text-5xl font-bold mt-4 mb-6 text-parchment">Estrutura e Composição</h2>
+        </div>
+        
+        <div class="grid lg:grid-cols-2 gap-12 mb-16">
+            <div class="scroll-reveal space-y-6">
+                <h3 class="font-display text-2xl font-bold text-quixote-gold">Organização das Duas Partes</h3>
+                <div class="space-y-4 text-parchment-dark">
+                    <p><strong class="text-parchment">Parte I (1605):</strong> 52 capítulos. Estrutura episódica, com interrupções narrativas (histórias inseridas como a de <em>Cardenio e Lucinda</em>, <em>o Cautivo</em>, <em>a Novela do Curioso Impertinente</em>). Termina abruptamente com a promessa de continuação.</p>
+                    <p><strong class="text-parchment">Parte II (1615):</strong> 74 capítulos. Estrutura mais coesa, unidade de ação. Personagens conscientes de serem lidos. Sancho Pança ganha protagonismo.</p>
+                </div>
+                
+                <div class="analysis-box p-6 rounded-lg mt-6">
+                    <h4 class="font-display font-bold text-quixote-gold mb-3">A Mise en Abyme Cervantina</h4>
+                    <p class="text-parchment-dark text-sm">Cervantes cria múltiplas camadas de ficção: ele é "editor" de um manuscrito árabe encontrado em Toledo, traduzido por um "morisco" (cristão novo convertido do islã). O suposto autor árabe, <strong>Cide Hamete Benengeli</strong>, comenta a ação, criando distância irônica. Na Parte II, personagens já leram a Parte I, e alguns encontram a "falsa" Parte de Avellaneda.</p>
+                </div>
+            </div>
+            
+            <div class="scroll-reveal">
+                <div class="bg-ink/60 p-8 rounded-2xl border border-quixote-gold/30">
+                    <h3 class="font-display text-xl font-bold text-quixote-gold mb-6">Comparação Estrutural</h3>
+                    <div class="comparison-grid">
+                        <div class="space-y-4">
+                            <h4 class="font-bold text-parchment border-b border-quixote-gold/30 pb-2">Parte I (1605)</h4>
+                            <ul class="space-y-2 text-sm text-parchment-dark">
+                                <li class="flex items-start gap-2"><span class="text-quixote-gold">•</span> Estrutura aberta, episódica</li>
+                                <li class="flex items-start gap-2"><span class="text-quixote-gold">•</span> Histórias intercaladas</li>
+                                <li class="flex items-start gap-2"><span class="text-quixote-gold">•</span> Foco em Quixote</li>
+                                <li class="flex items-start gap-2"><span class="text-quixote-gold">•</span> Sancho como cômico</li>
+                                <li class="flex items-start gap-2"><span class="text-quixote-gold">•</span> Final abrupto</li>
+                                <li class="flex items-start gap-2"><span class="text-quixote-gold">•</span> Tom mais burlesco</li>
+                            </ul>
+                        </div>
+                        <div class="space-y-4">
+                            <h4 class="font-bold text-parchment border-b border-la-mancha/30 pb-2">Parte II (1615)</h4>
+                            <ul class="space-y-2 text-sm text-parchment-dark">
+                                <li class="flex items-start gap-2"><span class="text-la-mancha">•</span> Estrutura fechada, circular</li>
+                                <li class="flex items-start gap-2"><span class="text-la-mancha">•</span> Unidade de ação</li>
+                                <li class="flex items-start gap-2"><span class="text-la-mancha">•</span> Foco em Quixote e Sancho</li>
+                                <li class="flex items-start gap-2"><span class="text-la-mancha">•</span> Sancho como protagonista</li>
+                                <li class="flex items-start gap-2"><span class="text-la-mancha">•</span> Final redondo (morte)</li>
+                                <li class="flex items-start gap-2"><span class="text-la-mancha">•</span> Tom trágico-filosófico</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="scroll-reveal bg-ink/40 p-8 rounded-2xl border border-quixote-gold/20">
+            <h3 class="font-display text-2xl font-bold text-quixote-gold mb-6">As Novelas Intercaladas (Parte I)</h3>
+            <p class="text-parchment-dark mb-6">Cervantes interrompe a narrativa principal com histórias completas que dialogam tematicamente com a trama principal:</p>
+            <div class="grid md:grid-cols-2 gap-6">
+                <div class="bg-dawn/30 p-6 rounded-xl border-l-4 border-quixote-gold">
+                    <h4 class="font-bold text-parchment mb-2">A Novela do Curioso Impertinente</h4>
+                    <p class="text-sm text-parchment-dark">Anselmo testa a fidelidade da esposa Camila através do amigo Lotário. Tragédia clássica sobre ciúme e honra. Metaforicamente, reflete a "prova" desnecessária que Quixote impõe à realidade.</p>
+                </div>
+                <div class="bg-dawn/30 p-6 rounded-xl border-l-4 border-la-mancha">
+                    <h4 class="font-bold text-parchment mb-2">A História do Cautivo</h4>
+                    <p class="text-sm text-parchment-dark">Narração em primeira pessoa de um soldado cativo em Argel (eco biográfico de Cervantes). Introduz Zoraida, a moura convertida, tema do encontro entre cristianismo e islamismo.</p>
+                </div>
+                <div class="bg-dawn/30 p-6 rounded-xl border-l-4 border-parchment">
+                    <h4 class="font-bold text-parchment mb-2">Cardenio, Lucinda e Fernando</h4>
+                    <p class="text-sm text-parchment-dark">Triângulo amoroso que espelha os temas de honra e loucura. Cardenio enlouquece nas montanhas do Céltico, como Quixote enlouqueceu lendo.</p>
+                </div>
+                <div class="bg-dawn/30 p-6 rounded-xl border-l-4 border-blood">
+                    <h4 class="font-bold text-parchment mb-2">A História da Sra. Cornélia</h4>
+                    <p class="text-sm text-parchment-dark">Intrigas de corte italianas, demonstrando a versatilidade de Cervantes com diferentes subgêneros narrativos.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="personagens" class="py-24 px-4 bg-dawn">
+    <div class="max-w-7xl mx-auto">
+        <div class="scroll-reveal mb-16 text-center">
+            <span class="text-quixote-gold font-display text-sm tracking-widest uppercase">Elenco Cervantino</span>
+            <h2 class="font-display text-5xl font-bold mt-4 text-parchment">Os Ingeniosos Hidalgos</h2>
+        </div>
+        
+        <div class="grid lg:grid-cols-2 gap-8 mb-16">
+            <div class="scroll-reveal section-card bg-ink/60 p-8 rounded-2xl border border-quixote-gold/50 illuminated-border">
+                <div class="chapter-number">I</div>
+                <div>
+                    <div class="flex items-center gap-4 mb-6">
+                        <div class="w-20 h-20 bg-quixote-gold/20 rounded-xl flex items-center justify-center text-4xl border-2 border-quixote-gold/50 tilt">🤺</div>
+                        <div>
+                            <h3 class="font-decorative text-3xl font-bold text-quixote-gold">Dom Quixote</h3>
+                            <p class="text-xs text-la-mancha uppercase tracking-wider">O Cavaleiro da Triste Figura / O Cavaleiro dos Leões</p>
+                        </div>
+                    </div>
+                    <div class="space-y-4 text-parchment-dark">
+                        <p><strong class="text-parchment">Identidade Real:</strong> Alonso Quijano (ou Quesada/Quijana — Cervantes varia propositalmente), hidalgo de cinquenta anos da aldeia (não nomeada explicitamente), leitor voraz de <em>libros de cavalaria</em> até perder o juízo ("frisava a sua cabeça de tal maneira, que lhe ficou totalmente esvaziada de todo o juízo").</p>
+                        <p><strong class="text-parchment">Transformação:</strong> Decide reviver a cavalaria andante medieval. Adota nome "Dom Quixote de La Mancha", nomeia seu cavalo de <strong>Rocinante</strong> (rocín = cavalo de trabalho + antes = antes de todos), elege <strong>Dulcinea del Toboso</strong> como dama, forja armadura ancestral (visor de papelão).</p>
+                        <p><strong class="text-parchment">Características:</strong> Magro, seco, alto, rosto magro, barba castanha. Sua loucura é <em>monomania sistemática</em>: é lúcido em tudo, exceto quando toca em cavalaria.</p>
+                        <div class="analysis-box p-4 rounded mt-4">
+                            <p class="text-sm text-parchment-dark"><strong class="text-quixote-gold">Análise Psicológica:</strong> Dom Quixote não é simplesmente louco, mas alguém que escolhe viver segundo princípios elevados em mundo corrupto. Sua "loucura" é <strong>voluntária e metódica</strong>. Na Parte II, oscila entre lucidez e delírio, criando ambiguidade sobre quando realmente acredita e quando finge para manter o jogo.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="scroll-reveal section-card bg-ink/60 p-8 rounded-2xl border border-la-mancha/50">
+                <div class="chapter-number">II</div>
+                <div>
+                    <div class="flex items-center gap-4 mb-6">
+                        <div class="w-20 h-20 bg-la-mancha/20 rounded-xl flex items-center justify-center text-4xl border-2 border-la-mancha/50">🧅</div>
+                        <div>
+                            <h3 class="font-decorative text-3xl font-bold text-la-mancha">Sancho Pança</h3>
+                            <p class="text-xs text-manchego uppercase tracking-wider">O Escudeiro / O Governador</p>
+                        </div>
+                    </div>
+                    <div class="space-y-4 text-parchment-dark">
+                        <p><strong class="text-parchment">Origem:</strong> Labrego da Mancha, casado com Teresa Cascajo (ou Teresa Pança/Gutiérrez — Cervantes varia), pai de Mari Gutiérrez. Carrega "acém" (toucinho) e "alforges" (alforges) com comida (cebolas, queijo, pão).</p>
+                        <p><strong class="text-parchment">Motivação:</strong> Segue Dom Quixote pela promessa de <strong>ilha a governar</strong> ("seria bom que, porventura, a gente viesse a ganhar uma ilha, e eu me ficasse a governá-la?"). É realista, pragmático, cheio de provérbios populares ("cada ovelha com sua parelhada", "o bom pagador não fica devedor").</p>
+                        <p><strong class="text-parchment">Evolução:</strong> De simples escudeiro cômico na Parte I, torna-se protagonista moral na Parte II. Seu governo na Ilha Baratária demonstra sabedoria prática ("quero governar sem interesses").</p>
+                        <div class="analysis-box p-4 rounded mt-4 border-la-mancha" style="border-left-color: #C19A6B;">
+                            <p class="text-sm text-parchment-dark"><strong class="text-la-mancha">Análise:</strong> Sancho representa o <em>povo espanhol</em> — a "Espanha real" contra a "Espanha ideal" de Quixote. Sua relação com Quixote é a mais profunda da literatura: amor-ódio, mestre-escravo, louco-sábio. Sancho "quixotiza-se" (adota ideais) enquanto Quixote "sanchifica-se" (torna-se pragmático).</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="scroll-reveal section-card bg-ink/60 p-8 rounded-2xl border border-parchment/30 lg:col-span-2">
+                <div class="chapter-number">III</div>
+                <div>
+                    <div class="flex items-center gap-4 mb-6">
+                        <div class="w-20 h-20 bg-parchment/10 rounded-xl flex items-center justify-center text-4xl border-2 border-parchment/30">👸</div>
+                        <div>
+                            <h3 class="font-decorative text-3xl font-bold text-parchment">Dulcinea del Toboso</h3>
+                            <p class="text-xs text-parchment-dark uppercase tracking-wider">A Dama Imaginada / Aldonza Lorenzo</p>
+                        </div>
+                    </div>
+                    <div class="grid md:grid-cols-2 gap-8">
+                        <div class="space-y-4 text-parchment-dark">
+                            <p><strong class="text-parchment">A Realidade:</strong> Aldonza Lorenzo, filha de Lorenzo Corchuelo, moradora de El Toboso. Camponesa robusta que "sabe salgar porcos" e tem "bom hálito". Nunca aparece diretamente na narrativa.</p>
+                            <p><strong class="text-parchment">A Invenção:</strong> Dom Quixote transforma-a poeticamente em <strong>Dulcinea del Toboso</strong>, "soberana da beleza", "princesa de El Toboso". É o <em>objeto amoroso platônico</em> da cavalaria (amor cortês sem consumação).</p>
+                            <p><strong class="text-parchment">O Encantamento:</strong> Na Parte II, Quixote acredita que Dulcinea foi transformada em camponesa grotesca por um feiticeiro (na verdade, Sancho inventa que a viu em encantamento para justificar não tê-la encontrado).</p>
+                        </div>
+                        <div class="space-y-4">
+                            <div class="bg-velvet/30 p-6 rounded-xl border-l-4 border-parchment">
+                                <p class="font-quote italic text-parchment text-lg mb-2">"Ela me escreveu, Sancho."</p>
+                                <p class="text-xs text-parchment-dark mt-2">— Quixote acredita que recebe cartas de Dulcinea (Parte II)</p>
+                            </div>
+                            <div class="analysis-box p-4 rounded mt-4 border-parchment" style="border-left-color: #F5E6D3;">
+                                <p class="text-sm text-parchment-dark"><strong class="text-parchment">Análise:</strong> Dulcinea representa como <strong>a literatura interpela a realidade</strong>: Aldonza existe, mas é irrelevante; Dulcinea não existe, mas é essencial. É a <em>quimera</em> que move a ação, o ideal inatingível que justifica todas as loucuras.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="scroll-reveal bg-ink/40 p-8 rounded-2xl border border-quixote-gold/20">
+            <h3 class="font-display text-2xl font-bold text-quixote-gold mb-6">Personagens Secundários Importantes</h3>
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div class="space-y-3">
+                    <h4 class="font-bold text-parchment">Rocinante</h4>
+                    <p class="text-sm text-parchment-dark">O cavalo. Magro, galgo, "muito estreito de quartos". Primeira coisa que Quixote nomeia. Representa a decadência da cavalaria: um cavalo de trabalho tentando ser corcel de guerra.</p>
+                </div>
+                <div class="space-y-3">
+                    <h4 class="font-bold text-parchment">Sansón Carrasco</h4>
+                    <p class="text-sm text-parchment-dark">Bacharel da aldeia, jovem estudioso. Na Parte II, tenta "curar" Quixote disfarçando-se de <strong>Cavaleiro da Espada Branca</strong> (depois da Lua). Representa a razão iluminista contra o idealismo.</p>
+                </div>
+                <div class="space-y-3">
+                    <h4 class="font-bold text-parchment">O Duque e a Duquesa</h4>
+                    <p class="text-sm text-parchment-dark">Nobres da Parte II que conhecem o livro da Parte I e criam elaboradas encenações para entretenimento próprio (Ilha Baratária). Representam a crueldade da aristocracia ociosa.</p>
+                </div>
+                <div class="space-y-3">
+                    <h4 class="font-bold text-parchment">Teresa Pança</h4>
+                    <p class="text-sm text-parchment-dark">Esposa de Sancho. Mulher prática, grosseira, mas leal. Na Parte II, torna-se ambiciosa com a perspectiva de ser "senhora de ilha".</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="enredo" class="py-24 px-4 bg-night">
+    <div class="max-w-6xl mx-auto">
+        <div class="scroll-reveal mb-16">
+            <span class="text-quixote-gold font-display text-sm tracking-widest uppercase">Narrativa Completa</span>
+            <h2 class="font-display text-5xl font-bold mt-4 mb-6 text-parchment">As Três Saídas e o Regresso</h2>
+        </div>
+
+        <div class="scroll-reveal mb-16 relative">
+            <div class="flex items-start gap-6 mb-6">
+                <div class="timeline-number text-quixote-gold">I</div>
+                <div class="flex-1">
+                    <h3 class="font-display text-3xl font-bold text-parchment mb-4">Primeira Saída (Sozinho) — Capítulos I-V</h3>
+                </div>
+            </div>
+            <div class="pl-20">
+                <div class="space-y-4 text-parchment-dark leading-relaxed">
+                    <p>Sem avisar ninguém, armado com armadura ancestral, montado em Rocinante, Dom Quixote parte antes do amanhecer. Primeira aventura: <strong>a estalagem de Juan Palomeque</strong>, que ele toma por castelo. O estalajadeiro (cauteloso com loucos) armou-lhe o elmo à força. Quixote passa a noite em vigília de armas (como cavaleiros noviços), mas é atacado por um "gigante" (um muledro que o derruba com um puxão).</p>
+                    <p>Sai e encontra <strong>um lavrador (Andrés)</strong> sendo chicoteado. Quixote intervém, manda o amo soltar o moço. O amo obedece na frente do cavaleiro, mas assim que Quixote sai, bate duas vezes mais no lavrador. <em>Primeira demonstração da inutilidade prática do idealismo quixotesco</em>: a justiça abstrata falha sem poder coercitivo.</p>
+                    <p>Retorna à aldeia apanhado por um vizinho, trazido em jumento, dentro de uma gaiola de madeira, considerado louco.</p>
+                    <div class="analysis-box p-6 rounded-lg">
+                        <h4 class="font-display font-bold text-quixote-gold mb-3">Análise da Primeira Saída</h4>
+                        <p class="text-parchment-dark">Esta saída estabelece o <em>padrão quixotesco</em>: confusão de realidade com ficção, intervenção moralmente correta mas praticamente inútil, derrota física, retorno à aldeia. O episódio de Andrés é crucial: mostra que o mundo não obedece aos códigos da cavalaria.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="scroll-reveal mb-16 relative">
+            <div class="flex items-start gap-6 mb-6">
+                <div class="timeline-number text-la-mancha" style="background: rgba(193, 154, 107, 0.15); border-color: rgba(193, 154, 107, 0.4);">II</div>
+                <div class="flex-1">
+                    <h3 class="font-display text-3xl font-bold text-parchment mb-4">Segunda Saída (Com Sancho) — Parte I, Capítulos VII-XXVI</h3>
+                </div>
+            </div>
+            <div class="pl-20">
+                <div class="space-y-4 text-parchment-dark leading-relaxed">
+                    <p>Após ser "armado cavaleiro" pelo estalajadeiro (que não sabe o que faz), e convencer <strong>Sancho Pança</strong> (prometendo-lhe ilha), partem de noite. Sancho carrega alforges com comida.</p>
+                    
+                    <div class="bg-ink/30 p-6 rounded-xl border-l-4 border-quixote-gold my-6">
+                        <h4 class="font-bold text-quixote-gold mb-3">Os Moinhos de Vento (Capítulo VIII)</h4>
+                        <p class="mb-4">Primeira aventura lendária: Quixote vê "gigantes" (moinhos de vento). Sancho avisa que são moinhos. Quixote não acredita: "Parece-me bem — disse Dom Quixote — que não estás versado nisto de aventuras: eles são gigantes; e, se tens medo, aparta-te para ora e põe-te em oração, enquanto vou a entrar com eles em feroz e desigual batalha."</p>
+                        <p>Rocinante cai, moinho o atira ao chão. Quixote explica: "Sabe o que penso, Sancho? Que o maligno Frestão (magician) transformou os gigantes em moinhos."</p>
+                    </div>
+
+                    <p><strong>Outras aventuras da Segunda Saída:</strong></p>
+                    <ul class="list-disc list-inside space-y-2 ml-4">
+                        <li><strong>O Rebanho de Ovelhas:</strong> Confunde rebanho com exércitos. Ataca, é apedreado por pastores.</li>
+                        <li><strong>Os Galeotes:</strong> Liberta condenados para as galés (contra a justiça real), que o apedrejam e roubam.</li>
+                        <li><strong>A Sierra Morena:</strong> Encontra Cardenio enlouquecido. Quixote faz penitência imitando Amadís (ficar nu, bater-se).</li>
+                        <li><strong>O Bálsamo de Fierabrás:</strong> Mistura de azeite, vinagre, sal e água que faz Quixote e Sancho vomitar (cura imaginária).</li>
+                    </ul>
+
+                    <div class="analysis-box p-6 rounded-lg">
+                        <h4 class="font-display font-bold text-quixote-gold mb-3">Análise da Segunda Saída</h4>
+                        <p class="text-parchment-dark">O episódio dos moinhos tornou-se metáfora universal da <strong>luta contra inimigos imaginários</strong> ou <strong>projetar malignidade onde não existe</strong>. A "loucura" de Quixote é <strong>sistemática</strong>: ele não vê mal, mas interpreta mal através de um prisma literário.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="scroll-reveal mb-16 relative">
+            <div class="flex items-start gap-6 mb-6">
+                <div class="timeline-number text-parchment" style="background: rgba(245, 230, 211, 0.1); border-color: rgba(245, 230, 211, 0.3);">✦</div>
+                <div class="flex-1">
+                    <h3 class="font-display text-3xl font-bold text-parchment mb-4">O Manuscrito Encontrado e a Continuação Falsa</h3>
+                </div>
+            </div>
+            <div class="pl-20">
+                <div class="space-y-4 text-parchment-dark leading-relaxed">
+                    <p>Cervantes interrompe a narrativa no Capítulo IX da Parte I para explicar que encontrou o manuscrito em <strong>Toledo</strong>, escrito em árabe por <strong>Cide Hamete Benengeli</strong> ("Cide" = senhor em árabe; "Hamete" = muçulmano; "Benengeli" = filho de enguia — nome falso/humorístico). Esta <strong>mise en abyme</strong> cria distância irônica: Cervantes não é autor, mas "editor" e "tradutor".</p>
+                    <p>Em 1614, <strong>Alonso Fernández de Avellaneda</strong> publica continuação não-autorizada. Cervantes responde com Parte II (1615), onde Quixote e Sancho <strong>sabem que são personagens famosos</strong>. Na Parte II, encontram pessoas que leram a Parte I, e criticam o "falso Quixote" de Avellaneda (onde Sancho é casado com outra mulher, não Teresa).</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="scroll-reveal mb-16 relative">
+            <div class="flex items-start gap-6 mb-6">
+                <div class="timeline-number text-blood" style="background: rgba(139, 0, 0, 0.15); border-color: rgba(139, 0, 0, 0.4);">III</div>
+                <div class="flex-1">
+                    <h3 class="font-display text-3xl font-bold text-parchment mb-4">Terceira Saída — Parte II, Completa</h3>
+                </div>
+            </div>
+            <div class="pl-20">
+                <div class="space-y-4 text-parchment-dark leading-relaxed">
+                    <p><strong>Sansón Carrasco</strong> visita Quixote, informa que é famoso por toda a Espanha. Propõe-se "curá-lo" disfarçando-se de <strong>Cavaleiro da Espada Branca</strong> (depois Cavaleiro da Lua), desafiando Quixote a combate com condição: o vencido abandona a cavalaria.</p>
+                    
+                    <p><strong>As Aventuras do Duque:</strong> Nobres que leram a Parte I criam <strong>Ilha Baratária</strong> (ilha falsa, "barata" = barata/sem valor) para Sancho governar. Sancho demonstra sabedoria prática surpreendente:</p>
+                    <ul class="list-disc list-inside space-y-2 ml-4 mb-4">
+                        <li>Resolve o caso do "rio dividido" com bom senso</li>
+                        <li>Cria leis justas e simples</li>
+                        <li>Recusa subornos</li>
+                        <li>Abandona o governo quando percebe a farsa</li>
+                    </ul>
+
+                    <p><strong>A Cave de Montesinos:</strong> Quixote desce a uma caverna e "sonha" (ou delira) uma visão do passado medieval. Discussão sobre se era sonho ou realidade — metafísica cervantina.</p>
+
+                    <p><strong>A Derrota Final:</strong> Encontram o <strong>Cavaleiro do Branco Leão</strong> (Sansón Carrasco disfarçado novamente). Desta vez, Quixote é derrotado. Deve cumprir a promessa: abandonar as armas por um ano.</p>
+
+                    <div class="analysis-box p-6 rounded-lg">
+                        <h4 class="font-display font-bold text-quixote-gold mb-3">Análise da Terceira Saída</h4>
+                        <p class="text-parchment-dark">O governo de Sancho é o <strong>ápice da inversão quixotesca</strong>: o "ignorante" demonstra mais capacidade administrativa que juristas formados. O Duque representa a <strong>aristocracia parasitária</strong> que brinca com os sonhos alheios. A metaficção atinge níveis pós-modernos: personagens conscientes de serem lidos.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="scroll-reveal mb-16 relative">
+            <div class="flex items-start gap-6 mb-6">
+                <div class="timeline-number" style="background: rgba(120, 113, 108, 0.15); border-color: rgba(120, 113, 108, 0.4); color: #9ca3af;">✝</div>
+                <div class="flex-1">
+                    <h3 class="font-display text-3xl font-bold text-parchment mb-4">O Regresso e a Morte do Cavaleiro</h3>
+                </div>
+            </div>
+            <div class="pl-20">
+                <div class="space-y-4 text-parchment-dark leading-relaxed">
+                    <p>De volta à aldeia, Quixote adoece profundamente. Acorda gritando: <strong>"Abençoado seja Deus, que tão grande bem me tem feito!"</strong> Pede que lhe tragam os livros de cavalaria para queimar.</p>
+                    <p><strong>A cura:</strong> "Chamo-me <strong>Alonso Quijano, o Bom</strong>, a quem outrora chamavam Quixote". Rejeita os livros de cavalaria, reconhece a loucura, recebe os sacramentos. Morre aos <strong>três dias</strong>, deixando testamento onde proíbe que sua sobrinha case com quem leia livros de cavalaria.</p>
+                    <div class="bg-velvet/40 p-8 rounded-2xl border border-blood/30 my-6">
+                        <span class="quote-mark text-blood">"</span>
+                        <p class="font-quote italic text-2xl text-parchment relative z-10 pt-4 text-center">"Não há memória que o tempo não leve,<br>nem dor que a morte não pague."</p>
+                        <p class="text-sm text-parchment-dark mt-4 text-center">— Últimas palavras de Alonso Quijano</p>
+                    </div>
+                    <div class="analysis-box p-6 rounded-lg">
+                        <h4 class="font-display font-bold text-quixote-gold mb-3">Análise da Morte</h4>
+                        <p class="text-parchment-dark">A morte de Quixote é ambígua: é <strong>tragédia</strong> (morte do idealismo) ou <strong>redenção</strong> (retorno à sanidade)? Cervantes não julga. O título "o Bom" sugere que a virtude moral permanece, mesmo sem a loucura. O testamento é cômico-trágico: até o fim, a obsessão com livros persiste.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="aventuras" class="py-24 px-4 bg-dawn">
+    <div class="max-w-6xl mx-auto">
+        <div class="scroll-reveal mb-16">
+            <span class="text-quixote-gold font-display text-sm tracking-widest uppercase">Catálogo de Aventuras</span>
+            <h2 class="font-display text-5xl font-bold mt-4 mb-6 text-parchment">Episódios Fundamentais</h2>
+        </div>
+
+        <div class="space-y-6">
+            <div class="scroll-reveal bg-ink/60 rounded-2xl border border-quixote-gold/30 overflow-hidden">
+                <button class="accordion-btn w-full p-6 text-left flex justify-between items-center hover:bg-ink/80 transition-colors" onclick="toggleAccordion(this)">
+                    <div class="flex items-center gap-4">
+                        <span class="text-3xl">🌪️</span>
+                        <div>
+                            <h3 class="font-display text-xl font-bold text-quixote-gold">Os Moinhos de Vento</h3>
+                            <p class="text-sm text-parchment-dark">Capítulo VIII, Parte I</p>
+                        </div>
+                    </div>
+                    <span class="text-quixote-gold text-2xl transform transition-transform">+</span>
+                </button>
+                <div class="accordion-content px-6 pb-6">
+                    <div class="pt-4 border-t border-quixote-gold/20">
+                        <p class="text-parchment-dark mb-4">O episódio mais famoso da literatura universal. Dom Quixote avista trinta ou mais moinhos de vento e confunde-os com gigantes. Sancho tenta dissuadi-lo, mas Quixote investe contra eles. Rocinante cai, e um moinho o levanta no ar e o arremessa ao chão, ficando "muito maltreito".</p>
+                        <div class="bg-dawn/30 p-4 rounded-lg">
+                            <p class="text-sm text-parchment-dark"><strong>Significado:</strong> Metáfora da luta contra inimigos imaginários, do idealismo desproporcional, da "loucura" de interpretar a realidade através de preconceitos. O "gigante" é a projeção psicológica do medo/heroísmo.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="scroll-reveal bg-ink/60 rounded-2xl border border-la-mancha/30 overflow-hidden">
+                <button class="accordion-btn w-full p-6 text-left flex justify-between items-center hover:bg-ink/80 transition-colors" onclick="toggleAccordion(this)">
+                    <div class="flex items-center gap-4">
+                        <span class="text-3xl">🐑</span>
+                        <div>
+                            <h3 class="font-display text-xl font-bold text-la-mancha">O Rebanho de Ovelhas</h3>
+                            <p class="text-sm text-parchment-dark">Capítulo XVIII, Parte I</p>
+                        </div>
+                    </div>
+                    <span class="text-la-mancha text-2xl transform transition-transform">+</span>
+                </button>
+                <div class="accordion-content px-6 pb-6">
+                    <div class="pt-4 border-t border-la-mancha/20">
+                        <p class="text-parchment-dark mb-4">Quixote avista duas grandes poeiras (rebanhos de ovelhas) e confunde-as com dois exércitos ("o poderoso exército do imperador Alifanfarão" vs "o de Pentapolim"). Descreve detalhadamente os escudos, armas e cavaleiros inexistentes. Investe contra o "exército", matando ovelhas. Os pastores apedrejam-no gravemente.</p>
+                        <div class="bg-dawn/30 p-4 rounded-lg">
+                            <p class="text-sm text-parchment-dark"><strong>Significado:</strong> Crítica à retórica épica e à construção de inimigos. A "poeira" da guerra é literal: poeira de ovelhas. Mostra o perigo real da fantasia: violência contra inocentes.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="scroll-reveal bg-ink/60 rounded-2xl border border-parchment/30 overflow-hidden">
+                <button class="accordion-btn w-full p-6 text-left flex justify-between items-center hover:bg-ink/80 transition-colors" onclick="toggleAccordion(this)">
+                    <div class="flex items-center gap-4">
+                        <span class="text-3xl">⛓️</span>
+                        <div>
+                            <h3 class="font-display text-xl font-bold text-parchment">Os Galeotes</h3>
+                            <p class="text-sm text-parchment-dark">Capítulo XXII, Parte I</p>
+                        </div>
+                    </div>
+                    <span class="text-parchment text-2xl transform transition-transform">+</span>
+                </button>
+                <div class="accordion-content px-6 pb-6">
+                    <div class="pt-4 border-t border-parchment/20">
+                        <p class="text-parchment-dark mb-4">Encontra condenados para as galés (forçados a remar em navios). Quixote pergunta a cada um seus crimes: um por amor (Ginés de Passamonte), outro por furto, outro por "não ter o que comer". Quixote decide libertá-los ("a liberdade é um dos mais preciosos dons"). Os galeotes agradecem apedrejando-o e roubando suas vestes.</p>
+                        <div class="bg-dawn/30 p-4 rounded-lg">
+                            <p class="text-sm text-parchment-dark"><strong>Significado:</strong> Crítica à justiça penal espanhola (penas desproporcionais) e à ingratitude humana. O "justo" Quixote é punido por sua bondade. Ginés de Passamonte reaparece na Parte II como "mágico" que rouba o burro de Sancho.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="scroll-reveal bg-ink/60 rounded-2xl border border-blood/30 overflow-hidden">
+                <button class="accordion-btn w-full p-6 text-left flex justify-between items-center hover:bg-ink/80 transition-colors" onclick="toggleAccordion(this)">
+                    <div class="flex items-center gap-4">
+                        <span class="text-3xl">🏨</span>
+                        <div>
+                            <h3 class="font-display text-xl font-bold text-blood">A Estalagem como Castelo</h3>
+                            <p class="text-sm text-parchment-dark">Recorrente</p>
+                        </div>
+                    </div>
+                    <span class="text-blood text-2xl transform transition-transform">+</span>
+                </button>
+                <div class="accordion-content px-6 pb-6">
+                    <div class="pt-4 border-t border-blood/20">
+                        <p class="text-parchment-dark mb-4">Quixote confunde estalagens (pousadas) com castelos medievais. O estalajadeiro torna-se "castelão", as prostitutas tornam-se "donzelas de alta estirpe", a palha do estábulo torna-se "camas perfumadas". Na primeira estalagem, é "armado cavaleiro" pelo estalajadeiro (que o faz bater em si mesmo com o pé).</p>
+                        <div class="bg-dawn/30 p-4 rounded-lg">
+                            <p class="text-sm text-parchment-dark"><strong>Significado:</strong> Metáfora da desilusão moderna: o "castelo" da cavalaria reduzido a estalagem comercial. O comércio substitui a honra. O estalajadeiro representa o pragmatismo burguês.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="scroll-reveal bg-ink/60 rounded-2xl border border-quixote-gold/30 overflow-hidden">
+                <button class="accordion-btn w-full p-6 text-left flex justify-between items-center hover:bg-ink/80 transition-colors" onclick="toggleAccordion(this)">
+                    <div class="flex items-center gap-4">
+                        <span class="text-3xl">🦁</span>
+                        <div>
+                            <h3 class="font-display text-xl font-bold text-quixote-gold">O Cavaleiro dos Leões</h3>
+                            <p class="text-sm text-parchment-dark">Capítulos XVI-XVII, Parte II</p>
+                        </div>
+                    </div>
+                    <span class="text-quixote-gold text-2xl transform transition-transform">+</span>
+                </button>
+                <div class="accordion-content px-6 pb-6">
+                    <div class="pt-4 border-t border-quixote-gold/20">
+                        <p class="text-parchment-dark mb-4">Quixote decide mudar seu nome para "Cavaleiro dos Leões" após um episódio com uma gaiola transportando um leão para o rei. O leão está dormindo. Quixote desafia o leão para combate. O leão, preguiçoso, apenas vira as costas e volta a dormir. Quixote considera isso vitória e adota o novo título.</p>
+                        <div class="bg-dawn/30 p-4 rounded-lg">
+                            <p class="text-sm text-parchment-dark"><strong>Significado:</strong> Sátira da propaganda militar e dos títulos honoríficos vazios. A "coragem" de desafiar um leão adormecido representa a vaidade das conquistas simbólicas. O leão indiferente é a realidade desinteressada nos jogos humanos de honra.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="scroll-reveal bg-ink/60 rounded-2xl border border-la-mancha/30 overflow-hidden">
+                <button class="accordion-btn w-full p-6 text-left flex justify-between items-center hover:bg-ink/80 transition-colors" onclick="toggleAccordion(this)">
+                    <div class="flex items-center gap-4">
+                        <span class="text-3xl">🏛️</span>
+                        <div>
+                            <h3 class="font-display text-xl font-bold text-la-mancha">O Governo da Ilha Baratária</h3>
+                            <p class="text-sm text-parchment-dark">Capítulos XLV-LIII, Parte II</p>
+                        </div>
+                    </div>
+                    <span class="text-la-mancha text-2xl transform transition-transform">+</span>
+                </button>
+                <div class="accordion-content px-6 pb-6">
+                    <div class="pt-4 border-t border-la-mancha/20">
+                        <p class="text-parchment-dark mb-4">Sancho é nomeado governador da "Ilha Baratária" (na verdade, uma vila dos Duques). Demonstra sabedoria prática surpreendente:</p>
+                        <ul class="list-disc list-inside space-y-2 ml-4 mb-4 text-parchment-dark">
+                            <li><strong>O Caso do Rio:</strong> Dois vizinhos disputam a posse de um rio. Sancho manda dividir igualmente, mas um aceita, o outro recusa. Sancho dá o rio inteiro ao que aceitou a divisão (pois mostrou justiça), punindo o ganancioso.</li>
+                            <li><strong>O Caso do Vestido:</strong> Mulher acusa homem de estuprar-a e roubar seu vestido. Sancho faz o homem dar-lhe dinheiro, depois manda a mulher devolver o dinheiro para recuperar o vestido. Ela não consegue provar que tinha o dinheiro, revelando a farsa.</li>
+                            <li><strong>Leis do Governo:</strong> "Não quero favorecer os que dão, nem prejudicar os que não dão"; "Proíbo as mulheres de andar de noite disfarçadas de homens, nem de homens disfarçados de mulheres".</li>
+                        </ul>
+                        <p class="text-parchment-dark mb-4">Sancho governa com bom senso, recusa subornos, e abdica quando percebe que é tudo encenação dos Duques.</p>
+                        <div class="bg-dawn/30 p-4 rounded-lg">
+                            <p class="text-sm text-parchment-dark"><strong>Significado:</strong> Demonstração de que a sabedoria popular supera a erudição acadêmica. Sancho é o "filósofo natural" que resolve problemas complexos com princípios morais simples. Crítica à burocracia e ao direito positivo.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="scroll-reveal bg-ink/60 rounded-2xl border border-parchment/30 overflow-hidden">
+                <button class="accordion-btn w-full p-6 text-left flex justify-between items-center hover:bg-ink/80 transition-colors" onclick="toggleAccordion(this)">
+                    <div class="flex items-center gap-4">
+                        <span class="text-3xl">🌙</span>
+                        <div>
+                            <h3 class="font-display text-xl font-bold text-parchment">O Cavaleiro da Lua</h3>
+                            <p class="text-sm text-parchment-dark">Capítulos LXII-LXIV, Parte II</p>
+                        </div>
+                    </div>
+                    <span class="text-parchment text-2xl transform transition-transform">+</span>
+                </button>
+                <div class="accordion-content px-6 pb-6">
+                    <div class="pt-4 border-t border-parchment/20">
+                        <p class="text-parchment-dark mb-4">Sansón Carrasco, disfarçado de Cavaleiro da Lua (com armadura prateada), desafia Quixote novamente. Desta vez, derrota Quixote em combate legítimo. Impõe a condição: Quixote deve abandonar as armas por um ano ou até que Sansón volte a desafiá-lo.</p>
+                        <p class="text-parchment-dark mb-4">Quixote, derrotado e humilhado, aceita a condição. É o princípio do fim: sem a cavalaria, Quixote perde a razão de existir.</p>
+                        <div class="bg-dawn/30 p-4 rounded-lg">
+                            <p class="text-sm text-parchment-dark"><strong>Significado:</strong> A razão (Carrasco) derrota o idealismo (Quixote), mas a vitória é vazia. Carrasco não "cura" Quixote, apenas o destrói. Representa a tragédia da modernidade: o triunfo do pragmatismo sobre a imaginação.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="analise-temas" class="py-24 px-4 bg-night">
+    <div class="max-w-6xl mx-auto">
+        <div class="scroll-reveal mb-16">
+            <span class="text-quixote-gold font-display text-sm tracking-widest uppercase">Análise Crítica Aprofundada</span>
+            <h2 class="font-display text-5xl font-bold mt-4 mb-8 text-parchment">Interpretações e Significados</h2>
+        </div>
+
+        <div class="grid lg:grid-cols-2 gap-8 mb-16">
+            <div class="scroll-reveal bg-ink/60 p-8 rounded-2xl border border-quixote-gold/30">
+                <h3 class="font-display text-2xl font-bold text-quixote-gold mb-6 flex items-center gap-3">
+                    <span class="w-10 h-10 bg-quixote-gold/20 rounded-lg flex items-center justify-center text-quixote-gold text-lg">1</span>
+                    Loucura como Crítica Social
+                </h3>
+                <div class="space-y-4 text-parchment-dark leading-relaxed">
+                    <p>A "loucura" de Quixote não é patológica, mas <strong>monomania literária</strong>. Ele é lúcido em 90% dos assuntos (teologia, economia, política), mas cego em 10% (moinhos = gigantes).</p>
+                    <p>Quando Quixote defende a <strong>honra</strong>, a <strong>justiça</strong> ou a <strong>liberdade</strong>, sua "loucura" é mais ética que a "sanidade" dos outros. O mundo "são" é corrupto: o estalajadeiro engana, o amo de Andrés mente, os Duques exploram.</p>
+                    <div class="bg-dawn/20 p-4 rounded-lg mt-4">
+                        <p class="text-sm italic">"Estou louco, mas sou mais honesto que vocês" — esta é a tese implícita de Cervantes.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="scroll-reveal bg-ink/60 p-8 rounded-2xl border border-la-mancha/30">
+                <h3 class="font-display text-2xl font-bold text-la-mancha mb-6 flex items-center gap-3">
+                    <span class="w-10 h-10 bg-la-mancha/30 rounded-lg flex items-center justify-center text-la-mancha text-lg">2</span>
+                    O Diálogo entre Ideal e Real
+                </h3>
+                <div class="space-y-4 text-parchment-dark leading-relaxed">
+                    <p>O par Quixote-Sancho é a <strong>antítese dialética</strong> que se transforma em síntese. Ambos mudam ao longo da obra:</p>
+                    <ul class="list-disc list-inside space-y-2 ml-4">
+                        <li><strong>Sancho "quixotiza-se":</strong> Adota ideais de justiça, sonha com aventuras, fala em linguagem elevada nas cartas à mulher.</li>
+                        <li><strong>Quixote "sanchifica-se":</strong> Torna-se pragmático na Parte II, duvida de seus próprios encantamentos, reconhece a realidade em momentos de lucidez.</li>
+                    </ul>
+                    <p class="mt-4">Ao final, são quase um só personagem: Sancho quer continuar as aventuras mesmo após a cura de Quixote.</p>
+                </div>
+            </div>
+
+            <div class="scroll-reveal bg-ink/60 p-8 rounded-2xl border border-parchment/30">
+                <h3 class="font-display text-2xl font-bold text-parchment mb-6 flex items-center gap-3">
+                    <span class="w-10 h-10 bg-parchment/20 rounded-lg flex items-center justify-center text-parchment text-lg">3</span>
+                    O Nascimento do Romance Moderno
+                </h3>
+                <div class="space-y-4 text-parchment-dark leading-relaxed">
+                    <p>Cervantes inventa o <strong>romance moderno</strong> ao parodiar o romance medieval. Elementos inovadores:</p>
+                    <ul class="list-disc list-inside space-y-2 ml-4">
+                        <li><strong>Personagem interior:</strong> Quixote tem consciência de si, conflitos internos, desenvolvimento psicológico.</li>
+                        <li><strong>Realismo:</strong> Descreve a Espanha real (estalagens, camponeses, estradas) em vez de castelos fantásticos.</li>
+                        <li><strong>Metaficção:</strong> Na Parte II, personagens sabem que são lidos.</li>
+                        <li><strong>Polifonia:</strong> Múltiplas vozes narrativas (Cervantes, Benengeli, personagens).</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="scroll-reveal bg-ink/60 p-8 rounded-2xl border border-blood/30">
+                <h3 class="font-display text-2xl font-bold text-blood mb-6 flex items-center gap-3">
+                    <span class="w-10 h-10 bg-blood/20 rounded-lg flex items-center justify-center text-blood text-lg">4</span>
+                    A Espanha em Crise
+                </h3>
+                <div class="space-y-4 text-parchment-dark leading-relaxed">
+                    <p>O Quixote é <strong>espelho da Espanha de 1605</strong>:</p>
+                    <ul class="list-disc list-inside space-y-2 ml-4">
+                        <li><strong>Império em declínio:</strong> Como Quixote, a Espanha mantém pretensões de grandeza medieval enquanto declina economicamente.</li>
+                        <li><strong>Aristocracia parasitária:</strong> Os Duques representam a nobreza ociosa que explora os sonhos alheios.</li>
+                        <li><strong>Contrarreforma:</strong> A rigidez ideológica de Quixote reflete a rigidez religiosa da Inquisição.</li>
+                        <li><strong>Modernização:</strong> O conflito entre a "cavalaria" (economia feudal) e as "estalagens" (economia monetária/comercial).</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="scroll-reveal bg-ink/40 p-8 rounded-2xl border border-quixote-gold/30 illuminated-border mb-16">
+            <h3 class="font-display text-2xl font-bold text-quixote-gold mb-6 flex items-center gap-3">
+                <span class="w-10 h-10 bg-quixote-gold/20 rounded-lg flex items-center justify-center text-quixote-gold text-lg">5</span>
+                O Humanismo Cervantino
+            </h3>
+            <div class="grid md:grid-cols-2 gap-8 text-parchment-dark">
+                <div class="space-y-4">
+                    <p>Cervantes é profundamente <strong>humano</strong> porque não julga. Cada personagem tem <em>interioridade</em> e dignidade:</p>
+                    <ul class="list-disc list-inside space-y-2 ml-4">
+                        <li>Até o "vil" Sansón Carrasco age por amizade (quer curar o amigo).</li>
+                        <li>Os Duques são cruéis, mas também têm momentos de generosidade.</li>
+                        <li>Sancho é guloso e medroso, mas também leal e sábio.</li>
+                    </ul>
+                </div>
+                <div class="space-y-4">
+                    <p>O <strong>perdão</strong> é central na obra. O riso cervantino é <strong>riso compassivo</strong>, não cruel. Cervantes ri com seus personagens, nunca deles.</p>
+                    <div class="bg-dawn/20 p-4 rounded-lg">
+                        <p class="text-sm italic">"Dom Quixote es el libro del mundo, y el mundo es el libro de Don Quijote" — <strong>Jorge Luis Borges</strong></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="scroll-reveal bg-ink/40 p-8 rounded-2xl border border-quixote-gold/20">
+            <h3 class="font-display text-2xl font-bold text-quixote-gold mb-6">Interpretações Críticas Históricas</h3>
+            <div class="grid md:grid-cols-3 gap-6">
+                <div class="space-y-3">
+                    <h4 class="font-bold text-parchment text-lg border-b border-quixote-gold/30 pb-2">Romantismo (Alemão)</h4>
+                    <p class="text-sm text-parchment-dark">Schlegel e Tieck veem Quixote como <strong>heroísmo idealista</strong> contra a vulgaridade moderna. A loucura é sublime.</p>
+                </div>
+                <div class="space-y-3">
+                    <h4 class="font-bold text-parchment text-lg border-b border-la-mancha/30 pb-2">Marxismo</h4>
+                    <p class="text-sm text-parchment-dark">Quixote representa a <strong>nobreza decadente</strong> que não aceita a ascensão da burguesia (Sancho). A cavalaria é modo de produção obsoleto.</p>
+                </div>
+                <div class="space-y-3">
+                    <h4 class="font-bold text-parchment text-lg border-b border-parchment/30 pb-2">Psicanálise</h4>
+                    <p class="text-sm text-parchment-dark">Quixote como <strong>neurose obsessiva</strong>, sublimação erótica (Dulcinea), ou construção de superego. Sancho como ego pragmático.</p>
+                </div>
+                <div class="space-y-3">
+                    <h4 class="font-bold text-parchment text-lg border-b border-blood/30 pb-2">Pós-modernismo</h4>
+                    <p class="text-sm text-parchment-dark">Foco na <strong>metaficção</strong>, na fragmentação narrativa, na impossibilidade de distinguir realidade e ficção (Borges, Cortázar).</p>
+                </div>
+                <div class="space-y-3">
+                    <h4 class="font-bold text-parchment text-lg border-b border-cervantes/30 pb-2">Filosofia Existencialista</h4>
+                    <p class="text-sm text-parchment-dark">Quixote como <strong>absurdo heroico</strong> (Camus): assume um mundo sem sentido e impõe sentido através da ação. A escolha da loucura é autêntica.</p>
+                </div>
+                <div class="space-y-3">
+                    <h4 class="font-bold text-parchment text-lg border-b border-quixote-gold/30 pb-2">Decolonial</h4>
+                    <p class="text-sm text-parchment-dark">Leitura do "Cautivo" e da presença mourisca como <strong>crítica ao colonialismo</strong> espanhol. A Espanha como Quixote: violenta e idealista.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="literario" class="py-24 px-4 bg-dawn">
+    <div class="max-w-6xl mx-auto">
+        <div class="scroll-reveal mb-16">
+            <span class="text-quixote-gold font-display text-sm tracking-widest uppercase">Estilo e Linguagem</span>
+            <h2 class="font-display text-5xl font-bold mt-4 mb-6 text-parchment">A Arte Cervantina</h2>
+        </div>
+
+        <div class="grid lg:grid-cols-2 gap-12 mb-16">
+            <div class="scroll-reveal space-y-6">
+                <h3 class="font-display text-2xl font-bold text-quixote-gold">Recursos Estilísticos</h3>
+                <div class="space-y-4 text-parchment-dark">
+                    <div class="bg-ink/30 p-4 rounded-lg">
+                        <h4 class="font-bold text-parchment mb-2">Estilo Indirecto Livre</h4>
+                        <p class="text-sm">Fusão entre voz do narrador e pensamento do personagem. Exemplo: "Era, a dizer verdade, uma das mais bravas aventuras que se contavam nos livros" (voz de Quixote infiltrada no narrador).</p>
+                    </div>
+                    <div class="bg-ink/30 p-4 rounded-lg">
+                        <h4 class="font-bold text-parchment mb-2">Polifonia Linguística</h4>
+                        <p class="text-sm">Múltiplos registros: linguagem elevada de Quixote (arcaísmos, latins), provérbios populares de Sancho, linguagem burocrática dos oficiais, giria de criminosos.</p>
+                    </div>
+                    <div class="bg-ink/30 p-4 rounded-lg">
+                        <h4 class="font-bold text-parchment mb-2">Ironia e Ambiguidade</h4>
+                        <p class="text-sm">Cervantes nunca revela sua opinião. O narrador é irônico, mas compassivo. Nunca sabemos se Quixote realmente acredita ou finge.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="scroll-reveal space-y-6">
+                <h3 class="font-display text-2xl font-bold text-la-mancha">Os Provérbios de Sancho</h3>
+                <div class="bg-ink/60 p-6 rounded-2xl border border-la-mancha/30">
+                    <p class="text-parchment-dark mb-4">Sancho usa mais de 200 provérbios ao longo da obra. Eles funcionam como:</p>
+                    <ul class="space-y-3 text-parchment-dark text-sm">
+                        <li class="flex items-start gap-2">
+                            <span class="text-la-mancha">•</span>
+                            <span><strong>Comic relief:</strong> Alívio cômico após tensão</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <span class="text-la-mancha">•</span>
+                            <span><strong>Sabedoria popular:</strong> Filosofia pragmática contra idealismo</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <span class="text-la-mancha">•</span>
+                            <span><strong>Caracterização:</strong> Revelam origem camponesa de Sancho</span>
+                        </li>
+                    </ul>
+                    <div class="mt-6 space-y-2 text-sm italic text-parchment-dark">
+                        <p>"Cada ovelha com sua parelhada"</p>
+                        <p>"O bom pagador não fica devedor"</p>
+                        <p>"De onde não há, não se pode tirar"</p>
+                        <p>"Muito vale el que no se mueve"</p>
+                        <p>"Dime con quién andas y te diré quién eres"</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="scroll-reveal bg-ink/40 p-8 rounded-2xl border border-quixote-gold/20">
+            <h3 class="font-display text-2xl font-bold text-quixote-gold mb-6">Citações Memoráveis</h3>
+            <div class="grid md:grid-cols-2 gap-6">
+                <div class="bg-dawn/30 p-6 rounded-xl border-l-4 border-quixote-gold">
+                    <p class="font-quote italic text-parchment text-lg mb-3">"Demasiada cordura, às vezes, é a pior das loucuras, e a prova disso é que, às vezes, é preciso ser louco para ser bom."</p>
+                    <p class="text-xs text-parchment-dark">— Diálogo entre Quixote e Sancho</p>
+                </div>
+                <div class="bg-dawn/30 p-6 rounded-xl border-l-4 border-la-mancha">
+                    <p class="font-quote italic text-parchment text-lg mb-3">"A liberdade, Sancho, é um dos mais preciosos dons que aos homens deram os céus."</p>
+                    <p class="text-xs text-parchment-dark">— Dom Quixote ao libertar os galeotes</p>
+                </div>
+                <div class="bg-dawn/30 p-6 rounded-xl border-l-4 border-parchment">
+                    <p class="font-quote italic text-parchment text-lg mb-3">"Fazei bem a quem vos mal faz, para que veja o malfeitor que sois capazes de bem."</p>
+                    <p class="text-xs text-parchment-dark">— Conselho de Quixote a Sancho como governador</p>
+                </div>
+                <div class="bg-dawn/30 p-6 rounded-xl border-l-4 border-blood">
+                    <p class="font-quote italic text-parchment text-lg mb-3">"Bem dizia Cide Hamete Benengeli, meu autor, que se podia esperar da estrela de Sancho Pança que governasse tão bem como andava."</p>
+                    <p class="text-xs text-parchment-dark">— Narrador sobre o governo de Sancho</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="legado" class="py-24 px-4 bg-night">
+    <div class="max-w-4xl mx-auto text-center">
+        <div class="scroll-reveal">
+            <h2 class="font-display text-5xl font-bold mb-8 text-parchment">Legado e Relevância</h2>
+            <p class="text-xl text-parchment-dark leading-relaxed mb-12">
+                "Dom Quixote" não é apenas um livro; é um <strong class="text-quixote-gold">modo de existir</strong>. 
+                Quatrocentos anos após sua publicação, continuamos a viver a tensão entre o ideal e o real.
+            </p>
+            
+            <div class="bg-ink/50 p-10 rounded-2xl border border-quixote-gold/50 illuminated-border mb-12">
+                <span class="quote-mark text-6xl left-4 top-4 text-quixote-gold">"</span>
+                <p class="font-quote text-2xl text-parchment italic relative z-10 pt-4">
+                    "Demasiada cordura, às vezes, é a pior das loucuras..."
+                </p>
+                <p class="text-parchment-dark mt-6 font-display tracking-wider">— Miguel de Cervantes</p>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-6 text-left mb-12">
+                <div class="bg-ink/40 p-6 rounded-xl border border-quixote-gold/20">
+                    <h3 class="font-bold text-quixote-gold mb-3">Influência Literária</h3>
+                    <p class="text-sm text-parchment-dark">Inspirou a novela moderna (Fielding, Flaubert, Dostoiévski), o realismo mágico (García Márquez), e a literatura existencialista.</p>
+                </div>
+                <div class="bg-ink/40 p-6 rounded-xl border border-la-mancha/20">
+                    <h3 class="font-bold text-la-mancha mb-3">Linguagem</h3>
+                    <p class="text-sm text-parchment-dark">"Quixotesco", "lutar contra moinhos de vento", "carga de Sancho" — expressões entraram para o vocabulário universal.</p>
+                </div>
+                <div class="bg-ink/40 p-6 rounded-xl border border-parchment/20">
+                    <h3 class="font-bold text-parchment mb-3">Filosofia</h3>
+                    <p class="text-sm text-parchment-dark">O "quixotismo" tornou-se conceito filosófico: a tensão entre ideal e real, sonho e vigília, razão e paixão.</p>
+                </div>
+            </div>
+
+            <div class="mt-12 flex justify-center gap-4">
+                <button onclick="scrollTo('intro')" class="px-8 py-3 bg-quixote-gold text-ink rounded-lg hover:bg-manchego transition-colors font-semibold border-2 border-quixote-gold">
+                    Voltar ao Início
+                </button>
+            </div>
+        </div>
+    </div>
+</section>
+
+<footer class="py-12 px-4 bg-black border-t border-quixote-gold/20">
+    <div class="max-w-4xl mx-auto text-center">
+        <p class="font-decorative text-3xl font-bold text-quixote-gold mb-2">DOM QUIXOTE DE LA MANCHA</p>
+        <p class="text-parchment-dark text-sm mb-6">Resumo Analítico Completo • Miguel de Cervantes Saavedra (1605 & 1615)</p>
+        <div class="flex justify-center gap-4 text-xs text-parchment-dark/50 mb-4">
+            <span>126 capítulos</span>
+            <span>•</span>
+            <span>~1.000 páginas (edição padrão)</span>
+            <span>•</span>
+            <span>Traduzido para 60+ idiomas</span>
+        </div>
+        <p class="text-parchment-dark/50 text-xs max-w-2xl mx-auto">
+            Esta é uma análise acadêmica e educacional da obra de Miguel de Cervantes, destinada ao estudo literário e cultural. O texto original está em domínio público.
+        </p>
+    </div>
+</footer>
+
+<script>
+    window.addEventListener('scroll', () => {
+        const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+        const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+        document.getElementById('progressBar').style.width = (winScroll / height) * 100 + '%';
+        updateNavDots();
+    });
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) entry.target.classList.add('active');
+        });
+    }, { threshold: 0.1, rootMargin: "0px 0px -50px 0px" });
+
+    document.querySelectorAll('.scroll-reveal').forEach(el => observer.observe(el));
+
+    function scrollTo(id) {
+        document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
+    }
+
+    function updateNavDots() {
+        const sections = ['intro', 'contexto', 'estrutura', 'personagens', 'enredo', 'aventuras', 'analise-temas', 'literario', 'legado'];
+        const scrollPos = window.scrollY + 200;
+        sections.forEach((section, index) => {
+            const element = document.getElementById(section);
+            const dot = document.querySelectorAll('.nav-dot')[index];
+            if (element && dot) {
+                const top = element.offsetTop;
+                const bottom = top + element.offsetHeight;
+                if (scrollPos >= top && scrollPos < bottom) {
+                    document.querySelectorAll('.nav-dot').forEach(d => d.classList.remove('active'));
+                    dot.classList.add('active');
+                }
+            }
+        });
+    }
+
+    function toggleAccordion(btn) {
+        const content = btn.nextElementSibling;
+        const icon = btn.querySelector('span:last-child');
+        
+        if (content.classList.contains('active')) {
+            content.classList.remove('active');
+            icon.style.transform = 'rotate(0deg)';
+            icon.textContent = '+';
+        } else {
+            // Fecha todos os outros
+            document.querySelectorAll('.accordion-content.active').forEach(el => {
+                el.classList.remove('active');
+                el.previousElementSibling.querySelector('span:last-child').style.transform = 'rotate(0deg)';
+                el.previousElementSibling.querySelector('span:last-child').textContent = '+';
+            });
+            
+            content.classList.add('active');
+            icon.style.transform = 'rotate(45deg)';
+            icon.textContent = '×';
+        }
+    }
+</script>
+
+</body>
+</html>
+                    
