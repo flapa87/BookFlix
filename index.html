@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>LitLoop - Resumos que Transformam</title>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Inter:wght@300;400;500;600;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Inter:wght@300;400;500;600;800&family=Cinzel:wght@400;700&family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -17,12 +17,10 @@
             --primary-dark: #4f46e5;
             --accent: #f59e0b;
             --quixote: #8b5cf6;
-            --dark: #0f0f1a;
-            --darker: #08080f;
-            --gray: #1e1e2e;
+            --dark: #0a0a0f;
+            --darker: #050508;
+            --gray: #151520;
             --light-gray: #94a3b8;
-            --cream: #f8fafc;
-            --gold: #fbbf24;
         }
 
         body {
@@ -33,12 +31,13 @@
             line-height: 1.6;
         }
 
-        /* Custom Logo */
+        /* Logo */
         .logo-container {
             display: flex;
             align-items: center;
             gap: 12px;
             cursor: pointer;
+            z-index: 1001;
         }
 
         .logo-icon {
@@ -91,7 +90,7 @@
             -webkit-text-fill-color: var(--primary);
         }
 
-        /* Navigation with Search */
+        /* Navigation */
         nav {
             position: fixed;
             top: 0;
@@ -101,76 +100,144 @@
             justify-content: space-between;
             align-items: center;
             z-index: 1000;
-            background: rgba(8, 8, 15, 0.9);
+            background: rgba(5, 5, 8, 0.8);
             backdrop-filter: blur(20px);
             border-bottom: 1px solid rgba(255,255,255,0.05);
         }
 
         .nav-center {
             flex: 1;
-            max-width: 500px;
+            max-width: 600px;
             margin: 0 40px;
         }
 
+        /* Interactive Search */
         .search-container {
             position: relative;
             width: 100%;
         }
 
-        .search-box {
-            width: 100%;
-            padding: 14px 50px 14px 20px;
+        .search-wrapper {
+            position: relative;
+            display: flex;
+            align-items: center;
             background: rgba(255,255,255,0.05);
             border: 1px solid rgba(255,255,255,0.1);
-            border-radius: 30px;
-            color: white;
-            font-size: 0.95rem;
+            border-radius: 50px;
+            padding: 5px;
             transition: all 0.3s;
-            outline: none;
         }
 
-        .search-box:focus {
+        .search-wrapper:focus-within {
             background: rgba(255,255,255,0.08);
             border-color: var(--primary);
-            box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+            box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.1), 0 10px 40px rgba(0,0,0,0.3);
+            transform: scale(1.02);
+        }
+
+        .search-icon-btn {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            border: none;
+            border-radius: 50%;
+            color: white;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            transition: all 0.3s;
+            margin-right: 10px;
+        }
+
+        .search-icon-btn:hover {
+            transform: scale(1.1) rotate(15deg);
+            box-shadow: 0 5px 20px rgba(99, 102, 241, 0.4);
+        }
+
+        .search-box {
+            flex: 1;
+            background: transparent;
+            border: none;
+            color: white;
+            font-size: 1rem;
+            padding: 10px;
+            outline: none;
         }
 
         .search-box::placeholder {
             color: var(--light-gray);
         }
 
-        .search-icon {
-            position: absolute;
-            right: 20px;
-            top: 50%;
-            transform: translateY(-50%);
+        .clear-search {
+            background: none;
+            border: none;
             color: var(--light-gray);
+            cursor: pointer;
+            padding: 8px;
+            opacity: 0;
+            transition: all 0.3s;
             font-size: 1.2rem;
         }
 
-        /* Search Results Dropdown */
+        .clear-search.visible {
+            opacity: 1;
+        }
+
+        .clear-search:hover {
+            color: white;
+            transform: scale(1.2);
+        }
+
+        /* Search Results */
         .search-results {
             position: absolute;
-            top: calc(100% + 10px);
+            top: calc(100% + 15px);
             left: 0;
             right: 0;
-            background: var(--gray);
-            border-radius: 16px;
+            background: rgba(21, 21, 32, 0.95);
+            border-radius: 20px;
             border: 1px solid rgba(255,255,255,0.1);
             overflow: hidden;
             opacity: 0;
             visibility: hidden;
-            transform: translateY(-10px);
-            transition: all 0.3s;
-            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
-            max-height: 400px;
+            transform: translateY(-20px) scale(0.95);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 25px 50px rgba(0,0,0,0.5);
+            max-height: 500px;
             overflow-y: auto;
+            backdrop-filter: blur(20px);
         }
 
         .search-results.active {
             opacity: 1;
             visibility: visible;
-            transform: translateY(0);
+            transform: translateY(0) scale(1);
+        }
+
+        .search-header {
+            padding: 20px;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .search-header h4 {
+            font-size: 0.9rem;
+            color: var(--light-gray);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .search-count {
+            background: var(--primary);
+            color: white;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
         }
 
         .search-item {
@@ -181,23 +248,43 @@
             cursor: pointer;
             transition: all 0.3s;
             border-bottom: 1px solid rgba(255,255,255,0.05);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .search-item::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background: var(--primary);
+            transform: scaleY(0);
+            transition: transform 0.3s;
+        }
+
+        .search-item:hover::before {
+            transform: scaleY(1);
         }
 
         .search-item:hover {
             background: rgba(99, 102, 241, 0.1);
-        }
-
-        .search-item:last-child {
-            border-bottom: none;
+            padding-left: 30px;
         }
 
         .search-item-image {
-            width: 60px;
-            height: 85px;
+            width: 70px;
+            height: 100px;
             border-radius: 8px;
             overflow: hidden;
             flex-shrink: 0;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+            transition: transform 0.3s;
+        }
+
+        .search-item:hover .search-item-image {
+            transform: scale(1.1) rotate(-3deg);
         }
 
         .search-item-image img {
@@ -206,35 +293,63 @@
             object-fit: cover;
         }
 
-        .search-item-info h4 {
-            font-family: 'Playfair Display', serif;
-            font-size: 1.1rem;
-            margin-bottom: 5px;
-            color: white;
+        .search-item-content {
+            flex: 1;
         }
 
-        .search-item-info p {
-            font-size: 0.85rem;
-            color: var(--light-gray);
+        .search-item-content h4 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.3rem;
+            margin-bottom: 8px;
+            color: white;
+            transition: color 0.3s;
+        }
+
+        .search-item:hover .search-item-content h4 {
+            color: var(--primary);
         }
 
         .search-item-meta {
-            margin-left: auto;
-            text-align: right;
+            display: flex;
+            gap: 15px;
+            font-size: 0.9rem;
+            color: var(--light-gray);
+        }
+
+        .search-item-meta span {
+            display: flex;
+            align-items: center;
+            gap: 5px;
         }
 
         .search-item-year {
-            background: rgba(99, 102, 241, 0.2);
-            color: var(--primary);
-            padding: 4px 12px;
+            margin-left: auto;
+            background: rgba(255,255,255,0.1);
+            color: white;
+            padding: 8px 16px;
             border-radius: 20px;
-            font-size: 0.75rem;
+            font-size: 0.85rem;
             font-weight: 600;
         }
 
         .no-results {
-            padding: 40px;
+            padding: 60px 40px;
             text-align: center;
+        }
+
+        .no-results-icon {
+            font-size: 4rem;
+            margin-bottom: 20px;
+            opacity: 0.3;
+        }
+
+        .no-results h4 {
+            font-size: 1.2rem;
+            color: white;
+            margin-bottom: 10px;
+        }
+
+        .no-results p {
             color: var(--light-gray);
         }
 
@@ -299,26 +414,28 @@
         }
 
         .hero-badge span {
-            background: linear-gradient(135deg, rgba(99, 102, 241, 0.2), rgba(245, 158, 11, 0.2));
-            color: var(--primary);
+            background: linear-gradient(135deg, rgba(139, 92, 246, 0.2), rgba(99, 102, 241, 0.2));
+            color: var(--quixote);
             padding: 10px 20px;
             border-radius: 30px;
             font-size: 0.8rem;
             font-weight: 600;
             text-transform: uppercase;
             letter-spacing: 2px;
-            border: 1px solid rgba(99, 102, 241, 0.3);
+            border: 1px solid rgba(139, 92, 246, 0.3);
         }
 
         .hero h1 {
-            font-family: 'Playfair Display', serif;
+            font-family: 'Cinzel', serif;
             font-size: 5rem;
-            font-weight: 900;
+            font-weight: 700;
             line-height: 1.1;
             margin-bottom: 25px;
-            background: linear-gradient(135deg, #fff 0%, #94a3b8 100%);
+            background: linear-gradient(135deg, #f4e4c1 0%, #d4af37 50%, #8b6914 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
+            text-shadow: 0 10px 30px rgba(212, 175, 55, 0.2);
+            letter-spacing: 2px;
         }
 
         .hero-description {
@@ -351,14 +468,14 @@
         }
 
         .btn-primary {
-            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            background: linear-gradient(135deg, var(--quixote) 0%, #7c3aed 100%);
             color: white;
-            box-shadow: 0 10px 30px rgba(99, 102, 241, 0.3);
+            box-shadow: 0 10px 30px rgba(139, 92, 246, 0.3);
         }
 
         .btn-primary:hover {
             transform: translateY(-2px);
-            box-shadow: 0 15px 40px rgba(99, 102, 241, 0.4);
+            box-shadow: 0 15px 40px rgba(139, 92, 246, 0.4);
         }
 
         .btn-secondary {
@@ -378,13 +495,13 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            background: radial-gradient(circle at center, rgba(99, 102, 241, 0.15) 0%, transparent 70%);
+            background: radial-gradient(circle at center, rgba(139, 92, 246, 0.15) 0%, transparent 70%);
         }
 
         .book-showcase {
             position: relative;
-            width: 380px;
-            height: 550px;
+            width: 400px;
+            height: 600px;
             transform-style: preserve-3d;
             perspective: 1000px;
             animation: float 6s ease-in-out infinite;
@@ -402,7 +519,7 @@
             overflow: hidden;
             box-shadow: 
                 0 50px 100px rgba(0,0,0,0.8),
-                0 30px 60px rgba(99, 102, 241, 0.2),
+                0 30px 60px rgba(139, 92, 246, 0.2),
                 inset 0 0 0 1px rgba(255,255,255,0.1);
             position: relative;
             transform: rotateY(-5deg);
@@ -419,11 +536,22 @@
             object-fit: cover;
         }
 
-        /* Featured Section with Background Images */
+        /* Featured Section - 3D Interactive Cards */
         .featured-section {
             padding: 100px 5%;
             background: var(--dark);
             position: relative;
+            overflow: hidden;
+        }
+
+        .featured-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
         }
 
         .section-header {
@@ -433,205 +561,296 @@
 
         .section-header h2 {
             font-family: 'Playfair Display', serif;
-            font-size: 3rem;
+            font-size: 3.5rem;
             font-weight: 700;
-            margin-bottom: 15px;
+            margin-bottom: 20px;
             color: white;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-header h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+            border-radius: 2px;
         }
 
         .section-header p {
             color: var(--light-gray);
-            font-size: 1.1rem;
+            font-size: 1.2rem;
             max-width: 600px;
-            margin: 0 auto;
+            margin: 30px auto 0;
         }
 
-        .books-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 30px;
-            max-width: 1600px;
-            margin: 0 auto;
+        /* 3D Carousel Container */
+        .carousel-container {
+            perspective: 2000px;
+            padding: 50px 0;
+        }
+
+        .carousel-track {
+            display: flex;
+            gap: 40px;
+            justify-content: center;
+            align-items: center;
+            transform-style: preserve-3d;
         }
 
         @media (max-width: 1200px) {
-            .books-grid {
-                grid-template-columns: repeat(2, 1fr);
+            .carousel-track {
+                flex-direction: column;
+                gap: 60px;
             }
         }
 
-        @media (max-width: 768px) {
-            .books-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        .book-card-large {
+        /* 3D Book Card */
+        .book-card-3d {
             position: relative;
-            border-radius: 24px;
-            overflow: hidden;
+            width: 380px;
+            height: 550px;
+            transform-style: preserve-3d;
+            transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
             cursor: pointer;
-            min-height: 550px;
-            border: 1px solid rgba(255,255,255,0.1);
-            transition: all 0.5s;
         }
 
-        .book-card-bg {
-            position: absolute;
-            top: 0;
-            left: 0;
+        .book-card-3d:hover {
+            transform: translateZ(50px) rotateX(5deg);
+        }
+
+        .book-card-inner {
+            position: relative;
             width: 100%;
             height: 100%;
-            background-size: cover;
-            background-position: center;
-            filter: blur(2px) brightness(0.3);
-            transform: scale(1.1);
-            transition: all 0.5s;
-        }
-
-        .book-card-large:hover .book-card-bg {
-            transform: scale(1.2);
-            filter: blur(3px) brightness(0.2);
-        }
-
-        .book-card-overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(135deg, rgba(15, 15, 26, 0.95) 0%, rgba(15, 15, 26, 0.7) 50%, rgba(15, 15, 26, 0.9) 100%);
-        }
-
-        .book-card-content {
-            position: relative;
-            z-index: 2;
-            padding: 40px;
-            display: flex;
-            flex-direction: column;
-            height: 100%;
-            justify-content: space-between;
-        }
-
-        .book-card-top {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-align: center;
-        }
-
-        .book-card-image {
-            position: relative;
-            margin-bottom: 30px;
-        }
-
-        .book-card-image img {
-            width: 180px;
-            height: 260px;
-            border-radius: 12px;
+            border-radius: 20px;
+            overflow: hidden;
             box-shadow: 
-                0 25px 50px rgba(0,0,0,0.6),
+                0 30px 60px rgba(0,0,0,0.5),
                 0 0 0 1px rgba(255,255,255,0.1);
+            transform-style: preserve-3d;
             transition: all 0.5s;
-            transform: rotate(-3deg);
-            object-fit: cover;
         }
 
-        .book-card-large:hover .book-card-image img {
-            transform: rotate(0deg) scale(1.1) translateY(-10px);
+        .book-card-3d:hover .book-card-inner {
             box-shadow: 
-                0 35px 70px rgba(0,0,0,0.8),
+                0 50px 100px rgba(0,0,0,0.6),
                 0 0 0 1px rgba(255,255,255,0.2);
         }
 
-        .book-year {
-            display: inline-block;
-            background: rgba(99, 102, 241, 0.2);
-            color: var(--primary);
-            padding: 8px 16px;
-            border-radius: 20px;
-            font-size: 0.85rem;
-            font-weight: 600;
-            margin-bottom: 15px;
-            border: 1px solid rgba(99, 102, 241, 0.3);
+        /* Dynamic Background Layer */
+        .card-bg-layer {
+            position: absolute;
+            top: -20%;
+            left: -20%;
+            width: 140%;
+            height: 140%;
+            background-size: cover;
+            background-position: center;
+            filter: blur(40px) brightness(0.4);
+            transform: translateZ(-100px) scale(1.2);
+            transition: all 0.8s;
+            opacity: 0.8;
         }
 
-        .book-card-info h3 {
-            font-family: 'Playfair Display', serif;
-            font-size: 1.8rem;
+        .book-card-3d:hover .card-bg-layer {
+            filter: blur(60px) brightness(0.3);
+            transform: translateZ(-150px) scale(1.4) rotate(5deg);
+        }
+
+        /* Floating Particles */
+        .particles {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            overflow: hidden;
+            pointer-events: none;
+        }
+
+        .particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: rgba(255,255,255,0.3);
+            border-radius: 50%;
+            animation: float-particle 10s infinite;
+        }
+
+        @keyframes float-particle {
+            0%, 100% { transform: translateY(100%) rotate(0deg); opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { transform: translateY(-100vh) rotate(720deg); opacity: 0; }
+        }
+
+        .card-content-layer {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(180deg, 
+                rgba(0,0,0,0.1) 0%, 
+                rgba(0,0,0,0.6) 50%,
+                rgba(0,0,0,0.9) 100%);
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 40px;
+            transform: translateZ(20px);
+        }
+
+        /* Book Cover Image Floating */
+        .card-book-image {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -60%) translateZ(60px) rotate(-5deg);
+            width: 200px;
+            height: 300px;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 
+                0 30px 60px rgba(0,0,0,0.8),
+                0 0 0 2px rgba(255,255,255,0.1);
+            transition: all 0.5s;
+        }
+
+        .book-card-3d:hover .card-book-image {
+            transform: translate(-50%, -65%) translateZ(80px) rotate(0deg) scale(1.1);
+            box-shadow: 
+                0 40px 80px rgba(0,0,0,0.9),
+                0 0 0 2px rgba(255,255,255,0.2);
+        }
+
+        .card-book-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* Typography - Original Book Fonts */
+        .card-title {
+            font-size: 2.2rem;
             font-weight: 700;
             margin-bottom: 10px;
             line-height: 1.2;
-            color: white;
+            transform: translateZ(30px);
+            text-shadow: 0 4px 20px rgba(0,0,0,0.5);
         }
 
-        .book-author {
-            color: var(--light-gray);
+        /* Dom Quixote - Cinzel (medieval) */
+        .card-title.quixote {
+            font-family: 'Cinzel', serif;
+            background: linear-gradient(135deg, #f4e4c1 0%, #d4af37 50%, #8b6914 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: 1px;
+        }
+
+        /* Revolução dos Bichos - Bold Sans (propaganda soviética) */
+        .card-title.revolucao {
+            font-family: 'Inter', sans-serif;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            background: linear-gradient(135deg, #ff6b6b 0%, #c92a2a 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* Pequeno Príncipe - Dancing Script (manuscrito) */
+        .card-title.principe {
+            font-family: 'Dancing Script', cursive;
+            font-size: 2.8rem;
+            background: linear-gradient(135deg, #ffd43b 0%, #fab005 50%, #f08c00 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            transform: translateZ(30px) rotate(-2deg);
+        }
+
+        .card-author {
             font-size: 1rem;
+            color: rgba(255,255,255,0.8);
             margin-bottom: 20px;
+            transform: translateZ(25px);
             font-style: italic;
         }
 
-        .book-excerpt {
-            color: rgba(255,255,255,0.8);
-            line-height: 1.6;
-            margin-bottom: 20px;
-            font-size: 0.95rem;
-            display: -webkit-box;
-            -webkit-line-clamp: 3;
-            -webkit-box-orient: vertical;
-            overflow: hidden;
+        .card-meta {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 25px;
+            transform: translateZ(25px);
         }
 
-        .book-stats {
+        .card-meta-item {
             display: flex;
-            justify-content: center;
-            gap: 25px;
-            margin-bottom: 25px;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.9rem;
+            color: rgba(255,255,255,0.7);
+            background: rgba(255,255,255,0.1);
+            padding: 8px 16px;
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+        }
+
+        .card-action {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            transform: translateZ(35px);
             padding-top: 20px;
             border-top: 1px solid rgba(255,255,255,0.1);
         }
 
-        .stat {
-            display: flex;
-            flex-direction: column;
-            gap: 5px;
-            text-align: center;
-        }
-
-        .stat-value {
-            font-size: 1.3rem;
-            font-weight: 700;
-            color: white;
-        }
-
-        .stat-label {
-            font-size: 0.75rem;
-            color: var(--light-gray);
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        .read-more-btn {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            color: var(--primary);
+        .card-btn {
+            background: white;
+            color: black;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 30px;
             font-weight: 600;
-            text-decoration: none;
+            cursor: pointer;
             transition: all 0.3s;
-            font-size: 1rem;
-            padding: 12px 24px;
-            border-radius: 8px;
-            background: rgba(99, 102, 241, 0.1);
-            border: 1px solid rgba(99, 102, 241, 0.3);
+            display: flex;
+            align-items: center;
+            gap: 10px;
         }
 
-        .read-more-btn:hover {
-            gap: 15px;
-            background: rgba(99, 102, 241, 0.2);
-            border-color: var(--primary);
+        .card-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 30px rgba(255,255,255,0.3);
+        }
+
+        .card-rating {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            color: #ffd43b;
+            font-weight: 700;
+        }
+
+        /* Reflection Effect */
+        .card-reflection {
+            position: absolute;
+            bottom: -30px;
+            left: 10%;
+            right: 10%;
+            height: 60px;
+            background: inherit;
+            background-size: cover;
+            background-position: center;
+            filter: blur(20px) brightness(0.3);
+            transform: scaleY(-1);
+            opacity: 0.4;
+            border-radius: 20px;
+            pointer-events: none;
         }
 
         /* Modals */
@@ -641,7 +860,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(8, 8, 15, 0.98);
+            background: rgba(5, 5, 8, 0.98);
             backdrop-filter: blur(30px);
             z-index: 3000;
             opacity: 0;
@@ -668,7 +887,7 @@
             grid-template-columns: 1fr 1fr;
             align-items: center;
             padding: 100px 10% 50px;
-            background: linear-gradient(135deg, rgba(99, 102, 241, 0.05) 0%, transparent 50%);
+            background: linear-gradient(135deg, rgba(139, 92, 246, 0.05) 0%, transparent 50%);
         }
 
         .modal-book-display {
@@ -686,7 +905,7 @@
             box-shadow: 
                 0 50px 100px rgba(0,0,0,0.8),
                 0 0 0 1px rgba(255,255,255,0.1),
-                0 0 100px rgba(99, 102, 241, 0.2);
+                0 0 100px rgba(139, 92, 246, 0.2);
             transform: rotate(-3deg);
             transition: transform 0.5s;
             animation: bookEntrance 0.8s ease-out;
@@ -719,8 +938,8 @@
 
         .modal-tag {
             display: inline-block;
-            background: rgba(99, 102, 241, 0.2);
-            color: var(--primary);
+            background: rgba(139, 92, 246, 0.2);
+            color: var(--quixote);
             padding: 10px 20px;
             border-radius: 30px;
             font-size: 0.85rem;
@@ -728,18 +947,19 @@
             text-transform: uppercase;
             letter-spacing: 2px;
             margin-bottom: 30px;
-            border: 1px solid rgba(99, 102, 241, 0.3);
+            border: 1px solid rgba(139, 92, 246, 0.3);
         }
 
         .modal-title {
-            font-family: 'Playfair Display', serif;
+            font-family: 'Cinzel', serif;
             font-size: 4rem;
-            font-weight: 900;
+            font-weight: 700;
             margin-bottom: 20px;
             line-height: 1.1;
-            background: linear-gradient(135deg, #fff 0%, #94a3b8 100%);
+            background: linear-gradient(135deg, #f4e4c1 0%, #d4af37 50%, #8b6914 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
+            letter-spacing: 2px;
         }
 
         .modal-author {
@@ -791,8 +1011,8 @@
         }
 
         .modal-close:hover {
-            background: rgba(99, 102, 241, 0.2);
-            border-color: var(--primary);
+            background: rgba(139, 92, 246, 0.2);
+            border-color: var(--quixote);
             transform: rotate(90deg);
         }
 
@@ -826,7 +1046,7 @@
             left: 0;
             width: 60px;
             height: 3px;
-            background: linear-gradient(90deg, var(--primary), var(--accent));
+            background: linear-gradient(90deg, var(--quixote), var(--accent));
         }
 
         .modal-text {
@@ -853,7 +1073,7 @@
 
         .key-points li::before {
             content: '→';
-            color: var(--primary);
+            color: var(--quixote);
             font-weight: bold;
             font-size: 1.2rem;
         }
@@ -898,7 +1118,7 @@
             width: 100%;
             margin-top: 30px;
             padding: 20px;
-            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            background: linear-gradient(135deg, var(--quixote) 0%, #7c3aed 100%);
             color: white;
             text-align: center;
             text-decoration: none;
@@ -906,12 +1126,12 @@
             font-weight: 600;
             font-size: 1.1rem;
             transition: all 0.3s;
-            box-shadow: 0 10px 30px rgba(99, 102, 241, 0.3);
+            box-shadow: 0 10px 30px rgba(139, 92, 246, 0.3);
         }
 
         .access-page-btn:hover {
             transform: translateY(-2px);
-            box-shadow: 0 15px 40px rgba(99, 102, 241, 0.4);
+            box-shadow: 0 15px 40px rgba(139, 92, 246, 0.4);
         }
 
         /* Responsive */
@@ -928,8 +1148,9 @@
                 display: none;
             }
 
-            .book-card-content {
-                padding: 30px;
+            .book-card-3d {
+                width: 320px;
+                height: 480px;
             }
 
             .modal-hero {
@@ -953,6 +1174,10 @@
             .modal-sidebar {
                 position: static;
             }
+
+            .modal-title {
+                font-size: 2.5rem;
+            }
         }
 
         @media (max-width: 768px) {
@@ -960,13 +1185,21 @@
                 font-size: 3rem;
             }
 
-            .modal-title {
+            .section-header h2 {
                 font-size: 2.5rem;
             }
 
-            .modal-book-cover {
-                width: 250px;
-                height: 350px;
+            .book-card-3d {
+                width: 300px;
+                height: 450px;
+            }
+
+            .card-title {
+                font-size: 1.8rem;
+            }
+
+            .card-title.principe {
+                font-size: 2.2rem;
             }
 
             .nav-links {
@@ -975,11 +1208,6 @@
 
             .logo-text {
                 font-size: 1.5rem;
-            }
-
-            .book-card-image img {
-                width: 150px;
-                height: 220px;
             }
         }
 
@@ -995,7 +1223,7 @@
             transform: translateY(0);
         }
 
-        /* Scrollbar styling */
+        /* Scrollbar */
         ::-webkit-scrollbar {
             width: 10px;
         }
@@ -1012,6 +1240,18 @@
         ::-webkit-scrollbar-thumb:hover {
             background: var(--primary);
         }
+
+        /* Loading Animation */
+        .skeleton {
+            background: linear-gradient(90deg, var(--gray) 25%, #2a2a3e 50%, var(--gray) 75%);
+            background-size: 200% 100%;
+            animation: loading 1.5s infinite;
+        }
+
+        @keyframes loading {
+            0% { background-position: 200% 0; }
+            100% { background-position: -200% 0; }
+        }
     </style>
 </head>
 <body>
@@ -1025,15 +1265,18 @@
 
         <div class="nav-center">
             <div class="search-container">
-                <input type="text" class="search-box" id="searchInput" placeholder="Pesquisar livros, autores, temas..." autocomplete="off">
-                <span class="search-icon">🔍</span>
+                <div class="search-wrapper">
+                    <button class="search-icon-btn" onclick="focusSearch()">🔍</button>
+                    <input type="text" class="search-box" id="searchInput" placeholder="Pesquisar livros, autores, temas..." autocomplete="off">
+                    <button class="clear-search" id="clearSearch" onclick="clearSearch()">×</button>
+                </div>
                 <div class="search-results" id="searchResults"></div>
             </div>
         </div>
 
         <ul class="nav-links">
             <li><a href="#inicio">Início</a></li>
-            <li><a href="#catalogo">Catálogo</a></li>
+            <li><a href="#destaques">Destaques</a></li>
             <li><a href="#categorias">Categorias</a></li>
             <li><a href="#minha-lista">Minha Lista</a></li>
         </ul>
@@ -1043,11 +1286,11 @@
     <section class="hero" id="inicio">
         <div class="hero-content">
             <div class="hero-badge">
-                <span>Clássico da Semana</span>
+                <span>Clássico Imortal</span>
             </div>
             <h1>Dom Quixote</h1>
             <p class="hero-description">
-                A maior obra da literatura ocidental. As aventuras do cavaleiro andante que lutou contra moinhos de vento e nos ensinou sobre idealismo, loucura e a eterna busca pela justiça.
+                A primeira novela moderna da literatura ocidental. As aventuras do Cavaleiro da Triste Figura que nos ensinou que sonhar é a primeira forma de resistência contra a realidade.
             </p>
             <div class="hero-buttons">
                 <button class="btn btn-primary" onclick="openModal('quixote')">
@@ -1067,175 +1310,149 @@
         </div>
     </section>
 
-    <!-- Featured Books Section -->
-    <section class="featured-section" id="catalogo">
+    <!-- Featured Section - 3D Interactive -->
+    <section class="featured-section" id="destaques">
         <div class="section-header fade-in">
             <h2>Destaques da Semana</h2>
-            <p>Resumos cuidadosamente elaborados dos maiores clássicos da literatura mundial</p>
+            <p>Três obras-primas que definiram a literatura mundial, agora em resumos imersivos</p>
         </div>
 
-        <div class="books-grid">
-            <!-- Book 1: Dom Quixote -->
-            <div class="book-card-large fade-in" onclick="openModal('quixote')">
-                <div class="book-card-bg" style="background-image: url('domquixote.png');"></div>
-                <div class="book-card-overlay"></div>
-                <div class="book-card-content">
-                    <div class="book-card-top">
-                        <div class="book-card-image">
+        <div class="carousel-container">
+            <div class="carousel-track">
+                
+                <!-- Card 1: Dom Quixote -->
+                <div class="book-card-3d fade-in" onclick="openModal('quixote')" data-tilt>
+                    <div class="card-reflection" style="background-image: url('domquixote.png');"></div>
+                    <div class="book-card-inner">
+                        <div class="card-bg-layer" style="background-image: url('domquixote.png');"></div>
+                        <div class="particles" id="particles-quixote"></div>
+                        
+                        <div class="card-book-image">
                             <img src="domquixote.png" alt="Dom Quixote">
                         </div>
-                        <span class="book-year" style="background: rgba(139, 92, 246, 0.2); color: var(--quixote); border-color: rgba(139, 92, 246, 0.3);">1605</span>
-                        <div class="book-card-info">
-                            <h3>Dom Quixote</h3>
-                            <p class="book-author">Miguel de Cervantes</p>
-                            <p class="book-excerpt">
-                                "Lutar contra moinhos de vento." A história do cavaleiro andante que confundia a realidade com seus livros de cavalaria, acompanhado por seu fiel escudeiro Sancho Pança, é uma reflexão profunda sobre idealismo, loucura e sanidade.
-                            </p>
-                        </div>
-                    </div>
-                    <div>
-                        <div class="book-stats">
-                            <div class="stat">
-                                <span class="stat-value">25</span>
-                                <span class="stat-label">Min de Leitura</span>
+                        
+                        <div class="card-content-layer">
+                            <h3 class="card-title quixote">Dom Quixote</h3>
+                            <p class="card-author">Miguel de Cervantes</p>
+                            
+                            <div class="card-meta">
+                                <span class="card-meta-item">⚔️ Aventura</span>
+                                <span class="card-meta-item">📖 1020 pág</span>
                             </div>
-                            <div class="stat">
-                                <span class="stat-value">5.0</span>
-                                <span class="stat-label">Avaliação</span>
-                            </div>
-                            <div class="stat">
-                                <span class="stat-value">1020</span>
-                                <span class="stat-label">Páginas</span>
+                            
+                            <div class="card-action">
+                                <button class="card-btn">
+                                    Ler Resumo <span>→</span>
+                                </button>
+                                <div class="card-rating">
+                                    <span>⭐</span> 5.0
+                                </div>
                             </div>
                         </div>
-                        <a href="#" class="read-more-btn" style="color: var(--quixote); background: rgba(139, 92, 246, 0.1); border-color: rgba(139, 92, 246, 0.3);" onclick="event.stopPropagation(); openModal('quixote')">
-                            Ler Resumo →
-                        </a>
                     </div>
                 </div>
-            </div>
 
-            <!-- Book 2: Revolução dos Bichos -->
-            <div class="book-card-large fade-in" onclick="openModal('revolucao')">
-                <div class="book-card-bg" style="background-image: url('revolucaodosbichos.png');"></div>
-                <div class="book-card-overlay"></div>
-                <div class="book-card-content">
-                    <div class="book-card-top">
-                        <div class="book-card-image">
+                <!-- Card 2: Revolução dos Bichos -->
+                <div class="book-card-3d fade-in" onclick="openModal('revolucao')" data-tilt>
+                    <div class="card-reflection" style="background-image: url('revolucaodosbichos.png');"></div>
+                    <div class="book-card-inner">
+                        <div class="card-bg-layer" style="background-image: url('revolucaodosbichos.png');"></div>
+                        <div class="particles" id="particles-revolucao"></div>
+                        
+                        <div class="card-book-image">
                             <img src="revolucaodosbichos.png" alt="A Revolução dos Bichos">
                         </div>
-                        <span class="book-year">1945</span>
-                        <div class="book-card-info">
-                            <h3>A Revolução dos Bichos</h3>
-                            <p class="book-author">George Orwell</p>
-                            <p class="book-excerpt">
-                                "Todos os animais são iguais, mas alguns animais são mais iguais que outros." Uma alegoria política que continua ecoando através das décadas como um alerta sobre a natureza do poder absoluto.
-                            </p>
-                        </div>
-                    </div>
-                    <div>
-                        <div class="book-stats">
-                            <div class="stat">
-                                <span class="stat-value">15</span>
-                                <span class="stat-label">Min de Leitura</span>
+                        
+                        <div class="card-content-layer">
+                            <h3 class="card-title revolucao">A Revolução dos Bichos</h3>
+                            <p class="card-author">George Orwell</p>
+                            
+                            <div class="card-meta">
+                                <span class="card-meta-item">🎭 Sátira</span>
+                                <span class="card-meta-item">📖 112 pág</span>
                             </div>
-                            <div class="stat">
-                                <span class="stat-value">4.9</span>
-                                <span class="stat-label">Avaliação</span>
-                            </div>
-                            <div class="stat">
-                                <span class="stat-value">112</span>
-                                <span class="stat-label">Páginas</span>
+                            
+                            <div class="card-action">
+                                <button class="card-btn">
+                                    Ler Resumo <span>→</span>
+                                </button>
+                                <div class="card-rating">
+                                    <span>⭐</span> 4.9
+                                </div>
                             </div>
                         </div>
-                        <a href="#" class="read-more-btn" onclick="event.stopPropagation(); openModal('revolucao')">
-                            Ler Resumo →
-                        </a>
                     </div>
                 </div>
-            </div>
 
-            <!-- Book 3: O Pequeno Príncipe -->
-            <div class="book-card-large fade-in" onclick="openModal('principe')">
-                <div class="book-card-bg" style="background-image: url('opequenoprincipe.png');"></div>
-                <div class="book-card-overlay"></div>
-                <div class="book-card-content">
-                    <div class="book-card-top">
-                        <div class="book-card-image">
+                <!-- Card 3: O Pequeno Príncipe -->
+                <div class="book-card-3d fade-in" onclick="openModal('principe')" data-tilt>
+                    <div class="card-reflection" style="background-image: url('opequenoprincipe.png');"></div>
+                    <div class="book-card-inner">
+                        <div class="card-bg-layer" style="background-image: url('opequenoprincipe.png');"></div>
+                        <div class="particles" id="particles-principe"></div>
+                        
+                        <div class="card-book-image">
                             <img src="opequenoprincipe.png" alt="O Pequeno Príncipe">
                         </div>
-                        <span class="book-year" style="background: rgba(245, 158, 11, 0.2); color: var(--accent); border-color: rgba(245, 158, 11, 0.3);">1943</span>
-                        <div class="book-card-info">
-                            <h3>O Pequeno Príncipe</h3>
-                            <p class="book-author">Antoine de Saint-Exupéry</p>
-                            <p class="book-excerpt">
-                                "O essencial é invisível aos olhos." Uma história aparentemente infantil que esconde lições profundas sobre amor, perda e o verdadeiro sentido das relações humanas.
-                            </p>
-                        </div>
-                    </div>
-                    <div>
-                        <div class="book-stats">
-                            <div class="stat">
-                                <span class="stat-value">12</span>
-                                <span class="stat-label">Min de Leitura</span>
+                        
+                        <div class="card-content-layer">
+                            <h3 class="card-title principe">O Pequeno Príncipe</h3>
+                            <p class="card-author">Antoine de Saint-Exupéry</p>
+                            
+                            <div class="card-meta">
+                                <span class="card-meta-item">🌟 Filosofia</span>
+                                <span class="card-meta-item">📖 96 pág</span>
                             </div>
-                            <div class="stat">
-                                <span class="stat-value">5.0</span>
-                                <span class="stat-label">Avaliação</span>
-                            </div>
-                            <div class="stat">
-                                <span class="stat-value">96</span>
-                                <span class="stat-label">Páginas</span>
+                            
+                            <div class="card-action">
+                                <button class="card-btn">
+                                    Ler Resumo <span>→</span>
+                                </button>
+                                <div class="card-rating">
+                                    <span>⭐</span> 5.0
+                                </div>
                             </div>
                         </div>
-                        <a href="#" class="read-more-btn" style="color: var(--accent); background: rgba(245, 158, 11, 0.1); border-color: rgba(245, 158, 11, 0.3);" onclick="event.stopPropagation(); openModal('principe')">
-                            Ler Resumo →
-                        </a>
                     </div>
                 </div>
+
             </div>
         </div>
     </section>
 
-    <!-- Modal: Dom Quixote -->
+    <!-- Modals -->
+    <!-- Modal Dom Quixote -->
     <div class="modal-overlay" id="modal-quixote">
         <button class="modal-close" onclick="closeModal('quixote')">×</button>
-        
         <div class="modal-container">
-            <div class="modal-hero" style="background: linear-gradient(135deg, rgba(139, 92, 246, 0.05) 0%, transparent 50%);">
+            <div class="modal-hero">
                 <div class="modal-book-display">
-                    <div class="modal-book-cover" style="box-shadow: 0 50px 100px rgba(0,0,0,0.8), 0 0 100px rgba(139, 92, 246, 0.2);">
+                    <div class="modal-book-cover">
                         <img src="domquixote.png" alt="Dom Quixote">
                     </div>
                 </div>
-                
                 <div class="modal-info">
-                    <span class="modal-tag" style="background: rgba(139, 92, 246, 0.2); color: var(--quixote); border-color: rgba(139, 92, 246, 0.3);">Romance de Cavalaria</span>
+                    <span class="modal-tag">Romance de Cavalaria</span>
                     <h2 class="modal-title">Dom Quixote<br>de la Mancha</h2>
-                    <p class="modal-author">por Miguel de Cervantes</p>
-                    
+                    <p class="modal-author">por Miguel de Cervantes Saavedra</p>
                     <div class="modal-actions">
-                        <a href="domquixote.html" class="btn btn-primary btn-large" style="background: linear-gradient(135deg, var(--quixote) 0%, #7c3aed 100%); box-shadow: 0 10px 30px rgba(139, 92, 246, 0.3);">
+                        <a href="domquixote.html" class="btn btn-primary btn-large">
                             <span>▶</span> Acessar Resumo Completo
                         </a>
-                        <button class="btn btn-outline btn-large" onclick="closeModal('quixote')">
-                            Voltar
-                        </button>
+                        <button class="btn btn-outline btn-large" onclick="closeModal('quixote')">Voltar</button>
                     </div>
                 </div>
             </div>
-
             <div class="modal-body">
                 <div class="modal-grid">
                     <div class="modal-section">
                         <h3>Sobre a Obra</h3>
                         <p class="modal-text">
-                            Dom Quixote de la Mancha é um romance escrito pelo espanhol Miguel de Cervantes e publicado em duas partes (1605 e 1615). Considerado por muitos o primeiro romance moderno da literatura ocidental, a obra narra as aventuras de Alonso Quijano, um fidalgo que enlouqueceu de tanto ler livros de cavalaria e decide tornar-se cavaleiro andante.
+                            Publicado em duas partes (1605 e 1615), Dom Quixote é considerado o primeiro romance moderno e a obra mais importante da literatura espanhola. A história segue Alonso Quijano, um fidalgo que enlouquece de tanto ler livros de cavalaria e decide tornar-se cavaleiro andante.
                         </p>
                         <p class="modal-text">
-                            Acompanhado por seu fiel escudeiro Sancho Pança, Dom Quixote parte em busca de aventuras para desfazer agravos, endireitar tortos e proteger donzelas. Suas confusões — como a famosa luta contra moinhos de vento que ele confunde com gigantes — tornaram-se metáforas universais para o idealismo desmedido e a luta entre sonho e realidade.
+                            Acompanhado por seu fiel escudeiro Sancho Pança, Dom Quixote parte em busca de aventuras para desfazer agravos e proteger donzelas. Suas confusões — como a famosa luta contra moinhos de vento — tornaram-se metáforas universais para o idealismo desmedido.
                         </p>
-
                         <h3 style="margin-top: 50px;">Temas Principais</h3>
                         <ul class="key-points">
                             <li>A tensão entre idealismo e realidade, loucura e sanidade</li>
@@ -1243,137 +1460,78 @@
                             <li>A amizade verdadeira entre Dom Quixote e Sancho Pança</li>
                             <li>A crítica às convenções sociais e à hipocrisia</li>
                             <li>A busca pela justiça em um mundo injusto</li>
-                            <li>O conflito entre o mundo medieval e o mundo moderno renascentista</li>
                         </ul>
                     </div>
-
                     <div class="modal-sidebar">
                         <h4 class="sidebar-title">Ficha Técnica</h4>
-                        
-                        <div class="detail-row">
-                            <span class="detail-label">Autor</span>
-                            <span class="detail-value">Miguel de Cervantes</span>
-                        </div>
-                        <div class="detail-row">
-                            <span class="detail-label">Publicação</span>
-                            <span class="detail-value">1605 (Parte I)<br>1615 (Parte II)</span>
-                        </div>
-                        <div class="detail-row">
-                            <span class="detail-label">Gênero</span>
-                            <span class="detail-value">Romance/Burlesco</span>
-                        </div>
-                        <div class="detail-row">
-                            <span class="detail-label">Páginas</span>
-                            <span class="detail-value">~1020</span>
-                        </div>
-                        <div class="detail-row">
-                            <span class="detail-label">Idioma Original</span>
-                            <span class="detail-value">Espanhol</span>
-                        </div>
-                        <div class="detail-row">
-                            <span class="detail-label">Tempo de Leitura</span>
-                            <span class="detail-value">~25 min</span>
-                        </div>
-
-                        <a href="domquixote.html" class="access-page-btn" style="background: linear-gradient(135deg, var(--quixote) 0%, #7c3aed 100%);">
-                            Ler Resumo Completo →
-                        </a>
+                        <div class="detail-row"><span class="detail-label">Autor</span><span class="detail-value">Miguel de Cervantes</span></div>
+                        <div class="detail-row"><span class="detail-label">Publicação</span><span class="detail-value">1605 / 1615</span></div>
+                        <div class="detail-row"><span class="detail-label">Gênero</span><span class="detail-value">Romance/Burlesco</span></div>
+                        <div class="detail-row"><span class="detail-label">Páginas</span><span class="detail-value">~1020</span></div>
+                        <div class="detail-row"><span class="detail-label">Idioma</span><span class="detail-value">Espanhol</span></div>
+                        <div class="detail-row"><span class="detail-label">Leitura</span><span class="detail-value">~25 min</span></div>
+                        <a href="domquixote.html" class="access-page-btn">Ler Resumo Completo →</a>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- Modal: Revolução dos Bichos -->
+    <!-- Modal Revolução dos Bichos -->
     <div class="modal-overlay" id="modal-revolucao">
         <button class="modal-close" onclick="closeModal('revolucao')">×</button>
-        
         <div class="modal-container">
-            <div class="modal-hero">
+            <div class="modal-hero" style="background: linear-gradient(135deg, rgba(229, 9, 20, 0.05) 0%, transparent 50%);">
                 <div class="modal-book-display">
-                    <div class="modal-book-cover">
+                    <div class="modal-book-cover" style="box-shadow: 0 50px 100px rgba(0,0,0,0.8), 0 0 100px rgba(229, 9, 20, 0.2);">
                         <img src="revolucaodosbichos.png" alt="A Revolução dos Bichos">
                     </div>
                 </div>
-                
                 <div class="modal-info">
-                    <span class="modal-tag">Distopia Política</span>
-                    <h2 class="modal-title">A Revolução<br>dos Bichos</h2>
+                    <span class="modal-tag" style="background: rgba(229, 9, 20, 0.2); color: #ff6b6b; border-color: rgba(229, 9, 20, 0.3);">Distopia Política</span>
+                    <h2 class="modal-title" style="font-family: 'Inter', sans-serif; font-weight: 900; text-transform: uppercase; letter-spacing: 2px; background: linear-gradient(135deg, #ff6b6b 0%, #c92a2a 100%); -webkit-background-clip: text;">A Revolução<br>dos Bichos</h2>
                     <p class="modal-author">por George Orwell</p>
-                    
                     <div class="modal-actions">
-                        <a href="revolucaodosbichos.html" class="btn btn-primary btn-large">
+                        <a href="revolucaodosbichos.html" class="btn btn-primary btn-large" style="background: linear-gradient(135deg, #ff6b6b 0%, #c92a2a 100%); box-shadow: 0 10px 30px rgba(229, 9, 20, 0.3);">
                             <span>▶</span> Acessar Resumo Completo
                         </a>
-                        <button class="btn btn-outline btn-large" onclick="closeModal('revolucao')">
-                            Voltar
-                        </button>
+                        <button class="btn btn-outline btn-large" onclick="closeModal('revolucao')">Voltar</button>
                     </div>
                 </div>
             </div>
-
             <div class="modal-body">
                 <div class="modal-grid">
                     <div class="modal-section">
                         <h3>Sobre a Obra</h3>
                         <p class="modal-text">
-                            A Revolução dos Bichos é uma fábula política escrita por George Orwell e publicada em 1945. A história se passa na Granja do Solar, onde os animais, cansados da exploração do fazendeiro Sr. Jones, organizam uma revolução e expulsam os humanos, estabelecendo um regime de igualdade entre os animais.
+                            Publicado em 1945, A Revolução dos Bichos é uma fábula política que narra a revolta dos animais de uma granja contra seus donos humanos. O que começa como um sonho de igualdade degenera em uma ditadura tão opressiva quanto o regime anterior.
                         </p>
-                        <p class="modal-text">
-                            No entanto, o que começa como um sonho de liberdade e justiça degenera rapidamente em uma ditadura tão opressiva quanto o regime anterior. Os porcos, liderados por Napoleão, gradualmente se corrompem pelo poder e traem todos os princípios da revolução.
-                        </p>
-
                         <h3 style="margin-top: 50px;">Pontos Principais</h3>
                         <ul class="key-points">
-                            <li>A corrupção do poder e como revoluções podem trair seus próprios ideais</li>
-                            <li>A manipulação da linguagem e da história para controlar as massas</li>
-                            <li>A natureza cíclica da opressão e a dificuldade de manter ideais puros</li>
-                            <li>A crítica ao totalitarismo stalinista e seus mecanismos de controle</li>
-                            <li>A importância do ceticismo e da vigilância contra a propaganda</li>
+                            <li>A corrupção do poder e como revoluções traem seus ideais</li>
+                            <li>A manipulação da linguagem para controlar as massas</li>
+                            <li>A natureza cíclica da opressão</li>
+                            <li>A crítica ao totalitarismo stalinista</li>
                         </ul>
                     </div>
-
                     <div class="modal-sidebar">
                         <h4 class="sidebar-title">Ficha Técnica</h4>
-                        
-                        <div class="detail-row">
-                            <span class="detail-label">Autor</span>
-                            <span class="detail-value">George Orwell</span>
-                        </div>
-                        <div class="detail-row">
-                            <span class="detail-label">Publicação</span>
-                            <span class="detail-value">17/08/1945</span>
-                        </div>
-                        <div class="detail-row">
-                            <span class="detail-label">Gênero</span>
-                            <span class="detail-value">Sátira/Distopia</span>
-                        </div>
-                        <div class="detail-row">
-                            <span class="detail-label">Páginas</span>
-                            <span class="detail-value">112</span>
-                        </div>
-                        <div class="detail-row">
-                            <span class="detail-label">Idioma Original</span>
-                            <span class="detail-value">Inglês</span>
-                        </div>
-                        <div class="detail-row">
-                            <span class="detail-label">Tempo de Leitura</span>
-                            <span class="detail-value">~15 min</span>
-                        </div>
-
-                        <a href="revolucaodosbichos.html" class="access-page-btn">
-                            Ler Resumo Completo →
-                        </a>
+                        <div class="detail-row"><span class="detail-label">Autor</span><span class="detail-value">George Orwell</span></div>
+                        <div class="detail-row"><span class="detail-label">Publicação</span><span class="detail-value">17/08/1945</span></div>
+                        <div class="detail-row"><span class="detail-label">Gênero</span><span class="detail-value">Sátira/Distopia</span></div>
+                        <div class="detail-row"><span class="detail-label">Páginas</span><span class="detail-value">112</span></div>
+                        <div class="detail-row"><span class="detail-label">Idioma</span><span class="detail-value">Inglês</span></div>
+                        <div class="detail-row"><span class="detail-label">Leitura</span><span class="detail-value">~15 min</span></div>
+                        <a href="revolucaodosbichos.html" class="access-page-btn" style="background: linear-gradient(135deg, #ff6b6b 0%, #c92a2a 100%);">Ler Resumo Completo →</a>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- Modal: O Pequeno Príncipe -->
+    <!-- Modal O Pequeno Príncipe -->
     <div class="modal-overlay" id="modal-principe">
         <button class="modal-close" onclick="closeModal('principe')">×</button>
-        
         <div class="modal-container">
             <div class="modal-hero" style="background: linear-gradient(135deg, rgba(245, 158, 11, 0.05) 0%, transparent 50%);">
                 <div class="modal-book-display">
@@ -1381,75 +1539,42 @@
                         <img src="opequenoprincipe.png" alt="O Pequeno Príncipe">
                     </div>
                 </div>
-                
                 <div class="modal-info">
-                    <span class="modal-tag" style="background: rgba(245, 158, 11, 0.2); color: var(--accent); border-color: rgba(245, 158, 11, 0.3);">Fábula Filosófica</span>
-                    <h2 class="modal-title">O Pequeno<br>Príncipe</h2>
+                    <span class="modal-tag" style="background: rgba(245, 158, 11, 0.2); color: #f59e0b; border-color: rgba(245, 158, 11, 0.3);">Fábula Filosófica</span>
+                    <h2 class="modal-title" style="font-family: 'Dancing Script', cursive; font-size: 5rem; background: linear-gradient(135deg, #ffd43b 0%, #fab005 50%, #f08c00 100%); -webkit-background-clip: text;">O Pequeno<br>Príncipe</h2>
                     <p class="modal-author">por Antoine de Saint-Exupéry</p>
-                    
                     <div class="modal-actions">
-                        <a href="opequenoprincipe.html" class="btn btn-primary btn-large" style="background: linear-gradient(135deg, var(--accent) 0%, #d97706 100%); box-shadow: 0 10px 30px rgba(245, 158, 11, 0.3);">
+                        <a href="opequenoprincipe.html" class="btn btn-primary btn-large" style="background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%); box-shadow: 0 10px 30px rgba(245, 158, 11, 0.3);">
                             <span>▶</span> Acessar Resumo Completo
                         </a>
-                        <button class="btn btn-outline btn-large" onclick="closeModal('principe')">
-                            Voltar
-                        </button>
+                        <button class="btn btn-outline btn-large" onclick="closeModal('principe')">Voltar</button>
                     </div>
                 </div>
             </div>
-
             <div class="modal-body">
                 <div class="modal-grid">
                     <div class="modal-section">
                         <h3>Sobre a Obra</h3>
                         <p class="modal-text">
-                            O Pequeno Príncipe é uma obra do escritor e aviador francês Antoine de Saint-Exupéry, publicada em 1943. A história começa com um piloto perdido no deserto do Saara, onde encontra um pequeno príncipe que vem do asteroide B-612.
+                            Publicado em 1943, O Pequeno Príncipe é a história de um piloto perdido no deserto do Saara que encontra um pequeno príncipe vindo do asteroide B-612. Através de suas conversas, o príncipe compartilha lições sobre amor, responsabilidade e o que realmente importa na vida.
                         </p>
-                        <p class="modal-text">
-                            Ao longo de oito dias, o príncipe conta ao piloto sobre suas viagens por outros asteroides e as pessoas estranhas que encontrou: um rei sem súditos, um vaidoso que só ouve elogios, um bêbado envergonhado de beber, um homem de negócios ocupado contando estrelas, um acendedor de lampiões fiel a sua rotina, e um geógrafo que nunca viaja.
-                        </p>
-
                         <h3 style="margin-top: 50px;">Lições Principais</h3>
                         <ul class="key-points">
-                            <li>O verdadeiro valor das coisas está no tempo dedicado a elas</li>
-                            <li>A importância de ver com o coração, não apenas com os olhos</li>
-                            <li>A responsabilidade que vem com a criação de laços afetivos</li>
-                            <li>A crítica à perda da imaginação e inocência na vida adulta</li>
-                            <li>O significado da amizade e do cuidado com o outro</li>
+                            <li>O essencial é invisível aos olhos</li>
+                            <li>A responsabilidade que vem com a criação de laços</li>
+                            <li>O tempo dedicado torna as coisas especiais</li>
+                            <li>A crítica à perda da imaginação na vida adulta</li>
                         </ul>
                     </div>
-
                     <div class="modal-sidebar">
                         <h4 class="sidebar-title">Ficha Técnica</h4>
-                        
-                        <div class="detail-row">
-                            <span class="detail-label">Autor</span>
-                            <span class="detail-value">A. de Saint-Exupéry</span>
-                        </div>
-                        <div class="detail-row">
-                            <span class="detail-label">Publicação</span>
-                            <span class="detail-value">06/04/1943</span>
-                        </div>
-                        <div class="detail-row">
-                            <span class="detail-label">Gênero</span>
-                            <span class="detail-value">Fábula/Filosófico</span>
-                        </div>
-                        <div class="detail-row">
-                            <span class="detail-label">Páginas</span>
-                            <span class="detail-value">96</span>
-                        </div>
-                        <div class="detail-row">
-                            <span class="detail-label">Idioma Original</span>
-                            <span class="detail-value">Francês</span>
-                        </div>
-                        <div class="detail-row">
-                            <span class="detail-label">Tempo de Leitura</span>
-                            <span class="detail-value">~12 min</span>
-                        </div>
-
-                        <a href="opequenoprincipe.html" class="access-page-btn" style="background: linear-gradient(135deg, var(--accent) 0%, #d97706 100%);">
-                            Ler Resumo Completo →
-                        </a>
+                        <div class="detail-row"><span class="detail-label">Autor</span><span class="detail-value">A. de Saint-Exupéry</span></div>
+                        <div class="detail-row"><span class="detail-label">Publicação</span><span class="detail-value">06/04/1943</span></div>
+                        <div class="detail-row"><span class="detail-label">Gênero</span><span class="detail-value">Fábula/Filosófico</span></div>
+                        <div class="detail-row"><span class="detail-label">Páginas</span><span class="detail-value">96</span></div>
+                        <div class="detail-row"><span class="detail-label">Idioma</span><span class="detail-value">Francês</span></div>
+                        <div class="detail-row"><span class="detail-label">Leitura</span><span class="detail-value">~12 min</span></div>
+                        <a href="opequenoprincipe.html" class="access-page-btn" style="background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);">Ler Resumo Completo →</a>
                     </div>
                 </div>
             </div>
@@ -1457,7 +1582,7 @@
     </div>
 
     <script>
-        // Book database for search
+        // Book database
         const books = [
             {
                 id: 'quixote',
@@ -1466,7 +1591,9 @@
                 year: '1605',
                 image: 'domquixote.png',
                 genre: 'Romance de Cavalaria',
-                description: 'O maior clássico da literatura ocidental'
+                description: 'O primeiro romance moderno da literatura',
+                pages: '1020',
+                rating: '5.0'
             },
             {
                 id: 'revolucao',
@@ -1475,7 +1602,9 @@
                 year: '1945',
                 image: 'revolucaodosbichos.png',
                 genre: 'Distopia Política',
-                description: 'Uma alegoria sobre poder e corrupção'
+                description: 'Uma alegoria sobre poder e corrupção',
+                pages: '112',
+                rating: '4.9'
             },
             {
                 id: 'principe',
@@ -1484,18 +1613,35 @@
                 year: '1943',
                 image: 'opequenoprincipe.png',
                 genre: 'Fábula Filosófica',
-                description: 'Uma história sobre amor e inocência'
+                description: 'Uma história sobre amor e inocência',
+                pages: '96',
+                rating: '5.0'
             }
         ];
 
         // Search functionality
         const searchInput = document.getElementById('searchInput');
         const searchResults = document.getElementById('searchResults');
+        const clearSearchBtn = document.getElementById('clearSearch');
+
+        function focusSearch() {
+            searchInput.focus();
+        }
+
+        function clearSearch() {
+            searchInput.value = '';
+            searchResults.classList.remove('active');
+            clearSearchBtn.classList.remove('visible');
+            searchInput.focus();
+        }
 
         searchInput.addEventListener('input', (e) => {
             const query = e.target.value.toLowerCase().trim();
             
-            if (query.length === 0) {
+            if (query.length > 0) {
+                clearSearchBtn.classList.add('visible');
+            } else {
+                clearSearchBtn.classList.remove('visible');
                 searchResults.classList.remove('active');
                 return;
             }
@@ -1512,24 +1658,45 @@
 
         function renderSearchResults(results) {
             if (results.length === 0) {
-                searchResults.innerHTML = '<div class="no-results">Nenhum livro encontrado</div>';
+                searchResults.innerHTML = `
+                    <div class="no-results">
+                        <div class="no-results-icon">📚</div>
+                        <h4>Nenhum livro encontrado</h4>
+                        <p>Tente buscar por título, autor ou ano</p>
+                    </div>
+                `;
             } else {
-                searchResults.innerHTML = results.map(book => `
-                    <div class="search-item" onclick="openModal('${book.id}'); searchResults.classList.remove('active'); searchInput.value = '';">
-                        <div class="search-item-image">
-                            <img src="${book.image}" alt="${book.title}">
-                        </div>
-                        <div class="search-item-info">
-                            <h4>${book.title}</h4>
-                            <p>${book.author} • ${book.genre}</p>
-                        </div>
-                        <div class="search-item-meta">
+                searchResults.innerHTML = `
+                    <div class="search-header">
+                        <h4>Resultados da Busca</h4>
+                        <span class="search-count">${results.length} encontrado${results.length > 1 ? 's' : ''}</span>
+                    </div>
+                    ${results.map(book => `
+                        <div class="search-item" onclick="selectBook('${book.id}')">
+                            <div class="search-item-image">
+                                <img src="${book.image}" alt="${book.title}">
+                            </div>
+                            <div class="search-item-content">
+                                <h4>${book.title}</h4>
+                                <div class="search-item-meta">
+                                    <span>👤 ${book.author}</span>
+                                    <span>📖 ${book.genre}</span>
+                                    <span>⭐ ${book.rating}</span>
+                                </div>
+                            </div>
                             <span class="search-item-year">${book.year}</span>
                         </div>
-                    </div>
-                `).join('');
+                    `).join('')}
+                `;
             }
             searchResults.classList.add('active');
+        }
+
+        function selectBook(bookId) {
+            openModal(bookId);
+            searchResults.classList.remove('active');
+            searchInput.value = '';
+            clearSearchBtn.classList.remove('visible');
         }
 
         // Close search when clicking outside
@@ -1538,6 +1705,47 @@
                 searchResults.classList.remove('active');
             }
         });
+
+        // 3D Tilt Effect for Cards
+        document.querySelectorAll('[data-tilt]').forEach(card => {
+            card.addEventListener('mousemove', (e) => {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                
+                const centerX = rect.width / 2;
+                const centerY = rect.height / 2;
+                
+                const rotateX = (y - centerY) / 20;
+                const rotateY = (centerX - x) / 20;
+                
+                card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateZ(30px)`;
+            });
+            
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) translateZ(0)';
+            });
+        });
+
+        // Create floating particles
+        function createParticles(containerId, color) {
+            const container = document.getElementById(containerId);
+            if (!container) return;
+            
+            for (let i = 0; i < 15; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.animationDelay = Math.random() * 10 + 's';
+                particle.style.animationDuration = (10 + Math.random() * 10) + 's';
+                particle.style.background = color;
+                container.appendChild(particle);
+            }
+        }
+
+        createParticles('particles-quixote', 'rgba(212, 175, 55, 0.4)');
+        createParticles('particles-revolucao', 'rgba(255, 107, 107, 0.4)');
+        createParticles('particles-principe', 'rgba(255, 212, 59, 0.4)');
 
         // Scroll animations
         const observerOptions = {
@@ -1597,6 +1805,7 @@
             });
         });
 
+        // Smooth scroll
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
