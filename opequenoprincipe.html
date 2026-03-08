@@ -1,0 +1,1227 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>O Pequeno Príncipe - Resumo & Análise Profunda</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Space+Grotesk:wght@300;400;600&display=swap" rel="stylesheet">
+  <style>
+      :root {
+          --golden: #FFD700;
+          --deep-blue: #0B1026;
+          --star-white: #FFF8E7;
+      }
+      
+      html {
+          scroll-behavior: smooth;
+      }
+      
+      body {
+          font-family: 'Cormorant Garamond', serif;
+          background: var(--deep-blue);
+          color: var(--star-white);
+          overflow-x: hidden;
+          -webkit-font-smoothing: antialiased;
+          -moz-osx-font-smoothing: grayscale;
+      }
+      
+      .font-display {
+          font-family: 'Space Grotesk', sans-serif;
+      }
+      
+      /* Estrelas estáticas - sem animação pesada */
+      .stars-bg {
+          position: fixed;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          pointer-events: none;
+          z-index: 0;
+          background-image: 
+              radial-gradient(2px 2px at 20px 30px, rgba(255,255,255,0.8), transparent),
+              radial-gradient(2px 2px at 40px 70px, rgba(255,255,255,0.6), transparent),
+              radial-gradient(1px 1px at 50px 90px, rgba(255,255,255,0.9), transparent),
+              radial-gradient(2px 2px at 130px 80px, rgba(255,255,255,0.7), transparent),
+              radial-gradient(1px 1px at 160px 120px, rgba(255,255,255,0.8), transparent),
+              radial-gradient(2px 2px at 200px 50px, rgba(255,255,255,0.6), transparent),
+              radial-gradient(1px 1px at 250px 180px, rgba(255,255,255,0.9), transparent),
+              radial-gradient(2px 2px at 300px 20px, rgba(255,255,255,0.7), transparent),
+              radial-gradient(1px 1px at 350px 100px, rgba(255,255,255,0.8), transparent),
+              radial-gradient(2px 2px at 400px 150px, rgba(255,255,255,0.6), transparent),
+              radial-gradient(1px 1px at 450px 40px, rgba(255,255,255,0.9), transparent),
+              radial-gradient(2px 2px at 500px 200px, rgba(255,255,255,0.7), transparent),
+              radial-gradient(1px 1px at 550px 80px, rgba(255,255,255,0.8), transparent),
+              radial-gradient(2px 2px at 600px 120px, rgba(255,255,255,0.6), transparent),
+              radial-gradient(1px 1px at 650px 30px, rgba(255,255,255,0.9), transparent),
+              radial-gradient(2px 2px at 700px 160px, rgba(255,255,255,0.7), transparent),
+              radial-gradient(1px 1px at 750px 60px, rgba(255,255,255,0.8), transparent),
+              radial-gradient(2px 2px at 800px 140px, rgba(255,255,255,0.6), transparent),
+              radial-gradient(1px 1px at 850px 20px, rgba(255,255,255,0.9), transparent),
+              radial-gradient(2px 2px at 900px 100px, rgba(255,255,255,0.7), transparent),
+              radial-gradient(1px 1px at 950px 180px, rgba(255,255,255,0.8), transparent),
+              radial-gradient(2px 2px at 1000px 50px, rgba(255,255,255,0.6), transparent),
+              radial-gradient(1px 1px at 1050px 130px, rgba(255,255,255,0.9), transparent),
+              radial-gradient(2px 2px at 1100px 70px, rgba(255,255,255,0.7), transparent),
+              radial-gradient(1px 1px at 1150px 150px, rgba(255,255,255,0.8), transparent),
+              radial-gradient(2px 2px at 1200px 40px, rgba(255,255,255,0.6), transparent),
+              radial-gradient(1px 1px at 1250px 110px, rgba(255,255,255,0.9), transparent),
+              radial-gradient(2px 2px at 1300px 170px, rgba(255,255,255,0.7), transparent),
+              radial-gradient(1px 1px at 1350px 90px, rgba(255,255,255,0.8), transparent),
+              radial-gradient(2px 2px at 1400px 20px, rgba(255,255,255,0.6), transparent),
+              radial-gradient(1px 1px at 1450px 140px, rgba(255,255,255,0.9), transparent);
+          background-size: 1500px 250px;
+          background-repeat: repeat;
+          opacity: 0.6;
+      }
+      
+      .glass-card {
+          background: rgba(255, 255, 255, 0.03);
+          backdrop-filter: blur(10px);
+          border: 1px solid rgba(255, 255, 255, 0.1);
+          box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+          will-change: transform;
+      }
+      
+      .chapter-card {
+          transition: transform 0.3s ease, box-shadow 0.3s ease;
+          will-change: transform;
+      }
+      
+      .chapter-card:hover {
+          transform: translateY(-4px);
+          box-shadow: 0 8px 24px rgba(255, 215, 0, 0.1);
+      }
+      
+      .chapter-card.expanded {
+          box-shadow: 0 12px 32px rgba(255, 215, 0, 0.15);
+      }
+      
+      .analysis-card {
+          transition: all 0.3s ease;
+          border-left: 3px solid transparent;
+      }
+      
+      .analysis-card:hover {
+          border-left-color: var(--golden);
+          background: rgba(255, 215, 0, 0.05);
+          transform: translateX(8px);
+      }
+      
+      .quote-mark {
+          font-size: 4rem;
+          line-height: 1;
+          opacity: 0.2;
+          position: absolute;
+          top: -10px;
+          left: 16px;
+          color: var(--golden);
+          pointer-events: none;
+      }
+      
+      .planet-icon {
+          width: 60px;
+          height: 60px;
+          border-radius: 50%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          font-size: 1.5rem;
+          animation: float 6s ease-in-out infinite;
+          will-change: transform;
+      }
+      
+      @keyframes float {
+          0%, 100% { transform: translateY(0px); }
+          50% { transform: translateY(-10px); }
+      }
+      
+      .progress-bar {
+          position: fixed;
+          top: 0;
+          left: 0;
+          height: 3px;
+          background: linear-gradient(90deg, var(--golden), #FF6B6B);
+          z-index: 50;
+          transition: width 0.1s linear;
+          will-change: width;
+      }
+      
+      .character-portrait {
+          width: 100px;
+          height: 100px;
+          border-radius: 50%;
+          border: 3px solid var(--golden);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          font-size: 2.5rem;
+          background: rgba(255, 215, 0, 0.1);
+          transition: transform 0.3s ease;
+          will-change: transform;
+      }
+      
+      .character-portrait:hover {
+          transform: scale(1.05);
+      }
+      
+      .hidden-content {
+          max-height: 0;
+          overflow: hidden;
+          transition: max-height 0.4s ease-out, opacity 0.3s ease;
+          opacity: 0;
+      }
+      
+      .expanded .hidden-content {
+          max-height: 2500px;
+          opacity: 1;
+      }
+      
+      .toggle-btn {
+          transition: transform 0.3s ease;
+      }
+      
+      .expanded .toggle-btn {
+          transform: rotate(180deg);
+      }
+      
+      .typing-effect {
+          border-right: 2px solid var(--golden);
+          animation: blink 0.7s infinite;
+      }
+      
+      @keyframes blink {
+          50% { border-color: transparent; }
+      }
+      
+      .symbol-card {
+          transition: all 0.3s ease;
+      }
+      
+      .symbol-card:hover {
+          transform: translateY(-4px);
+          border-color: rgba(255, 215, 0, 0.3);
+      }
+      
+      .tab-btn {
+          transition: all 0.2s ease;
+          position: relative;
+      }
+      
+      .tab-btn.active {
+          color: var(--golden);
+      }
+      
+      .tab-btn.active::after {
+          content: '';
+          position: absolute;
+          bottom: -2px;
+          left: 0;
+          width: 100%;
+          height: 2px;
+          background: var(--golden);
+      }
+      
+      /* Otimizações de performance */
+      .content-layer {
+          position: relative;
+          z-index: 1;
+      }
+      
+      /* Reduzir repaints */
+      .glass-card, .chapter-card, .analysis-card, .symbol-card {
+          contain: layout style paint;
+      }
+      
+      /* Animações suaves apenas em elementos visíveis */
+      @media (prefers-reduced-motion: reduce) {
+          * {
+              animation-duration: 0.01ms !important;
+              animation-iteration-count: 1 !important;
+              transition-duration: 0.01ms !important;
+          }
+      }
+  </style>
+</head>
+<body class="antialiased">
+
+  <!-- Progress Bar -->
+  <div class="progress-bar" id="progressBar"></div>
+
+  <!-- Stars Background - Estático e leve -->
+  <div class="stars-bg"></div>
+
+  <!-- Hero Section -->
+  <header class="relative min-h-screen flex items-center justify-center overflow-hidden content-layer">
+      <div class="absolute inset-0 z-0">
+          <div class="absolute top-1/4 left-1/4 w-96 h-96 bg-yellow-500 rounded-full opacity-10 blur-3xl"></div>
+          <div class="absolute bottom-1/4 right-1/4 w-64 h-64 bg-red-500 rounded-full opacity-10 blur-3xl"></div>
+      </div>
+      
+      <div class="relative z-10 text-center px-4 max-w-5xl mx-auto">
+          <div class="mb-8 inline-block">
+              <div class="planet-icon bg-yellow-500/20 mx-auto mb-4 text-4xl">🌟</div>
+          </div>
+          
+          <h1 class="font-display text-5xl md:text-7xl font-bold mb-6 bg-gradient-to-r from-yellow-200 via-yellow-400 to-yellow-200 bg-clip-text text-transparent tracking-tight">
+              O Pequeno Príncipe
+          </h1>
+          
+          <p class="text-2xl md:text-3xl italic text-yellow-200/80 mb-4">Antoine de Saint-Exupéry</p>
+          
+          <div class="w-24 h-1 bg-gradient-to-r from-transparent via-yellow-400 to-transparent mx-auto mb-8"></div>
+          
+          <p class="text-xl md:text-2xl text-gray-300 max-w-3xl mx-auto leading-relaxed typing-effect" id="subtitle">
+              "Só se vê bem com o coração. O essencial é invisível para os olhos."
+          </p>
+          
+          <div class="mt-12 flex justify-center gap-4 flex-wrap">
+              <button onclick="scrollToSection('resumo')" class="px-8 py-3 bg-yellow-500/20 border border-yellow-500/50 rounded-full hover:bg-yellow-500/30 transition-all duration-300 font-display text-sm tracking-wider uppercase">
+                  Resumo Completo
+              </button>
+              <button onclick="scrollToSection('analise')" class="px-8 py-3 bg-transparent border border-white/30 rounded-full hover:bg-white/10 transition-all duration-300 font-display text-sm tracking-wider uppercase">
+                  Análise Profunda
+              </button>
+          </div>
+      </div>
+      
+      <div class="absolute bottom-10 left-1/2 transform -translate-x-1/2 animate-bounce">
+          <svg class="w-6 h-6 text-yellow-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
+          </svg>
+      </div>
+  </header>
+
+  <!-- Navigation Tabs -->
+  <div class="sticky top-0 z-40 bg-[#0B1026]/95 backdrop-blur-md border-b border-white/10 py-4 px-4 content-layer">
+      <div class="max-w-6xl mx-auto flex justify-center gap-8 flex-wrap">
+          <button onclick="scrollToSection('resumo')" class="tab-btn font-display text-sm tracking-wider uppercase py-2">Resumo</button>
+          <button onclick="scrollToSection('analise')" class="tab-btn font-display text-sm tracking-wider uppercase py-2">Análise Crítica</button>
+          <button onclick="scrollToSection('filosofia')" class="tab-btn font-display text-sm tracking-wider uppercase py-2">Filosofia</button>
+          <button onclick="scrollToSection('contexto')" class="tab-btn font-display text-sm tracking-wider uppercase py-2">Contexto</button>
+      </div>
+  </div>
+
+  <!-- Introduction -->
+  <section id="resumo" class="relative py-20 px-4 content-layer">
+      <div class="max-w-6xl mx-auto">
+          <div class="glass-card rounded-3xl p-8 md:p-12 mb-16">
+              <h2 class="font-display text-4xl md:text-5xl font-bold mb-8 text-yellow-400">A Obra Prima da Literatura Universal</h2>
+              
+              <div class="prose prose-lg prose-invert max-w-none">
+                  <p class="text-xl leading-relaxed mb-6 text-gray-300">
+                      Publicado em <span class="text-yellow-400 font-semibold">1943</span>, "O Pequeno Príncipe" é muito mais que um livro infantil. É uma obra filosófica profunda que transcende idades, nacionalidades e épocas. Escrito pelo aristocrata e aviador francês Antoine de Saint-Exupéry, durante seu exílio nos Estados Unidos na Segunda Guerra Mundial, o livro combina poesia, filosofia e crítica social em uma narrativa aparentemente simples.
+                  </p>
+                  
+                  <p class="text-xl leading-relaxed mb-6 text-gray-300">
+                      A história é narrada por um piloto que cai no deserto do Saara e encontra um pequeno príncipe vindo do asteroide <span class="text-yellow-400">B-612</span>. Através de suas conversas, o príncipe revela sua jornada por diferentes planetas e sua busca pelo sentido da vida, do amor e da amizade.
+                  </p>
+              </div>
+
+              <div class="grid md:grid-cols-3 gap-6 mt-12">
+                  <div class="text-center p-6 rounded-2xl bg-white/5 border border-white/10">
+                      <div class="text-4xl mb-3">📚</div>
+                      <h3 class="font-display font-bold text-yellow-400 mb-2">Gênero</h3>
+                      <p class="text-gray-400">Fábula Filosófica</p>
+                  </div>
+                  <div class="text-center p-6 rounded-2xl bg-white/5 border border-white/10">
+                      <div class="text-4xl mb-3">🌍</div>
+                      <h3 class="font-display font-bold text-yellow-400 mb-2">Traduções</h3>
+                      <p class="text-gray-400">300+ idiomas</p>
+                  </div>
+                  <div class="text-center p-6 rounded-2xl bg-white/5 border border-white/10">
+                      <div class="text-4xl mb-3">❤️</div>
+                      <h3 class="font-display font-bold text-yellow-400 mb-2">Vendas</h3>
+                      <p class="text-gray-400">200+ milhões</p>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </section>
+
+  <!-- Characters Section -->
+  <section id="personagens" class="relative py-20 px-4 bg-gradient-to-b from-transparent to-black/20 content-layer">
+      <div class="max-w-6xl mx-auto">
+          <h2 class="font-display text-4xl md:text-5xl font-bold text-center mb-16 text-yellow-400">Os Personagens do Universo</h2>
+          
+          <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+              <!-- Little Prince -->
+              <div class="glass-card rounded-2xl p-6 text-center hover:border-yellow-400/30 transition-all">
+                  <div class="character-portrait mx-auto mb-4 text-5xl">👑</div>
+                  <h3 class="font-display text-2xl font-bold text-yellow-400 mb-2">O Pequeno Príncipe</h3>
+                  <p class="text-sm text-gray-400 mb-4">O protagonista misterioso</p>
+                  <p class="text-gray-300 text-sm leading-relaxed">
+                      Menino de cabelos dourados, vindo do asteroide B-612. Representa a pureza infantil, a curiosidade genuína e a capacidade de ver o essencial.
+                  </p>
+              </div>
+
+              <!-- The Pilot -->
+              <div class="glass-card rounded-2xl p-6 text-center hover:border-blue-400/30 transition-all">
+                  <div class="character-portrait mx-auto mb-4 text-5xl border-blue-400">✈️</div>
+                  <h3 class="font-display text-2xl font-bold text-blue-400 mb-2">O Aviador</h3>
+                  <p class="text-sm text-gray-400 mb-4">O narrador da história</p>
+                  <p class="text-gray-300 text-sm leading-relaxed">
+                      Representa o adulto que mantém a criança interior viva. Sua engine avarada no deserto simboliza o momento de crise onde reencontramos o essencial.
+                  </p>
+              </div>
+
+              <!-- The Rose -->
+              <div class="glass-card rounded-2xl p-6 text-center hover:border-red-400/30 transition-all">
+                  <div class="character-portrait mx-auto mb-4 text-5xl border-red-400">🌹</div>
+                  <h3 class="font-display text-2xl font-bold text-red-400 mb-2">A Rosa</h3>
+                  <p class="text-sm text-gray-400 mb-4">O amor complicado</p>
+                  <p class="text-gray-300 text-sm leading-relaxed">
+                      Única flor no asteroide B-612. Vaidosa e exigente, representa o amor que exige cuidado e responsabilidade. Seus quatro espinhos simbolizam a defesa.
+                  </p>
+              </div>
+
+              <!-- The Fox -->
+              <div class="glass-card rounded-2xl p-6 text-center hover:border-orange-400/30 transition-all">
+                  <div class="character-portrait mx-auto mb-4 text-5xl border-orange-400">🦊</div>
+                  <h3 class="font-display text-2xl font-bold text-orange-400 mb-2">A Raposa</h3>
+                  <p class="text-sm text-gray-400 mb-4">O sábio mensageiro</p>
+                  <p class="text-gray-300 text-sm leading-relaxed">
+                      Ensina o príncipe sobre o "domesticar" - criar laços. Revela o segredo: "O essencial é invisível para os olhos".
+                  </p>
+              </div>
+
+              <!-- The Snake -->
+              <div class="glass-card rounded-2xl p-6 text-center hover:border-green-400/30 transition-all">
+                  <div class="character-portrait mx-auto mb-4 text-5xl border-green-400">🐍</div>
+                  <h3 class="font-display text-2xl font-bold text-green-400 mb-2">A Serpente</h3>
+                  <p class="text-sm text-gray-400 mb-4">O enigma da morte</p>
+                  <p class="text-gray-300 text-sm leading-relaxed">
+                      Representa a morte como passagem, não fim. Fala em enigmas e oferece o retorno à origem.
+                  </p>
+              </div>
+
+              <!-- The King -->
+              <div class="glass-card rounded-2xl p-6 text-center hover:border-purple-400/30 transition-all">
+                  <div class="character-portrait mx-auto mb-4 text-5xl border-purple-400">👔</div>
+                  <h3 class="font-display text-2xl font-bold text-purple-400 mb-2">O Rei</h3>
+                  <p class="text-sm text-gray-400 mb-4">O autoritário vazio</p>
+                  <p class="text-gray-300 text-sm leading-relaxed">
+                      Primeiro planeta visitado. Rei sem súditos. Sátira ao poder autoritário e vaidade do comando sobre o vazio.
+                  </p>
+              </div>
+          </div>
+      </div>
+  </section>
+
+  <!-- Chapter by Chapter -->
+  <section class="relative py-20 px-4 content-layer">
+      <div class="max-w-5xl mx-auto">
+          <h2 class="font-display text-4xl md:text-5xl font-bold text-center mb-4 text-yellow-400">A Jornada Capítulo por Capítulo</h2>
+          <p class="text-center text-gray-400 mb-16 text-lg">Clique para expandir os detalhes</p>
+
+          <div class="space-y-4">
+              <!-- Capítulo 1 -->
+              <div class="chapter-card glass-card rounded-2xl overflow-hidden cursor-pointer" onclick="toggleChapter(this)">
+                  <div class="p-6 flex items-center justify-between">
+                      <div class="flex items-center gap-4">
+                          <span class="font-display text-3xl font-bold text-yellow-400">01</span>
+                          <div>
+                              <h3 class="text-xl font-bold">O Elefante dentro da Jiboia</h3>
+                              <p class="text-sm text-gray-400">A infância perdida e o desenho número um</p>
+                          </div>
+                      </div>
+                      <svg class="w-6 h-6 toggle-btn" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                      </svg>
+                  </div>
+                  <div class="hidden-content px-6 pb-6">
+                      <div class="border-t border-white/10 pt-4 mt-2">
+                          <p class="text-gray-300 leading-relaxed mb-4">
+                              O narrador, agora um piloto, conta como aos seis anos de idade viu em um livro sobre a selva uma imagem impressionante: uma jiboia engolindo uma fera. Ele fez seu <strong>Desenho Número Um</strong> - uma serpente com um elefante dentro.
+                          </p>
+                          <p class="text-gray-300 leading-relaxed mb-4">
+                              Quando mostrou aos adultos, todos acharam que era um chapéu. Frustrado, ele teve que fazer o <strong>Desenho Número Dois</strong>, mostrando a parte de dentro. Os adultos então aconselharam que ele abandonasse os desenhos e focasse em geografia, história, aritmética.
+                          </p>
+                          <div class="bg-yellow-500/10 border-l-4 border-yellow-400 p-4 rounded-r-lg mt-4">
+                              <p class="italic text-yellow-200">
+                                  "Os adultos nunca compreendem alguma coisa sozinhos, e é cansativo para as crianças ter que estar sempre explicando."
+                              </p>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+
+              <!-- Capítulo 2 -->
+              <div class="chapter-card glass-card rounded-2xl overflow-hidden cursor-pointer" onclick="toggleChapter(this)">
+                  <div class="p-6 flex items-center justify-between">
+                      <div class="flex items-center gap-4">
+                          <span class="font-display text-3xl font-bold text-yellow-400">02</span>
+                          <div>
+                              <h3 class="text-xl font-bold">O Encontro no Deserto</h3>
+                              <p class="text-sm text-gray-400">"Por favor... desenha-me um carneiro"</p>
+                          </div>
+                      </div>
+                      <svg class="w-6 h-6 toggle-btn" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                      </svg>
+                  </div>
+                  <div class="hidden-content px-6 pb-6">
+                      <div class="border-t border-white/10 pt-4 mt-2">
+                          <p class="text-gray-300 leading-relaxed mb-4">
+                              Seis anos atrás, o avião do narrador sofreu uma avaria no deserto do Saara. Na manhã seguinte, uma voz suave acordou-o: <strong>"Por favor... desenha-me um carneiro!"</strong>.
+                          </p>
+                          <p class="text-gray-300 leading-relaxed mb-4">
+                              O narrador fez vários desenhos, mas nenhum agradava. Frustrado, desenhou uma caixa e disse que o carneiro estava dentro. O príncipe ficou encantado - era exatamente assim que ele queria!
+                          </p>
+                      </div>
+                  </div>
+              </div>
+
+              <!-- Capítulo 3 -->
+              <div class="chapter-card glass-card rounded-2xl overflow-hidden cursor-pointer" onclick="toggleChapter(this)">
+                  <div class="p-6 flex items-center justify-between">
+                      <div class="flex items-center gap-4">
+                          <span class="font-display text-3xl font-bold text-yellow-400">03</span>
+                          <div>
+                              <h3 class="text-xl font-bold">A Origem do Príncipe</h3>
+                              <p class="text-sm text-gray-400">O asteroide B-612 e os baobás</p>
+                          </div>
+                      </div>
+                      <svg class="w-6 h-6 toggle-btn" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                      </svg>
+                  </div>
+                  <div class="hidden-content px-6 pb-6">
+                      <div class="border-t border-white/10 pt-4 mt-2">
+                          <p class="text-gray-300 leading-relaxed mb-4">
+                              Vinha do <strong>asteroide B-612</strong>, descoberto por um astrônomo turco em 1909. O planeta era minúsculo, com três vulcões e <strong>baobás</strong> - árvores perigosas que devem ser arrancadas quando pequenas.
+                          </p>
+                          <div class="grid md:grid-cols-2 gap-4 mt-4">
+                              <div class="bg-red-500/10 p-4 rounded-lg border border-red-500/30">
+                                  <h4 class="font-bold text-red-400 mb-2">⚠️ Os Baobás</h4>
+                                  <p class="text-sm text-gray-300">Problemas que devem ser eliminados quando pequenos.</p>
+                              </div>
+                              <div class="bg-yellow-500/10 p-4 rounded-lg border border-yellow-500/30">
+                                  <h4 class="font-bold text-yellow-400 mb-2">🌋 Os Vulcões</h4>
+                                  <p class="text-sm text-gray-300">Paixões que precisam de manutenção constante.</p>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+
+              <!-- Capítulo 4 -->
+              <div class="chapter-card glass-card rounded-2xl overflow-hidden cursor-pointer" onclick="toggleChapter(this)">
+                  <div class="p-6 flex items-center justify-between">
+                      <div class="flex items-center gap-4">
+                          <span class="font-display text-3xl font-bold text-yellow-400">04</span>
+                          <div>
+                              <h3 class="text-xl font-bold">A Rosa</h3>
+                              <p class="text-sm text-gray-400">O amor que nasce e o sofrimento que começa</p>
+                          </div>
+                      </div>
+                      <svg class="w-6 h-6 toggle-btn" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                      </svg>
+                  </div>
+                  <div class="hidden-content px-6 pb-6">
+                      <div class="border-t border-white/10 pt-4 mt-2">
+                          <p class="text-gray-300 leading-relaxed mb-4">
+                              Uma semente brotou e se tornou uma <strong>rosa</strong>. Ela era linda, mas extremamente vaidosa e exigente. Pedia abrigo, copos de água, escovação. Manipulava seus sentimentos.
+                          </p>
+                          <p class="text-gray-300 leading-relaxed mb-4">
+                              O príncipe, jovem, não sabia amar. Sentia-se explorado. Decidiu partir, deixando-a para trás.
+                          </p>
+                          <div class="bg-pink-500/10 border-l-4 border-pink-400 p-4 rounded-r-lg mt-4">
+                              <p class="italic text-pink-200">
+                                  "Eu era jovem demais para saber amá-la."
+                              </p>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+
+              <!-- Capítulo 5-9 -->
+              <div class="chapter-card glass-card rounded-2xl overflow-hidden cursor-pointer" onclick="toggleChapter(this)">
+                  <div class="p-6 flex items-center justify-between">
+                      <div class="flex items-center gap-4">
+                          <span class="font-display text-3xl font-bold text-yellow-400">05-09</span>
+                          <div>
+                              <h3 class="text-xl font-bold">A Viagem pelos Asteroides</h3>
+                              <p class="text-sm text-gray-400">Os adultos e suas obsessões vazias</p>
+                          </div>
+                      </div>
+                      <svg class="w-6 h-6 toggle-btn" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                      </svg>
+                  </div>
+                  <div class="hidden-content px-6 pb-6">
+                      <div class="border-t border-white/10 pt-4 mt-2 space-y-4">
+                          <div class="flex gap-4 items-start">
+                              <div class="w-10 h-10 rounded-full bg-purple-500/20 flex items-center justify-center text-xl flex-shrink-0">👑</div>
+                              <div>
+                                  <h4 class="font-bold text-purple-400 mb-1">O Rei</h4>
+                                  <p class="text-gray-300 text-sm">Poder vazio, autoritarismo burocrático.</p>
+                              </div>
+                          </div>
+                          <div class="flex gap-4 items-start">
+                              <div class="w-10 h-10 rounded-full bg-blue-500/20 flex items-center justify-center text-xl flex-shrink-0">🎩</div>
+                              <div>
+                                  <h4 class="font-bold text-blue-400 mb-1">O Vaidoso</h4>
+                                  <p class="text-gray-300 text-sm">Necessidade de validação externa, ego inflado.</p>
+                              </div>
+                          </div>
+                          <div class="flex gap-4 items-start">
+                              <div class="w-10 h-10 rounded-full bg-red-500/20 flex items-center justify-center text-xl flex-shrink-0">🍷</div>
+                              <div>
+                                  <h4 class="font-bold text-red-400 mb-1">O Bêbado</h4>
+                                  <p class="text-gray-300 text-sm">Ciclo vicioso, fuga da vergonha.</p>
+                              </div>
+                          </div>
+                          <div class="flex gap-4 items-start">
+                              <div class="w-10 h-10 rounded-full bg-green-500/20 flex items-center justify-center text-xl flex-shrink-0">💼</div>
+                              <div>
+                                  <h4 class="font-bold text-green-400 mb-1">O Homem de Negócios</h4>
+                                  <p class="text-gray-300 text-sm">Materialismo, posse abstrata das estrelas.</p>
+                              </div>
+                          </div>
+                          <div class="flex gap-4 items-start">
+                              <div class="w-10 h-10 rounded-full bg-orange-500/20 flex items-center justify-center text-xl flex-shrink-0">🏮</div>
+                              <div>
+                                  <h4 class="font-bold text-orange-400 mb-1">O Acendedor</h4>
+                                  <p class="text-gray-300 text-sm">Dever cego, trabalho alienado.</p>
+                              </div>
+                          </div>
+                          <div class="flex gap-4 items-start">
+                              <div class="w-10 h-10 rounded-full bg-gray-500/20 flex items-center justify-center text-xl flex-shrink-0">🗺️</div>
+                              <div>
+                                  <h4 class="font-bold text-gray-400 mb-1">O Geógrafo</h4>
+                                  <p class="text-gray-300 text-sm">Ciência sem experiência, conhecimento livresco.</p>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+
+              <!-- Capítulo 10-15 -->
+              <div class="chapter-card glass-card rounded-2xl overflow-hidden cursor-pointer" onclick="toggleChapter(this)">
+                  <div class="p-6 flex items-center justify-between">
+                      <div class="flex items-center gap-4">
+                          <span class="font-display text-3xl font-bold text-yellow-400">10-15</span>
+                          <div>
+                              <h3 class="text-xl font-bold">A Chegada à Terra</h3>
+                              <p class="text-sm text-gray-400">O jardim de rosas e a descoberta da Raposa</p>
+                          </div>
+                      </div>
+                      <svg class="w-6 h-6 toggle-btn" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                      </svg>
+                  </div>
+                  <div class="hidden-content px-6 pb-6">
+                      <div class="border-t border-white/10 pt-4 mt-2">
+                          <p class="text-gray-300 leading-relaxed mb-4">
+                              Na Terra, o príncipe encontrou <strong>milhares de rosas idênticas</strong>. Sua rosa não era única! Ele chorou, sentindo-se enganado.
+                          </p>
+                          <p class="text-gray-300 leading-relaxed mb-4">
+                              Foi então que apareceu a <strong>Raposa</strong>, que pediu para ser "domesticada". Explicou que domesticar é criar necessidades, estabelecer horários. "Tu te tornas eternamente responsável por aquilo que cativas."
+                          </p>
+                          <div class="bg-orange-500/10 border-l-4 border-orange-400 p-4 rounded-r-lg my-4">
+                              <p class="italic text-orange-200 font-semibold">
+                                  "O essencial é invisível para os olhos."
+                              </p>
+                          </div>
+                          <p class="text-gray-300 leading-relaxed">
+                              O príncipe compreendeu que sua rosa é única porque ele a regou, protegeu, ouviu suas queixas.
+                          </p>
+                      </div>
+                  </div>
+              </div>
+
+              <!-- Capítulo 16-23 -->
+              <div class="chapter-card glass-card rounded-2xl overflow-hidden cursor-pointer" onclick="toggleChapter(this)">
+                  <div class="p-6 flex items-center justify-between">
+                      <div class="flex items-center gap-4">
+                          <span class="font-display text-3xl font-bold text-yellow-400">16-23</span>
+                          <div>
+                              <h3 class="text-xl font-bold">A Busca pelo Poço</h3>
+                              <p class="text-sm text-gray-400">A água que canta e o significado escondido</p>
+                          </div>
+                      </div>
+                      <svg class="w-6 h-6 toggle-btn" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                      </svg>
+                  </div>
+                  <div class="hidden-content px-6 pb-6">
+                      <div class="border-t border-white/10 pt-4 mt-2">
+                          <p class="text-gray-300 leading-relaxed mb-4">
+                              O narrador e o príncipe buscam água. O príncipe fala sobre o <strong>sentido das coisas</strong> - o deserto é belo porque esconde um poço. As estrelas são belas porque há uma flor invisível em uma delas.
+                          </p>
+                          <div class="bg-blue-500/10 border-l-4 border-blue-400 p-4 rounded-r-lg my-4">
+                              <p class="italic text-blue-200">
+                                  "Tu terás estrelas que sabem rir."
+                              </p>
+                          </div>
+                          <p class="text-gray-300 leading-relaxed">
+                              Finalmente encontram o poço. A água é doce, canta como música. É <strong>água encantada</strong>, alimentada pelo esforço e pela busca.
+                          </p>
+                      </div>
+                  </div>
+              </div>
+
+              <!-- Capítulo 24-27 -->
+              <div class="chapter-card glass-card rounded-2xl overflow-hidden cursor-pointer" onclick="toggleChapter(this)">
+                  <div class="p-6 flex items-center justify-between bg-gradient-to-r from-red-900/20 to-transparent">
+                      <div class="flex items-center gap-4">
+                          <span class="font-display text-3xl font-bold text-red-400">24-27</span>
+                          <div>
+                              <h3 class="text-xl font-bold text-red-400">A Despedida</h3>
+                              <p class="text-sm text-gray-400">A mordida da serpente e as estrelas que riem</p>
+                          </div>
+                      </div>
+                      <svg class="w-6 h-6 toggle-btn" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                      </svg>
+                  </div>
+                  <div class="hidden-content px-6 pb-6">
+                      <div class="border-t border-white/10 pt-4 mt-2">
+                          <p class="text-gray-300 leading-relaxed mb-4">
+                              O príncipe encontra a <strong>serpente amarela</strong>, que oferece ajuda para retornar. Dá ao narrador o presente: <strong>as estrelas que riem</strong>.
+                          </p>
+                          <div class="bg-red-500/10 border-l-4 border-red-400 p-4 rounded-r-lg my-4">
+                              <p class="italic text-red-200 mb-2">
+                                  "Tu terás estrelas que sabem rir!"
+                              </p>
+                          </div>
+                          <p class="text-gray-300 leading-relaxed mb-4">
+                              O príncipe permite que a serpente o morda. Cai suavemente na areia. No dia seguinte, o narrador não encontra o corpo - o príncipe voltou para as estrelas.
+                          </p>
+                          <p class="text-gray-300 leading-relaxed">
+                              O livro termina pedindo que, se alguém encontrar um pequeno príncipe de cabelos dourados, o avise imediatamente.
+                          </p>
+                      </div>
+                  </div>
+              </div>
+
+          </div>
+      </div>
+  </section>
+
+  <!-- DEEP ANALYSIS SECTION -->
+  <section id="analise" class="relative py-20 px-4 bg-[#0d1230] content-layer">
+      <div class="max-w-6xl mx-auto">
+          <div class="text-center mb-16">
+              <h2 class="font-display text-5xl md:text-6xl font-bold mb-6 text-yellow-400">Análise Crítica Profunda</h2>
+              <div class="w-32 h-1 bg-gradient-to-r from-transparent via-yellow-400 to-transparent mx-auto"></div>
+              <p class="mt-6 text-xl text-gray-300 max-w-3xl mx-auto">
+                  Investigação sobre as camadas filosóficas, psicológicas e sociológicas da obra.
+              </p>
+          </div>
+
+          <div class="grid lg:grid-cols-2 gap-6 mb-12">
+              
+              <!-- Análise 1 -->
+              <div class="analysis-card glass-card rounded-2xl p-8">
+                  <div class="flex items-center gap-3 mb-4">
+                      <span class="text-3xl">🎭</span>
+                      <h3 class="font-display text-2xl font-bold text-yellow-400">O Paradoxo Adulto-Criança</h3>
+                  </div>
+                  <div class="space-y-4 text-gray-300">
+                      <p class="leading-relaxed">
+                          Saint-Exupéry estabelece uma dicotomia entre o mundo adulto (utilitário, numérico, "sério") e o infantil (qualitativo, simbólico, essencial).
+                      </p>
+                      <div class="bg-white/5 p-4 rounded-lg border-l-4 border-yellow-400">
+                          <p class="italic text-yellow-200 text-sm">
+                              "Os adultos gostam de números... nunca perguntam sobre o essencial: o tom da voz, os jogos favoritos."
+                          </p>
+                      </div>
+                      <p class="leading-relaxed font-semibold text-yellow-400">
+                          Crescer, na sociedade moderna, significa perder a capacidade de ver o essencial.
+                      </p>
+                  </div>
+              </div>
+
+              <!-- Análise 2 -->
+              <div class="analysis-card glass-card rounded-2xl p-8">
+                  <div class="flex items-center gap-3 mb-4">
+                      <span class="text-3xl">💝</span>
+                      <h3 class="font-display text-2xl font-bold text-red-400">A Fenomenologia do Amor</h3>
+                  </div>
+                  <div class="space-y-4 text-gray-300">
+                      <p class="leading-relaxed">
+                          A relação príncipe-rosa descreve a ambivalência amorosa. O amor não é romântico idealizado, é <span class="text-red-400">trabalho, responsabilidade, sofrimento</span>.
+                      </p>
+                      <div class="grid grid-cols-2 gap-4 my-4">
+                          <div class="bg-red-500/10 p-3 rounded text-center">
+                              <p class="text-xs text-gray-400 uppercase mb-1">O Erro</p>
+                              <p class="text-sm font-semibold">Julgar pelas palavras</p>
+                          </div>
+                          <div class="bg-green-500/10 p-3 rounded text-center">
+                              <p class="text-xs text-gray-400 uppercase mb-1">A Revelação</p>
+                              <p class="text-sm font-semibold">Ternura nas astúcias</p>
+                          </div>
+                      </div>
+                      <p class="leading-relaxed">
+                          A rosa torna-se única pelo investimento subjetivo, pelo tempo perdido, pelo cuidado dispensado.
+                      </p>
+                  </div>
+              </div>
+
+              <!-- Análise 3 -->
+              <div class="analysis-card glass-card rounded-2xl p-8">
+                  <div class="flex items-center gap-3 mb-4">
+                      <span class="text-3xl">🦊</span>
+                      <h3 class="font-display text-2xl font-bold text-orange-400">A Ética do Domesticar</h3>
+                  </div>
+                  <div class="space-y-4 text-gray-300">
+                      <p class="leading-relaxed">
+                          "Domesticar" não é dominação, mas <em>criação de vínculos</em>. É uma ética da vulnerabilidade: aceitar o risco das lágrimas para ter sentido.
+                      </p>
+                      <div class="bg-orange-500/10 border-l-4 border-orange-400 p-4 rounded-r-lg">
+                          <p class="font-semibold text-orange-300 mb-2">O Ritual</p>
+                          <p class="text-sm">
+                              "Se vens às quatro, desde as três eu começarei a ser feliz". O amor se constrói na expectativa programada.
+                          </p>
+                      </div>
+                      <p class="leading-relaxed">
+                          Crítica à sociedade do imediato: o amor verdadeiro exige paciência, repetição, trabalho.
+                      </p>
+                  </div>
+              </div>
+
+              <!-- Análise 4 -->
+              <div class="analysis-card glass-card rounded-2xl p-8">
+                  <div class="flex items-center gap-3 mb-4">
+                      <span class="text-3xl">🏭</span>
+                      <h3 class="font-display text-2xl font-bold text-purple-400">Crítica à Modernidade</h3>
+                  </div>
+                  <div class="space-y-4 text-gray-300">
+                      <p class="leading-relaxed">
+                          Cada habitante dos asteroides representa uma patologia:
+                      </p>
+                      <ul class="space-y-2 text-sm">
+                          <li class="flex items-start gap-2">
+                              <span class="text-purple-400">•</span>
+                              <span><strong>Rei:</strong> Autoritarismo burocrático</span>
+                          </li>
+                          <li class="flex items-start gap-2">
+                              <span class="text-purple-400">•</span>
+                              <span><strong>Vaidoso:</strong> Narcisismo</span>
+                          </li>
+                          <li class="flex items-start gap-2">
+                              <span class="text-purple-400">•</span>
+                              <span><strong>Bêbado:</strong> Fuga alienada</span>
+                          </li>
+                          <li class="flex items-start gap-2">
+                              <span class="text-purple-400">•</span>
+                              <span><strong>Homem de Negócios:</strong> Acumulação desenfreada</span>
+                          </li>
+                      </ul>
+                      <p class="leading-relaxed mt-4">
+                          Todos performam funções vazias na sociedade do espetáculo.
+                      </p>
+                  </div>
+              </div>
+
+          </div>
+
+          <!-- Análise Horizontal: A Morte -->
+          <div class="glass-card rounded-3xl p-8 md:p-12 mb-12 border border-red-500/20">
+              <h3 class="font-display text-3xl font-bold text-red-400 mb-8 text-center">A Morte como Transcendência</h3>
+              
+              <div class="grid md:grid-cols-3 gap-8">
+                  <div class="text-center">
+                      <div class="w-16 h-16 rounded-full bg-green-500/20 flex items-center justify-center text-3xl mx-auto mb-4">🐍</div>
+                      <h4 class="font-bold text-green-400 mb-2">A Serpente</h4>
+                      <p class="text-sm text-gray-300">
+                          Deus da passagem, não o diabo. Oferece retorno ao princípio. "Onde se está doente demais" - a Terra é a doença.
+                      </p>
+                  </div>
+                  
+                  <div class="text-center">
+                      <div class="w-16 h-16 rounded-full bg-yellow-500/20 flex items-center justify-center text-3xl mx-auto mb-4">✨</div>
+                      <h4 class="font-bold text-yellow-400 mb-2">O Retorno</h4>
+                      <p class="text-sm text-gray-300">
+                          Morte física como libertação. O príncipe "cai suavemente". Platonismo: a alma retorna à essência estelar.
+                      </p>
+                  </div>
+                  
+                  <div class="text-center">
+                      <div class="w-16 h-16 rounded-full bg-blue-500/20 flex items-center justify-center text-3xl mx-auto mb-4">😢</div>
+                      <h4 class="font-bold text-blue-400 mb-2">O Luto</h4>
+                      <p class="text-sm text-gray-300">
+                          A dor é real, mas transformada. O narrador ganha <strong>estrelas que riem</strong> - a memória enriquece espiritualmente.
+                      </p>
+                  </div>
+              </div>
+          </div>
+
+          <!-- Análise das Imagens -->
+          <div class="glass-card rounded-3xl p-8 md:p-12">
+              <h3 class="font-display text-3xl font-bold text-yellow-400 mb-8">A Iconografia do Invisível</h3>
+              
+              <div class="space-y-6">
+                  <div class="flex gap-6 items-start p-4 rounded-xl hover:bg-white/5 transition-all">
+                      <div class="text-4xl flex-shrink-0">🎩</div>
+                      <div>
+                          <h4 class="font-bold text-yellow-400 mb-2">O Chapéu/Elefante</h4>
+                          <p class="text-gray-300 text-sm leading-relaxed">
+                              Representa a perda da imaginação hermenêutica. Os adultos literalizam, reduzem o símbolo ao signo.
+                          </p>
+                      </div>
+                  </div>
+                  
+                  <div class="flex gap-6 items-start p-4 rounded-xl hover:bg-white/5 transition-all">
+                      <div class="text-4xl flex-shrink-0">📦</div>
+                      <div>
+                          <h4 class="font-bold text-yellow-400 mb-2">A Caixa do Carneiro</h4>
+                          <p class="text-gray-300 text-sm leading-relaxed">
+                              A obra de arte perfeita: o receptor completa o significado. A imaginação é mais real que a percepção.
+                          </p>
+                      </div>
+                  </div>
+                  
+                  <div class="flex gap-6 items-start p-4 rounded-xl hover:bg-white/5 transition-all">
+                      <div class="text-4xl flex-shrink-0">🌾</div>
+                      <div>
+                          <h4 class="font-bold text-yellow-400 mb-2">O Trigo Dourado</h4>
+                          <p class="text-gray-300 text-sm leading-relaxed">
+                              Metáfora da sublimação amorosa. O amor transforma o mundo físico em símbolo do amado.
+                          </p>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </section>
+
+  <!-- PHILOSOPHY SECTION -->
+  <section id="filosofia" class="relative py-20 px-4 content-layer">
+      <div class="max-w-6xl mx-auto">
+          <h2 class="font-display text-4xl md:text-5xl font-bold text-center mb-16 text-yellow-400">Fundamentos Filosóficos</h2>
+          
+          <div class="grid md:grid-cols-2 gap-6">
+              <div class="glass-card rounded-2xl p-8">
+                  <h3 class="font-display text-2xl font-bold text-blue-400 mb-4">Existencialismo</h3>
+                  <p class="text-gray-300 leading-relaxed mb-4">
+                      A obra antecipa Sartre e Camus: a existência precede a essência. A rosa é importante porque o príncipe <em>escolhe</em> investir nela. O sentido é criado, não dado.
+                  </p>
+                  <div class="text-sm text-gray-400 italic border-l-2 border-blue-400 pl-4">
+                      "Tu te tornas eternamente responsável" - liberdade como fardo existencial.
+                  </div>
+              </div>
+
+              <div class="glass-card rounded-2xl p-8">
+                  <h3 class="font-display text-2xl font-bold text-purple-400 mb-4">Pensamento Mítico</h3>
+                  <p class="text-gray-300 leading-relaxed mb-4">
+                      Recuperação do pensamento mítico contra o racionalismo. O geógrafo que não registra flores "efêmeras" representa a ciência desencantada.
+                  </p>
+                  <div class="text-sm text-gray-400 italic border-l-2 border-purple-400 pl-4">
+                      Tempo circular, espaço simbólico, personagens-arquétipos.
+                  </div>
+              </div>
+
+              <div class="glass-card rounded-2xl p-8">
+                  <h3 class="font-display text-2xl font-bold text-green-400 mb-4">Filosofia da Educação</h3>
+                  <p class="text-gray-300 leading-relaxed mb-4">
+                      Crítica ao sistema que "desanima" a criança. A educação formal mata a capacidade de ver o elefante na jiboia.
+                  </p>
+                  <div class="text-sm text-gray-400 italic border-l-2 border-green-400 pl-4">
+                      A compreensão como critério de humanidade.
+                  </div>
+              </div>
+
+              <div class="glass-card rounded-2xl p-8">
+                  <h3 class="font-display text-2xl font-bold text-red-400 mb-4">Teologia Negativa</h3>
+                  <p class="text-gray-300 leading-relaxed mb-4">
+                      "O essencial é invisível" ecoa Pseudo-Dionísio. Deus/Verdade não pode ser visto diretamente, apenas através do amor.
+                  </p>
+                  <div class="text-sm text-gray-400 italic border-l-2 border-red-400 pl-4">
+                      O deserto como apofase: só no vazio encontra-se o poço.
+                  </div>
+              </div>
+          </div>
+      </div>
+  </section>
+
+  <!-- CONTEXT SECTION -->
+  <section id="contexto" class="relative py-20 px-4 bg-gradient-to-b from-transparent to-black/30 content-layer">
+      <div class="max-w-6xl mx-auto">
+          <h2 class="font-display text-4xl md:text-5xl font-bold text-center mb-16 text-yellow-400">Contexto Histórico e Biográfico</h2>
+          
+          <div class="glass-card rounded-3xl p-8 md:p-12">
+              <div class="grid md:grid-cols-2 gap-12 items-center">
+                  <div>
+                      <h3 class="font-display text-2xl font-bold text-yellow-400 mb-4">A Guerra e o Exílio</h3>
+                      <p class="text-gray-300 leading-relaxed mb-4">
+                          Escrito em <strong>1942-1943</strong> em Nova York, exilado da França ocupada. A obra é uma carta de amor à França perdida, preservação de valores humanistas na barbárie.
+                      </p>
+                      <p class="text-gray-300 leading-relaxed mb-4">
+                          O deserto é o <strong>vazio da Europa em guerra</strong>, a solidão do exílio, a busca por esperança na devastação.
+                      </p>
+                      <div class="bg-yellow-500/10 p-4 rounded-lg border border-yellow-500/30">
+                          <p class="text-sm text-yellow-200">
+                              <strong>Trágico:</strong> Saint-Exupéry desapareceu em missão aérea em 1944, um ano após a publicação. Como o príncipe, retornou às estrelas.
+                          </p>
+                      </div>
+                  </div>
+                  
+                  <div class="space-y-4">
+                      <div class="glass-card p-6 rounded-xl">
+                          <h4 class="font-bold text-blue-400 mb-2">✈️ O Aviador</h4>
+                          <p class="text-sm text-gray-300">
+                              Pioneiro da aviação postal. Caiu no deserto do Saara em 1935. O avião é transcendência técnica e solidão existencial.
+                          </p>
+                      </div>
+                      
+                      <div class="glass-card p-6 rounded-xl">
+                          <h4 class="font-bold text-red-400 mb-2">💔 Consuelo</h4>
+                          <p class="text-sm text-gray-300">
+                              A rosa é Consuelo Suncín, esposa do autor. Relação tumultuada, passionada, cheia de dramas - amor real, não idealizado.
+                          </p>
+                      </div>
+                      
+                      <div class="glass-card p-6 rounded-xl">
+                          <h4 class="font-bold text-green-400 mb-2">🎨 As Aquarelas</h4>
+                          <p class="text-sm text-gray-300">
+                              Saint-Exupéry ilustrou o próprio livro. Desenhos simples, infantis - a arte não precisa de virtuosismo, mas de verdade interior.
+                          </p>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </section>
+
+  <!-- Symbols and Meanings -->
+  <section class="relative py-20 px-4 content-layer">
+      <div class="max-w-6xl mx-auto">
+          <h2 class="font-display text-4xl md:text-5xl font-bold text-center mb-16 text-yellow-400">Símbolos e Significados</h2>
+          
+          <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+              <div class="symbol-card glass-card rounded-2xl p-6 border border-white/10">
+                  <div class="text-4xl mb-4">🌹</div>
+                  <h3 class="font-display text-xl font-bold text-yellow-400 mb-2">A Rosa</h3>
+                  <p class="text-gray-300 text-sm leading-relaxed">
+                      Amor verdadeiro com contradições. Exige responsabilidade, tempo e cuidado. Não é a aparência, mas o vínculo criado.
+                  </p>
+              </div>
+
+              <div class="symbol-card glass-card rounded-2xl p-6 border border-white/10">
+                  <div class="text-4xl mb-4">🦊</div>
+                  <h3 class="font-display text-xl font-bold text-orange-400 mb-2">Domesticar</h3>
+                  <p class="text-gray-300 text-sm leading-relaxed">
+                      Criar laços é arriscar lágrimas. Tornar alguém único através do tempo, paciência e responsabilidade mútua.
+                  </p>
+              </div>
+
+              <div class="symbol-card glass-card rounded-2xl p-6 border border-white/10">
+                  <div class="text-4xl mb-4">⭐</div>
+                  <h3 class="font-display text-xl font-bold text-blue-400 mb-2">As Estrelas</h3>
+                  <p class="text-gray-300 text-sm leading-relaxed">
+                      Transcendência, esperança, conexão com o invisível. Cada uma é possibilidade de riso, água, amor.
+                  </p>
+              </div>
+
+              <div class="symbol-card glass-card rounded-2xl p-6 border border-white/10">
+                  <div class="text-4xl mb-4">🌵</div>
+                  <h3 class="font-display text-xl font-bold text-green-400 mb-2">O Deserto</h3>
+                  <p class="text-gray-300 text-sm leading-relaxed">
+                      Isolamento, solidão, beleza escondida. É no deserto que encontramos o essencial, longe das distrações.
+                  </p>
+              </div>
+
+              <div class="symbol-card glass-card rounded-2xl p-6 border border-white/10">
+                  <div class="text-4xl mb-4">🐍</div>
+                  <h3 class="font-display text-xl font-bold text-red-400 mb-2">A Serpente</h3>
+                  <p class="text-gray-300 text-sm leading-relaxed">
+                      Morte como retorno à origem, não fim. Mistério da passagem, ciclo da vida, sabedoria antiga.
+                  </p>
+              </div>
+
+              <div class="symbol-card glass-card rounded-2xl p-6 border border-white/10">
+                  <div class="text-4xl mb-4">✈️</div>
+                  <h3 class="font-display text-xl font-bold text-purple-400 mb-2">O Avião</h3>
+                  <p class="text-gray-300 text-sm leading-relaxed">
+                      Aventura, busca, queda como momento de crise. Motor quebrado é a necessidade de parar e refletir.
+                  </p>
+              </div>
+          </div>
+      </div>
+  </section>
+
+  <!-- Famous Quotes -->
+  <section class="relative py-20 px-4 content-layer">
+      <div class="max-w-4xl mx-auto">
+          <h2 class="font-display text-4xl md:text-5xl font-bold text-center mb-16 text-yellow-400">Frases que Marcam</h2>
+          
+          <div class="space-y-6">
+              <div class="glass-card rounded-2xl p-8 relative overflow-hidden">
+                  <span class="quote-mark">"</span>
+                  <p class="text-2xl md:text-3xl italic text-center text-yellow-100 relative z-10 pt-8">
+                      O essencial é invisível para os olhos.
+                  </p>
+                  <p class="text-center text-yellow-400 mt-4 font-display text-sm tracking-wider">— A Raposa</p>
+              </div>
+
+              <div class="glass-card rounded-2xl p-8 relative overflow-hidden">
+                  <span class="quote-mark">"</span>
+                  <p class="text-2xl md:text-3xl italic text-center text-yellow-100 relative z-10 pt-8">
+                      Tu te tornas eternamente responsável por aquilo que cativas.
+                  </p>
+                  <p class="text-center text-yellow-400 mt-4 font-display text-sm tracking-wider">— A Raposa</p>
+              </div>
+
+              <div class="glass-card rounded-2xl p-8 relative overflow-hidden">
+                  <span class="quote-mark">"</span>
+                  <p class="text-2xl md:text-3xl italic text-center text-yellow-100 relative z-10 pt-8">
+                      É o tempo que perdeste para tua rosa que faz tua rosa tão importante.
+                  </p>
+                  <p class="text-center text-yellow-400 mt-4 font-display text-sm tracking-wider">— A Raposa</p>
+              </div>
+
+              <div class="glass-card rounded-2xl p-8 relative overflow-hidden">
+                  <span class="quote-mark">"</span>
+                  <p class="text-2xl md:text-3xl italic text-center text-yellow-100 relative z-10 pt-8">
+                      Os adultos nunca compreendem alguma coisa sozinhos, e é cansativo para as crianças ter que estar sempre explicando.
+                  </p>
+                  <p class="text-center text-yellow-400 mt-4 font-display text-sm tracking-wider">— O Narrador</p>
+              </div>
+
+              <div class="glass-card rounded-2xl p-8 relative overflow-hidden">
+                  <span class="quote-mark">"</span>
+                  <p class="text-2xl md:text-3xl italic text-center text-yellow-100 relative z-10 pt-8">
+                      Tu terás estrelas que sabem rir!
+                  </p>
+                  <p class="text-center text-yellow-400 mt-4 font-display text-sm tracking-wider">— O Pequeno Príncipe</p>
+              </div>
+          </div>
+      </div>
+  </section>
+
+  <!-- Final Reflection -->
+  <section class="relative py-20 px-4 bg-gradient-to-b from-transparent to-yellow-900/20 content-layer">
+      <div class="max-w-4xl mx-auto text-center">
+          <h2 class="font-display text-3xl md:text-4xl font-bold mb-8 text-yellow-400">Por que ainda lemos?</h2>
+          <p class="text-xl text-gray-300 leading-relaxed mb-8">
+              "O Pequeno Príncipe" permanece atual porque fala de uma <strong>crise permanente</strong>: a perda da capacidade de ver o essencial em favor do útil. Em tempos de big data e relacionamentos swipe, é um manual de resistência existencial.
+          </p>
+          <p class="text-xl text-gray-300 leading-relaxed mb-8">
+              Ela nos lembra que somos responsáveis por nossas rosas, que o tempo investido cria valor, que a morte não anula o amor, e que só o coração vê direito.
+          </p>
+          <div class="inline-block p-6 rounded-2xl bg-yellow-500/10 border border-yellow-500/30">
+              <p class="text-yellow-200 italic text-lg">
+                  "E, se algum dia viajares para o deserto, não te esqueças de que há um poço em algum lugar..."
+              </p>
+          </div>
+      </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="relative py-12 px-4 border-t border-white/10 mt-20 content-layer">
+      <div class="max-w-4xl mx-auto text-center">
+          <div class="planet-icon bg-yellow-500/20 mx-auto mb-6 text-4xl">🌟</div>
+          <p class="text-gray-400 italic mb-4">
+              "E se alguém ama uma flor da qual só existe um exemplar em milhões e milhões de estrelas, isso basta para que seja feliz quando as contempla."
+          </p>
+          <p class="text-sm text-gray-600 font-display tracking-wider">
+              RESUMO & ANÁLISE COMPLETA • O PEQUENO PRÍNCIPE • ANTOINE DE SAINT-EXUPÉRY
+          </p>
+      </div>
+  </footer>
+
+  <script>
+      // Toggle Chapter - otimizado
+      function toggleChapter(element) {
+          const isExpanded = element.classList.contains('expanded');
+          
+          // Fecha todos
+          document.querySelectorAll('.chapter-card').forEach(card => {
+              card.classList.remove('expanded');
+          });
+          
+          // Abre o atual se não estava expandido
+          if (!isExpanded) {
+              element.classList.add('expanded');
+              // Scroll suave apenas se necessário
+              const rect = element.getBoundingClientRect();
+              if (rect.top < 100 || rect.bottom > window.innerHeight) {
+                  element.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+              }
+          }
+      }
+
+      // Progress Bar - throttled
+      let ticking = false;
+      function updateProgressBar() {
+          if (!ticking) {
+              window.requestAnimationFrame(() => {
+                  const winScroll = document.documentElement.scrollTop;
+                  const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+                  const scrolled = (winScroll / height) * 100;
+                  document.getElementById('progressBar').style.width = scrolled + '%';
+                  updateActiveTab();
+                  ticking = false;
+              });
+              ticking = true;
+          }
+      }
+
+      // Update Active Tab
+      function updateActiveTab() {
+          const sections = ['resumo', 'analise', 'filosofia', 'contexto'];
+          const scrollPos = window.scrollY + 300;
+          
+          sections.forEach(section => {
+              const element = document.getElementById(section);
+              if (element) {
+                  const offsetTop = element.offsetTop;
+                  const offsetHeight = element.offsetHeight;
+                  
+                  if (scrollPos >= offsetTop && scrollPos < offsetTop + offsetHeight) {
+                      document.querySelectorAll('.tab-btn').forEach(btn => {
+                          btn.classList.remove('active');
+                          if (btn.getAttribute('onclick').includes(section)) {
+                              btn.classList.add('active');
+                          }
+                      });
+                  }
+              }
+          });
+      }
+
+      // Smooth Scroll
+      function scrollToSection(id) {
+          const element = document.getElementById(id);
+          if (element) {
+              element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }
+      }
+
+      // Event Listeners otimizados
+      window.addEventListener('scroll', updateProgressBar, { passive: true });
+
+      // Initialize
+      document.addEventListener('DOMContentLoaded', () => {
+          // Typewriter effect
+          const subtitle = document.getElementById('subtitle');
+          const text = subtitle.textContent;
+          subtitle.textContent = '';
+          let i = 0;
+          
+          function typeWriter() {
+              if (i < text.length) {
+                  subtitle.textContent += text.charAt(i);
+                  i++;
+                  setTimeout(typeWriter, 50);
+              } else {
+                  subtitle.classList.remove('typing-effect');
+              }
+          }
+          
+          setTimeout(typeWriter, 800);
+          updateActiveTab();
+      });
+
+      // Reduzir motion se preferido
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+          document.documentElement.style.scrollBehavior = 'auto';
+      }
+  </script>
+</body>
+</html>
